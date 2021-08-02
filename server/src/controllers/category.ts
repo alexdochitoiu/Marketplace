@@ -1,16 +1,25 @@
 import { Request, Response } from "express";
 import { HOST } from "../config";
 import log from "../logger";
-import Category from "../models/category";
+import Category, { CategoryDocument } from "../models/category";
 
 const url = `${HOST}/public/images/`;
 
-const createCategory = async (req: Request, res: Response) => {
+interface IErrorResponse {
+  error: string;
+}
+
+type ResponseType<T> = T | IErrorResponse;
+
+const createCategory = async (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument>>
+) => {
   const { title, description } = req.body;
   const imageName = req.file?.filename;
   const alreadyExists = Boolean(await Category.findOne({ title }));
   if (alreadyExists) {
-    res.status(400).json({ message: "Category already exists" });
+    res.status(400).json({ error: "Category already exists" });
   } else {
     Category.create({
       title,
@@ -27,14 +36,17 @@ const createCategory = async (req: Request, res: Response) => {
   }
 };
 
-const getCategory = (req: Request, res: Response) => {
+const getCategory = (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument>>
+) => {
   const { id } = req.params;
   Category.findById(id)
     .then((category) => {
       if (category) {
         res.status(200).json(category);
       } else {
-        res.status(400).json({ message: "Category not found" });
+        res.status(400).json({ error: "Category not found" });
       }
     })
     .catch((error) => {
@@ -43,16 +55,22 @@ const getCategory = (req: Request, res: Response) => {
     });
 };
 
-const getAllCategories = (req: Request, res: Response) => {
+const getAllCategories = (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument[]>>
+) => {
   Category.find()
-    .then((categories) => res.status(200).json({ categories }))
+    .then((categories) => res.status(200).json(categories))
     .catch((error) => {
       log.error(error);
       res.status(500).json({ error });
     });
 };
 
-const updateCategory = (req: Request, res: Response) => {
+const updateCategory = (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument>>
+) => {
   const { id } = req.params;
   const { title, description } = req.body;
   const imageName = req.file?.filename;
@@ -62,7 +80,11 @@ const updateCategory = (req: Request, res: Response) => {
     image: url + imageName,
   })
     .then((category) => {
-      res.status(200).json(category);
+      if (!category) {
+        res.status(404).json({ error: "Category not found" });
+      } else {
+        res.status(200).json(category);
+      }
     })
     .catch((error) => {
       log.error(error);
@@ -70,14 +92,17 @@ const updateCategory = (req: Request, res: Response) => {
     });
 };
 
-const deleteCategory = (req: Request, res: Response) => {
+const deleteCategory = (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument>>
+) => {
   const { id } = req.params;
   Category.findByIdAndDelete(id)
     .then((category) => {
       if (category) {
         res.status(200).json(category);
       } else {
-        res.status(400).json({ message: "Category not found" });
+        res.status(400).json({ error: "Category not found" });
       }
     })
     .catch((error) => {

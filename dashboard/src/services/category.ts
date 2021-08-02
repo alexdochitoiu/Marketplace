@@ -7,8 +7,7 @@ import {
 import ICategory from "src/types/ICategory";
 import { getToken } from "./auth";
 
-const getAll = async () =>
-  axios.get<{ categories: ICategory[] }>(GET_CATEGORIES);
+const getAll = async () => axios.get<ICategory[]>(GET_CATEGORIES);
 
 const create = async (data: FormData) =>
   axios.post<ICategory>(CREATE_CATEGORY, data, {
@@ -21,7 +20,7 @@ const create = async (data: FormData) =>
 // const update = async () =>
 
 const remove = async (id: string) =>
-  axios.delete(DELETE_CATEGORY.replace(":id", id), {
+  axios.delete<ICategory>(DELETE_CATEGORY.replace(":id", id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

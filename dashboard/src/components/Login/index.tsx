@@ -12,8 +12,8 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import * as auth from "src/services/auth";
 import * as routes from "src/constants/routes";
+import history from "src/constants/history";
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 import Snackbar from "../shared/Snackbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -59,14 +59,13 @@ export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const history = useHistory();
 
   const handleLogin = (e: React.SyntheticEvent) => {
     e.preventDefault();
 
     auth.login({ username, password }).then((res) => {
       if (res.succeeded) {
-        history.push(routes.HOME);
+        window.location.assign(routes.HOME);
       } else {
         setError(
           res.message || "Cannot login to dasboard. Something went wrong!"

@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Dialog,
   DialogContent,
@@ -9,6 +10,8 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import ICategory from "src/types/ICategory";
+import PanoramaIcon from "@material-ui/icons/Panorama";
+import CancelIcon from "@material-ui/icons/Cancel";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -17,23 +20,67 @@ const useStyles = makeStyles((theme: Theme) => ({
   btn: {
     margin: theme.spacing(3, 0, 2),
   },
+  avatar: {
+    width: 80,
+    height: 80,
+    borderRadius: 4,
+  },
+  removeImageButton: {
+    cursor: "pointer",
+    width: 15,
+    height: 15,
+    color: "red",
+    position: "absolute",
+    top: 2,
+    right: 2,
+    backgroundColor: "#fff",
+    borderRadius: "50%",
+    opacity: 0.8,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
 }));
 
 interface IProps {
   mode: "create" | "update" | null;
   onClose: () => void;
   onDone: (category: Partial<ICategory>) => void;
+  category?: ICategory;
 }
 
-export default function ({ mode, onClose, onDone }: IProps) {
+export default function ({ mode, onClose, onDone, category }: IProps) {
   const classes = useStyles();
-  const [title, setTitle] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [image, setImage] = React.useState("");
+  const uploadImage = React.useRef<HTMLInputElement | null>(null);
+  const [title, setTitle] = React.useState(category ? category.title : "");
+  const [description, setDescription] = React.useState(
+    category ? category.description : ""
+  );
+  const [image, setImage] = React.useState<any>(null);
+  const [imagePreviewUrl, setImagePreviewUrl] = React.useState<any>(
+    category ? category.image : null
+  );
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
     onDone({ title, description, image });
+  };
+
+  const handleImageChange = (e: any) => {
+    const { files } = e.target;
+    if (files && files.length > 0) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setImagePreviewUrl(e.target?.result);
+      };
+      reader.readAsDataURL(files[0]);
+      setImage(files[0]);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setImage(null);
+    setImagePreviewUrl(null);
   };
 
   return (
@@ -66,6 +113,53 @@ export default function ({ mode, onClose, onDone }: IProps) {
             minRows={2}
             maxRows={4}
           />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <div style={{ position: "relative" }}>
+              <Avatar
+                className={classes.avatar}
+                src={imagePreviewUrl}
+                children={<PanoramaIcon />}
+              />
+              {image && (
+                <CancelIcon
+                  className={classes.removeImageButton}
+                  onClick={handleRemoveImage}
+                />
+              )}
+            </div>
+            <div
+              style={{
+                marginLeft: 10,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <input
+                accept="image/*"
+                style={{ display: "none" }}
+                name="image"
+                type="file"
+                ref={uploadImage}
+                onChange={handleImageChange}
+              />
+              <Button
+                onClick={() => {
+                  uploadImage?.current?.click();
+                }}
+              >
+                Upload
+              </Button>
+              <Button>Select</Button>
+            </div>
+          </div>
           <Button
             fullWidth={true}
             variant="contained"
@@ -73,7 +167,7 @@ export default function ({ mode, onClose, onDone }: IProps) {
             color="primary"
             className={classes.btn}
           >
-            Create
+            {mode?.toUpperCase()}
           </Button>
         </form>
       </DialogContent>

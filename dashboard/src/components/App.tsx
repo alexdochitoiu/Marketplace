@@ -1,9 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { Router, Switch, Route, Redirect } from "react-router-dom";
 import Dashboard from "./Dashboard";
 import Login from "./Login";
 import NotFound from "./NotFound";
@@ -11,6 +6,7 @@ import withAuth from "./withAuth";
 import * as routes from "../constants/routes";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { isLoggedIn } from "src/services/auth";
+import history from "src/constants/history";
 
 const theme = createTheme({
   palette: {
@@ -26,18 +22,18 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Router>
+      <Router history={history}>
         <Switch>
-          <Route exact={true} path={routes.LOGIN}>
-            <Login />
-          </Route>
-          <Route exact={true} path="/">
-            {<Redirect to={isLoggedIn() ? routes.HOME : routes.LOGIN} />}
-          </Route>
+          <Route exact={true} path={routes.LOGIN} component={() => <Login />} />
+          <Route
+            exact={true}
+            path="/"
+            component={() => (
+              <Redirect to={isLoggedIn() ? routes.HOME : routes.LOGIN} />
+            )}
+          />
           {withAuth(<Dashboard />)}
-          <Route>
-            <NotFound />
-          </Route>
+          <Route component={() => <NotFound />} />
         </Switch>
       </Router>
     </ThemeProvider>

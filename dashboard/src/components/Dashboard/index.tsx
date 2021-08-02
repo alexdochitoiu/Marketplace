@@ -10,6 +10,8 @@ import {
   DRAWER_CLOSED_WIDTH,
   DRAWER_OPENED_WIDTH,
 } from "./Navigation/constants";
+import Home from "./Home";
+import Products from "./Products";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -41,18 +43,22 @@ export default function () {
       <SideDrawer open={open} onChange={(open) => setOpen(open)} />
       <div className={open ? classes.containerShift : classes.container}>
         <Switch>
-          <Route exact={true} path={routes.HOME}>
-            <div>Home</div>
-          </Route>
-          <Route exact={true} path={routes.CATEGORIES}>
-            <Categories />
-          </Route>
-          <Route exact={true} path={routes.PRODUCTS}>
-            <div>products</div>
-          </Route>
-          <Route exact={true} path={routes.IMAGES}>
-            <Photos />
-          </Route>
+          <Route exact={true} path={routes.HOME} component={() => <Home />} />
+          <Route
+            exact={true}
+            path={routes.CATEGORIES}
+            component={() => <Categories />}
+          />
+          <Route
+            exact={true}
+            path={routes.PRODUCTS}
+            component={() => <Products />}
+          />
+          <Route
+            exact={true}
+            path={routes.IMAGES}
+            component={() => <Photos />}
+          />
         </Switch>
       </div>
     </div>

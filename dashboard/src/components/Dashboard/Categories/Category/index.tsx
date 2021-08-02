@@ -4,8 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
-  CardMedia,
-  Dialog,
+  Divider,
   IconButton,
   makeStyles,
   Typography,
@@ -38,8 +37,8 @@ const useStyles = makeStyles({
     borderTop: "1px solid #ccc",
   },
   avatar: {
-    width: 60,
-    height: 60,
+    width: 70,
+    height: 70,
     borderRadius: 4,
   },
 });
@@ -47,7 +46,7 @@ const useStyles = makeStyles({
 interface IProps {
   category: ICategory;
   onDelete: (id: string) => void;
-  onEdit: () => void;
+  onEdit: (category: ICategory) => void;
 }
 
 export default function ({ category, onDelete, onEdit }: IProps) {
@@ -70,6 +69,7 @@ export default function ({ category, onDelete, onEdit }: IProps) {
         }}
       />
       <CardHeader title={category.title} className={classes.title} />
+      <Divider />
       <CardContent className={classes.content}>
         <Typography variant="body2" color="textSecondary">
           {category.description}
@@ -81,7 +81,7 @@ export default function ({ category, onDelete, onEdit }: IProps) {
         />
       </CardContent>
       <CardActions className={classes.actions}>
-        <IconButton size="small">
+        <IconButton size="small" onClick={() => onEdit(category)}>
           <EditIcon fontSize="small" />
         </IconButton>
         <IconButton size="small" onClick={() => setDeleteConfirmation(true)}>

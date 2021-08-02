@@ -28,19 +28,22 @@ export default function () {
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
-      setCategories(data.categories);
+      setCategories(data);
     });
   }, []);
 
-  const handleDone = (category: Partial<ICategory>) => {
+  const handleDone = ({ title, description, image }: any) => {
     if (dialog === "create") {
       const data = new FormData();
-      data.append("title", category.title || "");
-      data.append("description", category.description || "");
+      data.append("title", title);
+      data.append("description", description);
+      if (image) {
+        data.append("image", image);
+      }
       categoryService
         .create(data)
         .then(({ data }) => setCategories([...categories, data]))
-        .catch(({ response }) => console.log(response));
+        .catch(({ response: { data } }) => console.log(data.error));
     }
 
     setDialog(null);

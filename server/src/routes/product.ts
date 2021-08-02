@@ -1,0 +1,24 @@
+import express from "express";
+import controller from "../controllers/product";
+import upload from "../middleware/image-upload";
+import checkAuth from "../middleware/auth-check";
+
+const router = express.Router();
+
+router.get("/", controller.getAllProducts);
+router.get("/:id", controller.getProduct);
+router.post(
+  "/create",
+  checkAuth,
+  upload.array("images"),
+  controller.createProduct
+);
+router.put(
+  "/update/:id",
+  checkAuth,
+  upload.single("image"),
+  controller.updateProduct
+);
+router.delete("/delete/:id", checkAuth, controller.deleteProduct);
+
+export = router;

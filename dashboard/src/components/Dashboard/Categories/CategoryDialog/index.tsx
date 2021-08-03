@@ -12,6 +12,8 @@ import React from "react";
 import ICategory from "src/types/ICategory";
 import PanoramaIcon from "@material-ui/icons/Panorama";
 import CancelIcon from "@material-ui/icons/Cancel";
+import ImagePicker from "./ImagePicker";
+import { IImage } from "src/types/IImage";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -60,6 +62,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState<any>(
     category ? category.image : null
   );
+  const [selectImage, setSelectImage] = React.useState(false);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -81,6 +84,12 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
   const handleRemoveImage = () => {
     setImage(null);
     setImagePreviewUrl(null);
+  };
+
+  const handleSelectImage = (img: IImage) => {
+    setImage(img.src);
+    setImagePreviewUrl(img.src);
+    setSelectImage(false);
   };
 
   return (
@@ -126,7 +135,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
                 src={imagePreviewUrl}
                 children={<PanoramaIcon />}
               />
-              {image && (
+              {imagePreviewUrl && (
                 <CancelIcon
                   className={classes.removeImageButton}
                   onClick={handleRemoveImage}
@@ -157,7 +166,12 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
               >
                 Upload
               </Button>
-              <Button>Select</Button>
+              <Button onClick={() => setSelectImage(true)}>Select</Button>
+              <ImagePicker
+                open={selectImage}
+                onClose={() => setSelectImage(false)}
+                onSelect={handleSelectImage}
+              />
             </div>
           </div>
           <Button

@@ -1,49 +1,89 @@
-import { makeStyles } from "@material-ui/core";
-import clsx from "clsx";
+import { IconButton, makeStyles, Theme } from "@material-ui/core";
 import { IImage } from "src/types/IImage";
+import DeleteIcon from "@material-ui/icons/Delete";
+import { useState } from "react";
+import clsx from "clsx";
+import ConfirmationDialog from "src/components/shared/ConfirmationDialog";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
+  root: {
+    position: "relative",
+    width: 220,
+    height: 200,
+    margin: 8,
+  },
   image: {
+    width: 220,
+    height: 200,
+    borderRadius: 5,
     background: "#222",
     objectFit: "contain",
   },
-  imageThumbnail: {
-    width: 220,
-    height: 200,
-    margin: 3,
-    borderRadius: 5,
-    padding: 2,
-    cursor: "pointer",
-    border: "1px solid transparent",
-    "&:hover": {
-      opacity: 0.8,
-      border: "1px solid #bbb",
-    },
+  toolbar: {
+    position: "absolute",
+    width: "100%",
+    background: "rgba(255, 255, 255, 0.5)",
+    bottom: 0,
+    height: 50,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderBottomLeftRadius: 5,
+    borderBottomRightRadius: 5,
   },
-  imageFullscreen: {
-    overflow: "hidden",
-  },
-});
+}));
 
 interface IProps {
   image: IImage;
-  variant: "fullscreen" | "thumbnail";
-  onClick?: () => void;
+  onDelete: (name: string) => void;
+  onClick: () => void;
 }
 
-export default function ({ image, variant, onClick }: IProps) {
+export default function ({ image, onClick, onDelete }: IProps) {
+  const [deleteConfirmation, setDeleteConfirmation] = useState(false);
+  const [hover, setHover] = useState(false);
   const classes = useStyles();
+
+  const handleOpenConfirmation = () => {
+    setHover(false);
+    setDeleteConfirmation(true);
+  };
+
+  const handleCloseConfirmation = () => {
+    setHover(false);
+    setDeleteConfirmation(false);
+  };
+
   return (
-    <img
-      src={image.src}
-      alt={image.name}
-      className={clsx(
-        classes.image,
-        variant === "thumbnail"
-          ? classes.imageThumbnail
-          : classes.imageFullscreen
+    <div
+      className={classes.root}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+    >
+      <ConfirmationDialog
+        open={deleteConfirmation}
+        onClose={handleCloseConfirmation}
+        title="Delete image"
+        contentText={"Are you sure you want to delete this image?"}
+        confirmButtonText="Delete"
+        onConfirm={() => {
+          handleCloseConfirmation();
+          onDelete(image.name);
+        }}
+      />
+      <img
+        src={image.src}
+        alt={image.name}
+        className={classes.image}
+        onClick={onClick}
+      />
+      {hover && (
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleOpenConfirmation}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
       )}
-      onClick={onClick}
-    />
+    </div>
   );
 }

@@ -29,7 +29,25 @@ const uploadImages = async (req: Request, res: Response) => {
   }
 };
 
+const deleteImages = async (req: Request, res: Response) => {
+  const { images }: { images: string[] } = req.body;
+  try {
+    images.map((i) => {
+      fs.unlink("public/images/" + i, (err) => {
+        if (!err) {
+          console.log(`Image ${i} deleted!`);
+        }
+      });
+    });
+    res.status(200).json({ images });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 export default {
   getAll,
   uploadImages,
+  deleteImages,
 };

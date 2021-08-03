@@ -7,6 +7,7 @@ export default function () {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
+      useFindAndModify: false,
     })
     .then(() => {
       log.info("Mongo database connected");

@@ -15,16 +15,17 @@ const createCategory = async (
   req: Request,
   res: Response<ResponseType<CategoryDocument>>
 ) => {
-  const { title, description } = req.body;
+  const { title, description, image: imageAsUrl } = req.body;
   const imageName = req.file?.filename;
   const alreadyExists = Boolean(await Category.findOne({ title }));
   if (alreadyExists) {
     res.status(400).json({ error: "Category already exists" });
   } else {
+    const image = imageName ? url + imageName : imageAsUrl;
     Category.create({
       title,
       description,
-      image: imageName && url + imageName,
+      image,
     })
       .then((category) => {
         res.status(201).json(category);
@@ -72,13 +73,18 @@ const updateCategory = (
   res: Response<ResponseType<CategoryDocument>>
 ) => {
   const { id } = req.params;
-  const { title, description } = req.body;
+  const { title, description, image: imageAsUrl } = req.body;
   const imageName = req.file?.filename;
-  Category.findByIdAndUpdate(id, {
-    title,
-    description,
-    image: url + imageName,
-  })
+  const image = imageName ? url + imageName : imageAsUrl;
+  Category.findByIdAndUpdate(
+    id,
+    {
+      title,
+      description,
+      image,
+    },
+    { new: true, omitUndefined: true }
+  )
     .then((category) => {
       if (!category) {
         res.status(404).json({ error: "Category not found" });

@@ -1,5 +1,5 @@
 import { Fab, makeStyles, Theme } from "@material-ui/core";
-import React from "react";
+import React, { useState } from "react";
 import ICategory from "src/types/ICategory";
 import Category from "./Category";
 import * as categoryService from "src/services/category";
@@ -23,8 +23,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function () {
   const classes = useStyles();
-  const [categories, setCategories] = React.useState<ICategory[]>([]);
-  const [dialog, setDialog] = React.useState<"create" | "update" | null>(null);
+  const [categories, setCategories] = useState<ICategory[]>([]);
+  const [dialog, setDialog] = useState<"create" | "update" | null>(null);
+  const [categoryToUpdate, setCategoryToUpdate] = useState<
+    ICategory | undefined
+  >(undefined);
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
@@ -33,20 +36,28 @@ export default function () {
   }, []);
 
   const handleDone = ({ title, description, image }: any) => {
+    const data = new FormData();
+    data.append("title", title);
+    data.append("description", description);
+    if (image) {
+      data.append("image", image);
+    }
     if (dialog === "create") {
-      const data = new FormData();
-      data.append("title", title);
-      data.append("description", description);
-      if (image) {
-        data.append("image", image);
-      }
       categoryService
         .create(data)
         .then(({ data }) => setCategories([...categories, data]))
         .catch(({ response: { data } }) => console.log(data.error));
+    } else if (dialog === "update" && categoryToUpdate) {
+      categoryService
+        .update(categoryToUpdate._id, data)
+        .then(({ data }) => {
+          console.log(data);
+          setCategories(categories.map((c) => (c._id === data._id ? data : c)));
+        })
+        .catch(({ response: { data } }) => console.log(data.error));
     }
 
-    setDialog(null);
+    handleDialogClose();
   };
 
   const handleDelete = (id: string) => {
@@ -55,6 +66,17 @@ export default function () {
     });
   };
 
+  const handleEdit = (category: ICategory) => {
+    setDialog("update");
+    setCategoryToUpdate(category);
+  };
+
+  const handleDialogClose = () => {
+    setDialog(null);
+    setCategoryToUpdate(undefined);
+  };
+
+  console.log(categories);
   return (
     <div className={classes.root}>
       {categories.map((c) => (
@@ -62,14 +84,17 @@ export default function () {
           key={c._id}
           category={c}
           onDelete={handleDelete}
-          onEdit={() => setDialog("update")}
+          onEdit={handleEdit}
         />
       ))}
-      <CategoryDialog
-        mode={dialog}
-        onClose={() => setDialog(null)}
-        onDone={handleDone}
-      />
+      {dialog && (
+        <CategoryDialog
+          mode={dialog}
+          onClose={handleDialogClose}
+          onDone={handleDone}
+          category={categoryToUpdate}
+        />
+      )}
       <Fab
         className={classes.fab}
         color="primary"

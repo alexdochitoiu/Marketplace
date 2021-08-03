@@ -11,15 +11,14 @@ import * as routes from "src/constants/routes";
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
-    flexWrap: "wrap",
-    justifyContent: "space-around",
-    overflow: "hidden",
   },
   grid: {
     padding: 15,
     height: "calc(100vh - 80px)",
     width: "100%",
     overflowY: "auto",
+    display: "flex",
+    flexWrap: "wrap",
   },
   fab: {
     position: "absolute",
@@ -62,18 +61,37 @@ export default function () {
     }
   };
 
+  const handleDelete = (name: string) => {
+    imageService
+      .remove(name)
+      .then(() => {
+        setImages(images.filter((i) => i.name !== name));
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className={classes.root}>
       <Dialog open={Boolean(openedImage)} onClose={() => setOpenedImage(null)}>
-        {openedImage && <Image variant="fullscreen" image={openedImage} />}
+        {openedImage && (
+          <img
+            src={openedImage.src}
+            alt={openedImage.name}
+            style={{
+              background: "#222",
+              objectFit: "contain",
+              overflow: "hidden",
+            }}
+          />
+        )}
       </Dialog>
       <Grid className={classes.grid}>
         {images.map((image) => (
           <Image
             key={image.name}
-            variant="thumbnail"
             image={image}
             onClick={() => setOpenedImage(image)}
+            onDelete={handleDelete}
           />
         ))}
       </Grid>

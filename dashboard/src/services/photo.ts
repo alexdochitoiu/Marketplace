@@ -1,5 +1,9 @@
 import axios from "axios";
-import { GET_PHOTOS, UPLOAD_PHOTOS } from "src/constants/endpoints";
+import {
+  DELETE_PHOTOS,
+  GET_PHOTOS,
+  UPLOAD_PHOTOS,
+} from "src/constants/endpoints";
 import { IImage } from "src/types/IImage";
 import { getToken } from "src/services/auth";
 
@@ -13,4 +17,16 @@ const upload = async (data: FormData) =>
     },
   });
 
-export { getAll, upload };
+const remove = async (name: string) =>
+  axios.post<{ images: string[] }>(
+    DELETE_PHOTOS,
+    { images: [name] },
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${getToken()}`,
+      },
+    }
+  );
+
+export { getAll, upload, remove };

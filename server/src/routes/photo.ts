@@ -12,5 +12,6 @@ router.post(
   upload.array("images"),
   controller.uploadImages
 );
+router.post("/delete", checkAuth, controller.deleteImages);
 
 export = router;

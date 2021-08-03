@@ -3,6 +3,7 @@ import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
   GET_CATEGORIES,
+  UPDATE_CATEGORY,
 } from "src/constants/endpoints";
 import ICategory from "src/types/ICategory";
 import { getToken } from "./auth";
@@ -17,7 +18,13 @@ const create = async (data: FormData) =>
     },
   });
 
-// const update = async () =>
+const update = async (id: string, data: FormData) =>
+  axios.put<ICategory>(UPDATE_CATEGORY.replace(":id", id), data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 
 const remove = async (id: string) =>
   axios.delete<ICategory>(DELETE_CATEGORY.replace(":id", id), {
@@ -26,9 +33,4 @@ const remove = async (id: string) =>
     },
   });
 
-export {
-  getAll,
-  create,
-  // update,
-  remove,
-};
+export { getAll, create, update, remove };

@@ -12,7 +12,7 @@ import React from "react";
 import ICategory from "src/types/ICategory";
 import PanoramaIcon from "@material-ui/icons/Panorama";
 import CancelIcon from "@material-ui/icons/Cancel";
-import ImagePicker from "./ImagePicker";
+import ImagePicker from "../../../shared/ImagePicker";
 import { IImage } from "src/types/IImage";
 
 const useStyles = makeStyles((theme: Theme) => ({

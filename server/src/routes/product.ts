@@ -10,13 +10,13 @@ router.get("/:id", controller.getProduct);
 router.post(
   "/create",
   checkAuth,
-  upload.array("images"),
+  upload.array("images", 4),
   controller.createProduct
 );
 router.put(
   "/update/:id",
   checkAuth,
-  upload.single("image"),
+  upload.array("images", 4),
   controller.updateProduct
 );
 router.delete("/delete/:id", checkAuth, controller.deleteProduct);

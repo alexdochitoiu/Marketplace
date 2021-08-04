@@ -4,7 +4,7 @@ import { CategoryDocument } from "./category";
 export interface ProductDocument extends mongoose.Document {
   title: string;
   description: string;
-  category: CategoryDocument["_id"];
+  category?: CategoryDocument["_id"];
   images: string[];
   price: number;
   promoPrice?: number;
@@ -18,7 +18,6 @@ const ProductSchema = new mongoose.Schema({
   category: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Category",
-    required: true,
   },
   images: [String],
   price: { type: Number, required: true },

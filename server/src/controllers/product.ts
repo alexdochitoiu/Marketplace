@@ -1,13 +1,36 @@
 import { Request, Response } from "express";
+import { HOST } from "../config";
 import log from "../logger";
-import Product from "../models/product";
+import Product, { ProductDocument } from "../models/product";
 
-const createProduct = async (req: Request, res: Response) => {
-  const { title, description, category, price, promoPrice, quantity, sizes } =
-    req.body;
-  const images = req.files
-    ? (req.files as Express.Multer.File[]).map((f) => f.path)
+const url = `${HOST}/public/images/`;
+
+interface IErrorResponse {
+  error: string;
+}
+
+type ResponseType<T> = T | IErrorResponse;
+
+const createProduct = async (
+  req: Request,
+  res: Response<ResponseType<ProductDocument>>
+) => {
+  const {
+    title,
+    description,
+    images: imagesAsUrl,
+    category,
+    price,
+    promoPrice,
+    quantity,
+    sizes,
+  } = req.body;
+
+  const imageNames = req.files
+    ? (req.files as Express.Multer.File[]).map((f) => url + f.filename)
     : [];
+
+  const images = imageNames.length > 0 ? imageNames : imagesAsUrl;
   Product.create({
     title,
     description,
@@ -27,14 +50,17 @@ const createProduct = async (req: Request, res: Response) => {
     });
 };
 
-const getProduct = (req: Request, res: Response) => {
+const getProduct = (
+  req: Request,
+  res: Response<ResponseType<ProductDocument>>
+) => {
   const { id } = req.params;
   Product.findById(id)
     .then((product) => {
       if (product) {
         res.status(200).json(product);
       } else {
-        res.status(400).json({ message: "Product not found" });
+        res.status(400).json({ error: "Product not found" });
       }
     })
     .catch((error) => {
@@ -43,7 +69,10 @@ const getProduct = (req: Request, res: Response) => {
     });
 };
 
-const getAllProducts = (req: Request, res: Response) => {
+const getAllProducts = (
+  req: Request,
+  res: Response<ResponseType<ProductDocument[]>>
+) => {
   Product.find()
     .then((products) => res.status(200).json(products))
     .catch((error) => {
@@ -52,25 +81,47 @@ const getAllProducts = (req: Request, res: Response) => {
     });
 };
 
-const updateProduct = (req: Request, res: Response) => {
+const updateProduct = (
+  req: Request,
+  res: Response<ResponseType<ProductDocument>>
+) => {
   const { id } = req.params;
-  const { title, description, category, price, promoPrice, quantity, sizes } =
-    req.body;
-  const images = req.files
-    ? (req.files as Express.Multer.File[]).map((f) => f.path)
-    : [];
-  Product.findByIdAndUpdate(id, {
+  const {
     title,
     description,
+    images: imagesAsUrl,
     category,
-    images,
     price,
     promoPrice,
     quantity,
     sizes,
-  })
+  } = req.body;
+
+  const imageNames = req.files
+    ? (req.files as Express.Multer.File[]).map((f) => url + f.filename)
+    : [];
+
+  const images = imageNames.length > 0 ? imageNames : imagesAsUrl;
+  Product.findByIdAndUpdate(
+    id,
+    {
+      title,
+      description,
+      category,
+      images,
+      price,
+      promoPrice,
+      quantity,
+      sizes,
+    },
+    { new: true, omitUndefined: true }
+  )
     .then((product) => {
-      res.status(200).json(product);
+      if (!product) {
+        res.status(404).json({ error: "Product not found" });
+      } else {
+        res.status(200).json(product);
+      }
     })
     .catch((error) => {
       log.error(error);
@@ -78,14 +129,17 @@ const updateProduct = (req: Request, res: Response) => {
     });
 };
 
-const deleteProduct = (req: Request, res: Response) => {
+const deleteProduct = (
+  req: Request,
+  res: Response<ResponseType<ProductDocument>>
+) => {
   const { id } = req.params;
   Product.findByIdAndDelete(id)
     .then((product) => {
       if (product) {
         res.status(200).json(product);
       } else {
-        res.status(400).json({ message: "Product not found" });
+        res.status(400).json({ error: "Product not found" });
       }
     })
     .catch((error) => {

@@ -76,7 +76,6 @@ export default function () {
     setCategoryToUpdate(undefined);
   };
 
-  console.log(categories);
   return (
     <div className={classes.root}>
       {categories.map((c) => (

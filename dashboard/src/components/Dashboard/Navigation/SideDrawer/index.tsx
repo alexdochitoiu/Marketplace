@@ -112,6 +112,7 @@ export default function ({ open, onChange }: IProps) {
             icon={item.icon}
             text={item.text}
             active={window.location.pathname === item.path}
+            tooltip={!open}
           />
         ))}
       </List>
@@ -121,6 +122,7 @@ export default function ({ open, onChange }: IProps) {
           onClick={handleLogout}
           icon={<ExitToAppIcon />}
           text="Log out"
+          tooltip={!open}
         />
       </div>
     </Drawer>

@@ -4,6 +4,7 @@ import {
   ListItemText,
   makeStyles,
   Theme,
+  Tooltip,
 } from "@material-ui/core";
 import clsx from "clsx";
 
@@ -23,11 +24,17 @@ interface IProps {
   text: string;
   icon: JSX.Element;
   active?: boolean;
+  tooltip?: boolean;
 }
 
-export default function ({ onClick, text, icon, active }: IProps) {
+export default function ({ onClick, text, icon, active, tooltip }: IProps) {
   const classes = useStyles();
-  return (
+  const withTooltip = (WrappedComponent: JSX.Element) => (
+    <Tooltip placement="right" title={text} arrow={true}>
+      <div>{WrappedComponent}</div>
+    </Tooltip>
+  );
+  const Button = () => (
     <ListItem
       button={true}
       onClick={onClick}
@@ -42,4 +49,5 @@ export default function ({ onClick, text, icon, active }: IProps) {
       />
     </ListItem>
   );
+  return tooltip ? withTooltip(<Button />) : <Button />;
 }

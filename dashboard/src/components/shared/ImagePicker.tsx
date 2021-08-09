@@ -45,7 +45,7 @@ export default function ({ open, onClose, onSelect }: IProps) {
 
   return (
     <Dialog open={open} onClose={onClose}>
-      <DialogTitle>Select image</DialogTitle>
+      <DialogTitle>Selecteaza imagine</DialogTitle>
       <DialogContent>
         <Grid>
           {images.map((image) => (

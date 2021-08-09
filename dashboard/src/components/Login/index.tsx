@@ -12,7 +12,6 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { makeStyles } from "@material-ui/core/styles";
 import * as auth from "src/services/auth";
 import * as routes from "src/constants/routes";
-import history from "src/constants/history";
 import React, { useState } from "react";
 import Snackbar from "../shared/Snackbar";
 
@@ -86,7 +85,7 @@ export default function Login() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Dashboard login
+            Autentificare
           </Typography>
           <form className={classes.form} onSubmit={handleLogin}>
             <TextField
@@ -97,8 +96,7 @@ export default function Login() {
               variant="outlined"
               margin="normal"
               required={true}
-              id="username"
-              label="Username"
+              label="Nume utilizator"
               name="username"
               autoFocus={true}
               fullWidth={true}
@@ -111,26 +109,25 @@ export default function Login() {
               margin="normal"
               required={true}
               fullWidth={true}
-              name="password"
-              label="Password"
+              name="parola"
+              label="Parola"
               type="password"
-              id="password"
               autoComplete="current-password"
             />
             <Button
               type="submit"
-              fullWidth={true}
               variant="contained"
               color="primary"
+              fullWidth={true}
               className={classes.submit}
             >
-              Login
+              Autentificare
             </Button>
           </form>
         </Card>
         <Box mt={8}>
           <Link href="/" variant="body2" className={classes.link}>
-            &#129044; Back to marketplace
+            &#129044; Catre magazin
           </Link>
         </Box>
       </Container>

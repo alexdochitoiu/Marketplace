@@ -30,7 +30,7 @@ export default function ({
         <DialogContentText>{contentText}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose}>Cancel</Button>
+        <Button onClick={onClose}>Anuleaza</Button>
         <Button onClick={onConfirm} color="primary" variant="contained">
           {confirmButtonText || "Ok"}
         </Button>

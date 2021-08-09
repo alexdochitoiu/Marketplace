@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     padding: 15,
     height: "calc(100vh - 80px)",
     overflowY: "auto",
+    alignItems: "flex-start",
   },
   fab: {
     position: "absolute",

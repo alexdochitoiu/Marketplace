@@ -63,9 +63,9 @@ export default function ({ image, onClick, onDelete }: IProps) {
       <ConfirmationDialog
         open={deleteConfirmation}
         onClose={handleCloseConfirmation}
-        title="Delete image"
-        contentText={"Are you sure you want to delete this image?"}
-        confirmButtonText="Delete"
+        title="Sterge imagine"
+        contentText="Esti sigur ca vrei sa stergi aceasta imagine?"
+        confirmButtonText="Sterge"
         onConfirm={() => {
           handleCloseConfirmation();
           onDelete(image.name);

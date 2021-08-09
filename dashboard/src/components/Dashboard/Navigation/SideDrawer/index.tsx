@@ -51,11 +51,11 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const items = [
-  { text: "Home", icon: <HomeIcon />, path: routes.HOME },
-  { text: "Categories", icon: <CategoryIcon />, path: routes.CATEGORIES },
-  { text: "Products", icon: <CardGiftcardIcon />, path: routes.PRODUCTS },
+  { text: "Acasa", icon: <HomeIcon />, path: routes.HOME },
+  { text: "Categorii", icon: <CategoryIcon />, path: routes.CATEGORIES },
+  { text: "Articole", icon: <CardGiftcardIcon />, path: routes.PRODUCTS },
   {
-    text: "Uploaded photos",
+    text: "Imagini",
     icon: <PhotoLibraryIcon />,
     path: routes.IMAGES,
   },
@@ -121,7 +121,7 @@ export default function ({ open, onChange }: IProps) {
         <ButtonItem
           onClick={handleLogout}
           icon={<ExitToAppIcon />}
-          text="Log out"
+          text="Deconectare"
           tooltip={!open}
         />
       </div>

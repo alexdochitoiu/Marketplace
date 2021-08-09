@@ -35,15 +35,18 @@ interface IProps {
 }
 
 export default function ({ image, onRemove }: IProps) {
+  const isSrc = typeof image === "string";
   const classes = useStyles();
-  const [src, setSrc] = React.useState<any>();
+  const [src, setSrc] = React.useState<any>(isSrc ? image : undefined);
 
   React.useEffect(() => {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      setSrc(e.target?.result);
-    };
-    reader.readAsDataURL(image);
+    if (!isSrc) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        setSrc(e.target?.result);
+      };
+      reader.readAsDataURL(image);
+    }
   }, [image]);
 
   return (

@@ -10,6 +10,7 @@ export interface ProductDocument extends mongoose.Document {
   promoPrice?: number;
   quantity: number;
   sizes: string[];
+  active: boolean;
 }
 
 const ProductSchema = new mongoose.Schema({
@@ -23,7 +24,7 @@ const ProductSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   promoPrice: Number,
   quantity: { type: Number, required: true },
-  size: [String],
+  sizes: [String],
 });
 
 const Product = mongoose.model<ProductDocument>("Product", ProductSchema);

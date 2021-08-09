@@ -39,7 +39,7 @@ const createProduct = async (
     price,
     promoPrice,
     quantity,
-    sizes,
+    sizes: JSON.parse(sizes),
   })
     .then((product) => {
       res.status(201).json(product);
@@ -56,6 +56,7 @@ const getProduct = (
 ) => {
   const { id } = req.params;
   Product.findById(id)
+    .populate("category")
     .then((product) => {
       if (product) {
         res.status(200).json(product);
@@ -69,12 +70,10 @@ const getProduct = (
     });
 };
 
-const getAllProducts = (
-  req: Request,
-  res: Response<ResponseType<ProductDocument[]>>
-) => {
+const getAllProducts = (req: Request, res: Response) => {
   Product.find()
-    .then((products) => res.status(200).json(products))
+    .populate("category")
+    .then(async (products) => res.status(200).json(products))
     .catch((error) => {
       log.error(error);
       res.status(500).json({ error });
@@ -101,7 +100,7 @@ const updateProduct = (
     ? (req.files as Express.Multer.File[]).map((f) => url + f.filename)
     : [];
 
-  const images = imageNames.length > 0 ? imageNames : imagesAsUrl;
+  const images = [...imageNames, imagesAsUrl].flat().filter((i) => i);
   Product.findByIdAndUpdate(
     id,
     {
@@ -112,10 +111,11 @@ const updateProduct = (
       price,
       promoPrice,
       quantity,
-      sizes,
+      sizes: JSON.parse(sizes),
     },
-    { new: true, omitUndefined: true }
+    { new: true }
   )
+    .populate("category")
     .then((product) => {
       if (!product) {
         res.status(404).json({ error: "Product not found" });

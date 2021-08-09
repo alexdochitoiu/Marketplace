@@ -22,20 +22,30 @@ const getSizes = (interval: any, hat = true) => {
   return result;
 };
 
+const getValue = (sizes: string[]): RadioValueType => {
+  if (sizes.length <= 1) return "universal";
+  if (
+    sizes[0] === `${hatSizes[0]}` &&
+    sizes[sizes.length - 1] === `${hatSizes[1]}`
+  )
+    return "hat";
+  return "clothes";
+};
+
 interface IProps {
   sizes: string[];
   onChange: (sizes: string[]) => void;
 }
 
 export default function ({ sizes, onChange }: IProps) {
-  const [value, setValue] = React.useState<RadioValueType>("universal");
+  const [value, setValue] = React.useState<RadioValueType>(getValue(sizes));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const v = event.target.value as RadioValueType;
     setValue(v);
     switch (v) {
       case "universal":
-        onChange(["Universal"]);
+        onChange(["Universala"]);
         break;
       case "hat":
         onChange(getSizes(hatSizes));
@@ -52,7 +62,7 @@ export default function ({ sizes, onChange }: IProps) {
         component="fieldset"
         style={{ marginRight: 8, width: "100%" }}
       >
-        <FormLabel component="legend">Sizes</FormLabel>
+        <FormLabel component="legend">Marimi</FormLabel>
         <RadioGroup
           value={value}
           onChange={handleChange}
@@ -61,14 +71,10 @@ export default function ({ sizes, onChange }: IProps) {
           <FormControlLabel
             value="universal"
             control={<Radio />}
-            label="Universal"
+            label="Universala"
           />
-          <FormControlLabel value="hat" control={<Radio />} label="Hat" />
-          <FormControlLabel
-            value="clothes"
-            control={<Radio />}
-            label="Clothes"
-          />
+          <FormControlLabel value="hat" control={<Radio />} label="Palarii" />
+          <FormControlLabel value="clothes" control={<Radio />} label="Haine" />
         </RadioGroup>
       </FormControl>
       <div
@@ -81,7 +87,7 @@ export default function ({ sizes, onChange }: IProps) {
         }}
       >
         <Typography variant="body2" style={{ marginRight: 8 }}>
-          Selected sizes:
+          Marimi selectate:
         </Typography>
         {sizes.map((s) => (
           <Chip

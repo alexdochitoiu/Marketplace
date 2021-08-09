@@ -12,6 +12,7 @@ import {
 } from "./Navigation/constants";
 import Home from "./Home";
 import Products from "./Products";
+import Product from "./Products/Product";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -53,6 +54,11 @@ export default function () {
             exact={true}
             path={routes.PRODUCTS}
             component={() => <Products />}
+          />
+          <Route
+            exact={true}
+            path={routes.PRODUCT}
+            component={() => <Product />}
           />
           <Route
             exact={true}

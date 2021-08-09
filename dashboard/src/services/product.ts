@@ -1,21 +1,21 @@
 import axios from "axios";
 import {
-  CREATE_CATEGORY,
-  DELETE_CATEGORY,
-  GET_CATEGORIES,
-  GET_CATEGORY,
-  UPDATE_CATEGORY,
+  CREATE_PRODUCT,
+  DELETE_PRODUCT,
+  GET_PRODUCT,
+  GET_PRODUCTS,
+  UPDATE_PRODUCT,
 } from "src/constants/endpoints";
-import ICategory from "src/types/ICategory";
+import IProduct from "src/types/IProduct";
 import { getToken } from "./auth";
 
 const getById = async (id: string) =>
-  axios.get<ICategory>(GET_CATEGORY.replace(":id", id));
+  axios.get<IProduct>(GET_PRODUCT.replace(":id", id));
 
-const getAll = async () => axios.get<ICategory[]>(GET_CATEGORIES);
+const getAll = async () => axios.get<IProduct[]>(GET_PRODUCTS);
 
 const create = async (data: FormData) =>
-  axios.post<ICategory>(CREATE_CATEGORY, data, {
+  axios.post<IProduct>(CREATE_PRODUCT, data, {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${getToken()}`,
@@ -23,7 +23,7 @@ const create = async (data: FormData) =>
   });
 
 const update = async (id: string, data: FormData) =>
-  axios.put<ICategory>(UPDATE_CATEGORY.replace(":id", id), data, {
+  axios.put<IProduct>(UPDATE_PRODUCT.replace(":id", id), data, {
     headers: {
       "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${getToken()}`,
@@ -31,7 +31,7 @@ const update = async (id: string, data: FormData) =>
   });
 
 const remove = async (id: string) =>
-  axios.delete<ICategory>(DELETE_CATEGORY.replace(":id", id), {
+  axios.delete<IProduct>(DELETE_PRODUCT.replace(":id", id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

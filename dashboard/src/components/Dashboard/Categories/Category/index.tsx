@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   root: {
     margin: 5,
     width: 220,
-    height: 240,
+    minHeight: 240,
   },
   title: {
     textAlign: "center",
@@ -30,7 +30,6 @@ const useStyles = makeStyles({
     flexDirection: "column",
     justifyContent: "space-between",
     alignItems: "center",
-    height: 100,
   },
   actions: {
     justifyContent: "space-between",
@@ -58,21 +57,32 @@ export default function ({ category, onDelete, onEdit }: IProps) {
       <ConfirmationDialog
         open={deleteConfirmation}
         onClose={() => setDeleteConfirmation(false)}
-        title="Delete category"
+        title="Sterge categorie"
         contentText={
-          "Are you sure you want to delete '" + category.title + "' category?"
+          "Esti sigur ca vrei sa stergi categoria '" + category.title + "'?"
         }
-        confirmButtonText="Delete"
+        confirmButtonText="Sterge"
         onConfirm={() => {
           setDeleteConfirmation(false);
           onDelete(category._id);
         }}
       />
-      <CardHeader title={category.title} className={classes.title} />
+      <CardHeader
+        title={category.title}
+        className={classes.title}
+        titleTypographyProps={{ style: { fontSize: 20 } }}
+      />
       <Divider />
       <CardContent className={classes.content}>
-        <Typography variant="body2" color="textSecondary">
-          {category.description}
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="pre"
+          style={{ whiteSpace: "pre-wrap", marginBottom: 10 }}
+        >
+          {category.description.length > 100
+            ? `${category.description.slice(0, 100)}...`
+            : category.description}
         </Typography>
         <Avatar
           className={classes.avatar}

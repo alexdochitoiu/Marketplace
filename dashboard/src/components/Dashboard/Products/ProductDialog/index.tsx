@@ -11,10 +11,7 @@ import {
 } from "@material-ui/core";
 import React from "react";
 import * as categoryService from "src/services/category";
-import PanoramaIcon from "@material-ui/icons/Panorama";
-import CancelIcon from "@material-ui/icons/Cancel";
-import { IImage } from "src/types/IImage";
-import IProduct from "src/types/IProduct";
+import IProduct, { IProductModel } from "src/types/IProduct";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import ICategory from "src/types/ICategory";
 import SizesPicker from "./SizesPicker";
@@ -52,26 +49,30 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface IProps {
   mode: "create" | "update" | null;
   onClose: () => void;
-  onDone: (product: Omit<IProduct, "_id">) => void;
+  onDone: (product: IProductModel) => void;
   product?: IProduct;
 }
 
-type FieldType = keyof Omit<IProduct, "_id">;
+type FieldType = keyof IProductModel;
+
+const isProduct = (p: any): p is IProduct => !!p._id;
 
 export default function ({ mode, onClose, onDone, product }: IProps) {
   const classes = useStyles();
   const [categories, setCategories] = React.useState<ICategory[]>([]);
   const [productDetails, setProductDetails] = React.useState<
-    Omit<IProduct, "_id">
-  >({
-    title: "",
-    description: "",
-    images: [],
-    price: 0,
-    promoPrice: undefined,
-    quantity: 0,
-    sizes: ["Universal"],
-  });
+    IProduct | IProductModel
+  >(
+    product || {
+      title: "",
+      description: "",
+      images: [],
+      price: 0,
+      promoPrice: undefined,
+      quantity: 0,
+      sizes: ["Universala"],
+    }
+  );
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
@@ -81,7 +82,13 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onDone(productDetails);
+    const data = isProduct(productDetails)
+      ? {
+          ...productDetails,
+          category: productDetails.category?._id,
+        }
+      : productDetails;
+    onDone(data);
   };
 
   const handleChange =
@@ -128,7 +135,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
   return (
     <Dialog open={Boolean(mode)} onClose={onClose} fullWidth={true}>
       <DialogTitle className={classes.title}>
-        {mode?.toUpperCase()} PRODUCT
+        {mode === "create" ? "Creeaza articol" : "Modifica articol"}
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit}>
@@ -140,7 +147,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             size="small"
             variant="outlined"
             required={true}
-            label="Title"
+            label="Titlu"
           />
           <TextField
             margin="normal"
@@ -149,7 +156,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             onChange={handleChange("description")}
             size="small"
             variant="outlined"
-            label="Description"
+            label="Descriere"
             required={true}
             multiline={true}
             minRows={2}
@@ -166,7 +173,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
                   {...params}
                   margin="normal"
                   size="small"
-                  label="Category"
+                  label="Categorie"
                   variant="outlined"
                   style={{ marginRight: 8 }}
                 />
@@ -179,7 +186,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
               size="small"
               variant="outlined"
               required={true}
-              label="Quantity"
+              label="Stoc"
               style={{ marginLeft: 8, width: 150 }}
             />
           </div>
@@ -192,17 +199,17 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
               size="small"
               variant="outlined"
               required={true}
-              label="Price (RON)"
+              label="Pret"
               style={{ marginRight: 8 }}
             />
             <TextField
               margin="normal"
               fullWidth={true}
-              value={productDetails.promoPrice}
+              value={productDetails.promoPrice || ""}
               onChange={handleChange("promoPrice")}
               size="small"
               variant="outlined"
-              label="Promo price (RON)"
+              label="Pret promotional"
               style={{ marginLeft: 8 }}
             />
           </div>
@@ -224,7 +231,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             color="primary"
             className={classes.btn}
           >
-            {mode?.toUpperCase()}
+            {mode === "create" ? "Creeaza" : "Modifica"}
           </Button>
         </form>
       </DialogContent>

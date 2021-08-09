@@ -95,7 +95,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
   return (
     <Dialog open={Boolean(mode)} onClose={onClose} fullWidth={true}>
       <DialogTitle className={classes.title}>
-        {mode?.toUpperCase()} CATEGORY
+        {mode === "create" ? "Creeaza categorie" : "Modifica categorie"}
       </DialogTitle>
       <DialogContent>
         <form onSubmit={handleSubmit}>
@@ -107,7 +107,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             size="small"
             variant="outlined"
             required={true}
-            label="Title"
+            label="Titlu"
           />
           <TextField
             margin="normal"
@@ -116,7 +116,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             onChange={(e) => setDescription(e.target.value)}
             size="small"
             variant="outlined"
-            label="Description"
+            label="Descriere"
             required={true}
             multiline={true}
             minRows={2}
@@ -164,9 +164,9 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
                   uploadImage?.current?.click();
                 }}
               >
-                Upload
+                Incarca
               </Button>
-              <Button onClick={() => setSelectImage(true)}>Select</Button>
+              <Button onClick={() => setSelectImage(true)}>Selecteaza</Button>
               <ImagePicker
                 open={selectImage}
                 onClose={() => setSelectImage(false)}
@@ -181,7 +181,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             color="primary"
             className={classes.btn}
           >
-            {mode?.toUpperCase()}
+            {mode === "create" ? "Creeaza" : "Modifica"}
           </Button>
         </form>
       </DialogContent>

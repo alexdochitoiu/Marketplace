@@ -1,6 +1,6 @@
 export default interface ICategory {
   _id: string;
   title: string;
-  description: string;
+  description?: string;
   image?: string;
 }

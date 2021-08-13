@@ -1,11 +1,14 @@
 import {
   Avatar,
   Button,
+  Checkbox,
   Dialog,
   DialogContent,
   DialogTitle,
   Divider,
+  FormControlLabel,
   makeStyles,
+  Switch,
   TextField,
   Theme,
 } from "@material-ui/core";
@@ -16,6 +19,7 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import ICategory from "src/types/ICategory";
 import SizesPicker from "./SizesPicker";
 import ProductImages from "./ProductImages";
+import ColorPicker from "src/components/shared/ColorPicker";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -70,9 +74,12 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
       price: 0,
       promoPrice: undefined,
       quantity: 0,
+      sizeType: "universal",
       sizes: ["Universala"],
+      active: true,
     }
   );
+  const [color, setColor] = React.useState(!!productDetails.color);
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
@@ -113,9 +120,13 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
     });
   };
 
-  const handleChangeSizes = (sizes: string[]) => {
+  const handleChangeSizes = (
+    sizeType: IProductModel["sizeType"],
+    sizes: string[]
+  ) => {
     setProductDetails({
       ...productDetails,
+      sizeType,
       sizes,
     });
   };
@@ -131,6 +142,29 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
       });
     }
   };
+
+  const handleChangeActive = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setProductDetails({
+      ...productDetails,
+      active: event.target.checked,
+    });
+  };
+
+  const handleAddColorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = event.target;
+    setColor(checked);
+    if (!checked) {
+      setProductDetails({
+        ...productDetails,
+        color: undefined,
+      });
+    }
+  };
+
+  const defaultCategory =
+    typeof productDetails.category === "string"
+      ? undefined
+      : productDetails.category;
 
   return (
     <Dialog open={Boolean(mode)} onClose={onClose} fullWidth={true}>
@@ -164,6 +198,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
           />
           <div style={{ display: "flex" }}>
             <Autocomplete
+              defaultValue={defaultCategory}
               fullWidth={true}
               options={categories}
               getOptionLabel={(option) => option.title}
@@ -214,7 +249,41 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             />
           </div>
           <Divider />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <FormControlLabel
+              control={
+                <Switch
+                  checked={productDetails.active}
+                  onChange={handleChangeActive}
+                />
+              }
+              label="Articol activ"
+            />
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={color} onChange={handleAddColorChange} />
+                }
+                label="Adauga culoare"
+              />
+              {color && (
+                <ColorPicker
+                  color={productDetails.color}
+                  onChange={(color) =>
+                    setProductDetails({ ...productDetails, color })
+                  }
+                />
+              )}
+            </div>
+          </div>
           <SizesPicker
+            sizeType={productDetails.sizeType}
             sizes={productDetails.sizes}
             onChange={handleChangeSizes}
           />
@@ -224,6 +293,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             onAddImages={handleAddImage}
             onRemoveImage={handleRemoveImage}
           />
+          <Divider />
           <Button
             fullWidth={true}
             variant="contained"

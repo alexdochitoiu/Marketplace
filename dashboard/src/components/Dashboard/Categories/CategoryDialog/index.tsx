@@ -117,7 +117,6 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             size="small"
             variant="outlined"
             label="Descriere"
-            required={true}
             multiline={true}
             minRows={2}
             maxRows={4}

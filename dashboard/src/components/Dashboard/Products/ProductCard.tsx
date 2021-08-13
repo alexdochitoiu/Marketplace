@@ -25,7 +25,6 @@ const useStyles = makeStyles({
   root: {
     margin: 5,
     width: 220,
-    minHeight: 240,
     border: "1px solid #555",
   },
   title: {

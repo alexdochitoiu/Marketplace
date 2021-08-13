@@ -6,6 +6,9 @@ import ProductDialog from "./ProductDialog";
 import * as productService from "src/services/product";
 import React from "react";
 import ProductCard from "./ProductCard";
+import NoItems from "src/components/shared/NoItems";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import Loading from "src/components/shared/Loading";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -25,6 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 export default function Products() {
   const classes = useStyles();
+  const [loading, setLoading] = useState(true);
   const [products, setProducts] = useState<IProduct[]>([]);
   const [dialog, setDialog] = useState<"create" | "update" | null>(null);
   const [productToUpdate, setProductToUpdate] = useState<IProduct | undefined>(
@@ -32,9 +36,11 @@ export default function Products() {
   );
 
   React.useEffect(() => {
+    setLoading(true);
     productService.getAll().then(({ data }) => {
       console.log(data);
       setProducts(data);
+      setLoading(false);
     });
   }, []);
 
@@ -42,18 +48,23 @@ export default function Products() {
     const data = new FormData();
     data.append("title", product.title);
     data.append("description", product.description);
+    data.append("quantity", `${product.quantity}`);
+    data.append("price", `${product.price}`);
+    data.append("sizeType", product.sizeType);
+    data.append("sizes", JSON.stringify(product.sizes));
+    data.append("active", `${product.active}`);
     if (product.category) {
       data.append("category", product.category);
     }
-    data.append("quantity", `${product.quantity}`);
-    data.append("price", `${product.price}`);
     if (product.promoPrice) {
       data.append("promoPrice", `${product.promoPrice}`);
+    }
+    if (product.color) {
+      data.append("color", product.color);
     }
     if (product.images.length > 0) {
       [...product.images].map((img) => data.append("images", img));
     }
-    data.append("sizes", JSON.stringify(product.sizes));
 
     if (dialog === "create") {
       productService
@@ -87,8 +98,28 @@ export default function Products() {
     setProductToUpdate(undefined);
   };
 
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div className={classes.root}>
+      {products.length === 0 && (
+        <NoItems
+          primaryText="Nu exista articole"
+          secondaryText={
+            <>
+              Apasa
+              <AddCircleIcon
+                fontSize="small"
+                color="primary"
+                style={{ margin: "0 3px " }}
+              />
+              pentru a crea
+            </>
+          }
+        />
+      )}
       {products.map((p) => (
         <ProductCard
           key={p._id}

@@ -1,4 +1,7 @@
 import ICategory from "./ICategory";
+import IColorGroup from "./IColorGroup";
+
+type SizeType = "universal" | "hat" | "clothes";
 
 export default interface IProduct {
   _id: string;
@@ -9,16 +12,14 @@ export default interface IProduct {
   price: number;
   promoPrice?: number;
   quantity: number;
+  color?: string;
+  colorGroup?: IColorGroup;
+  sizeType: SizeType;
   sizes: string[];
+  active: boolean;
 }
 
-export interface IProductModel {
-  title: string;
-  description: string;
+export interface IProductModel
+  extends Omit<IProduct, "_id" | "category" | "colorGroup"> {
   category?: string;
-  images: string[];
-  price: number;
-  promoPrice?: number;
-  quantity: number;
-  sizes: string[];
 }

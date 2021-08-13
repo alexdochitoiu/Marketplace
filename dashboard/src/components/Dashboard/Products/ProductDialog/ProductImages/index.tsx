@@ -1,4 +1,4 @@
-import { Avatar, makeStyles } from "@material-ui/core";
+import { Avatar, makeStyles, Tooltip } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import React from "react";
 import clsx from "clsx";
@@ -9,6 +9,7 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "center",
     marginTop: 16,
+    marginBottom: 16,
   },
   avatar: {
     width: 100,
@@ -55,11 +56,13 @@ export default function ({ images, onAddImages, onRemoveImage }: IProps) {
         onChange={handleImageChange}
       />
       {images.length < 4 && (
-        <Avatar
-          className={clsx(classes.avatar, classes.addImage)}
-          children={<AddIcon style={{ width: 45, height: 45 }} />}
-          onClick={() => uploadImage?.current?.click()}
-        />
+        <Tooltip placement="top" title="Adauga imagine (maxim 4)">
+          <Avatar
+            className={clsx(classes.avatar, classes.addImage)}
+            children={<AddIcon style={{ width: 45, height: 45 }} />}
+            onClick={() => uploadImage?.current?.click()}
+          />
+        </Tooltip>
       )}
     </div>
   );

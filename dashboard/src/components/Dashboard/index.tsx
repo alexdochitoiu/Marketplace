@@ -16,7 +16,8 @@ import Product from "./Products/Product";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
-    backgroundColor: "#ddd",
+    // backgroundColor: "#ddd",
+    background: "repeating-linear-gradient(135deg, #eee, #ddd 3px)",
     height: "100%",
   },
   container: {

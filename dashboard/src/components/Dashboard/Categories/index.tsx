@@ -1,10 +1,12 @@
-import { Fab, makeStyles, Theme } from "@material-ui/core";
+import { Fab, makeStyles, Theme, Typography } from "@material-ui/core";
 import React, { useState } from "react";
 import ICategory from "src/types/ICategory";
-import Category from "./Category";
+import CategoryCard from "./CategoryCard";
 import * as categoryService from "src/services/category";
 import AddIcon from "@material-ui/icons/Add";
 import CategoryDialog from "./CategoryDialog";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
+import NoItems from "src/components/shared/NoItems";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -79,8 +81,20 @@ export default function () {
 
   return (
     <div className={classes.root}>
+      {categories.length === 0 && (
+        <NoItems
+          primaryText="Nu exista categorii"
+          secondaryText={<>Apasa
+            <AddCircleIcon
+              fontSize="small"
+              color="primary"
+              style={{ margin: "0 3px " }}
+            />
+            pentru a crea</>}
+        />
+      )}
       {categories.map((c) => (
-        <Category
+        <CategoryCard
           key={c._id}
           category={c}
           onDelete={handleDelete}

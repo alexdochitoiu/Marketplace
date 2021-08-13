@@ -23,7 +23,10 @@ const createProduct = async (
     price,
     promoPrice,
     quantity,
+    sizeType,
     sizes,
+    color,
+    active,
   } = req.body;
 
   const imageNames = req.files
@@ -39,10 +42,15 @@ const createProduct = async (
     price,
     promoPrice,
     quantity,
+    sizeType,
     sizes: JSON.parse(sizes),
+    color,
+    active,
   })
-    .then((product) => {
-      res.status(201).json(product);
+    .then((response) => {
+      Product.findById(response._id)
+        .populate("category")
+        .then((product) => res.status(201).json(product!));
     })
     .catch((error) => {
       log.error(error);
@@ -93,7 +101,10 @@ const updateProduct = (
     price,
     promoPrice,
     quantity,
+    sizeType,
     sizes,
+    color,
+    active,
   } = req.body;
 
   const imageNames = req.files
@@ -111,7 +122,10 @@ const updateProduct = (
       price,
       promoPrice,
       quantity,
+      sizeType,
       sizes: JSON.parse(sizes),
+      color,
+      active,
     },
     { new: true }
   )

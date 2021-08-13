@@ -5,54 +5,74 @@ import {
   FormControlLabel,
   Radio,
   Chip,
-  Typography,
+  makeStyles,
+  Theme,
+  IconButton,
+  Tooltip,
 } from "@material-ui/core";
+import clsx from "clsx";
 import React from "react";
+import IProduct from "src/types/IProduct";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 
-type RadioValueType = "universal" | "hat" | "clothes";
+const useStyles = makeStyles((theme: Theme) => ({
+  chip: {
+    margin: 2,
+    cursor: "pointer",
+    "&:hover": {
+      background: "grey !important",
+      color: "#fff",
+    },
+  },
+  selected: {
+    background: theme.palette.primary.main,
+    color: "#fff",
+    fontWeight: "bold",
+  },
+}));
 
-const hatSizes = [53, 61];
-const clothesSizes = [32, 52];
-
-const getSizes = (interval: any, hat = true) => {
+const getSizes = (sizeType: IProduct["sizeType"]): string[] => {
+  if (sizeType === "universal") {
+    return ["Universala"];
+  } else if (sizeType === "hat") {
+    const hatSizes = [53, 61];
+    let result = [];
+    for (let i = hatSizes[0]; i <= hatSizes[1]; i++) {
+      result.push(`${i}`);
+    }
+    return result;
+  }
+  const clothesSizes = [32, 52];
   let result = [];
-  for (let i = interval[0]; i <= interval[1]; i += hat ? 1 : 2) {
+  for (let i = clothesSizes[0]; i <= clothesSizes[1]; i += 2) {
     result.push(`${i}`);
   }
   return result;
 };
 
-const getValue = (sizes: string[]): RadioValueType => {
-  if (sizes.length <= 1) return "universal";
-  if (
-    sizes[0] === `${hatSizes[0]}` &&
-    sizes[sizes.length - 1] === `${hatSizes[1]}`
-  )
-    return "hat";
-  return "clothes";
-};
-
 interface IProps {
+  sizeType: IProduct["sizeType"];
   sizes: string[];
-  onChange: (sizes: string[]) => void;
+  onChange: (sizeType: IProduct["sizeType"], sizes: string[]) => void;
 }
 
-export default function ({ sizes, onChange }: IProps) {
-  const [value, setValue] = React.useState<RadioValueType>(getValue(sizes));
+export default function ({ sizeType, sizes, onChange }: IProps) {
+  const classes = useStyles();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const v = event.target.value as RadioValueType;
-    setValue(v);
-    switch (v) {
-      case "universal":
-        onChange(["Universala"]);
-        break;
-      case "hat":
-        onChange(getSizes(hatSizes));
-        break;
-      case "clothes":
-        onChange(getSizes(clothesSizes, false));
-        break;
+    const v = event.target.value as IProduct["sizeType"];
+    onChange(v, getSizes(v));
+  };
+
+  const handleClickSize = (size: string) => (e: React.MouseEvent) => {
+    if (sizes.indexOf(size) === -1) {
+      onChange(sizeType, [...sizes, size]);
+    } else {
+      onChange(
+        sizeType,
+        sizes.filter((s) => s !== size)
+      );
     }
   };
 
@@ -62,9 +82,9 @@ export default function ({ sizes, onChange }: IProps) {
         component="fieldset"
         style={{ marginRight: 8, width: "100%" }}
       >
-        <FormLabel component="legend">Marimi</FormLabel>
+        <FormLabel>Marimi</FormLabel>
         <RadioGroup
-          value={value}
+          value={sizeType}
           onChange={handleChange}
           style={{ flexDirection: "row", justifyContent: "space-between" }}
         >
@@ -86,16 +106,31 @@ export default function ({ sizes, onChange }: IProps) {
           alignItems: "center",
         }}
       >
-        <Typography variant="body2" style={{ marginRight: 8 }}>
-          Marimi selectate:
-        </Typography>
-        {sizes.map((s) => (
+        <Tooltip placement="top" title="Selecteaza toate marimile">
+          <IconButton
+            size="small"
+            color="primary"
+            onClick={() => onChange(sizeType, getSizes(sizeType))}
+          >
+            <CheckCircleIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
+        <Tooltip placement="top" title="Sterge toate marimile">
+          <IconButton size="small" onClick={() => onChange(sizeType, [])}>
+            <HighlightOffIcon fontSize="small" />
+          </IconButton>
+        </Tooltip>
+        {getSizes(sizeType).map((s) => (
           <Chip
             key={s}
+            clickable={false}
             variant="outlined"
             size="small"
             label={s}
-            style={{ margin: 2 }}
+            className={clsx(classes.chip, {
+              [classes.selected]: sizes.indexOf(s) !== -1,
+            })}
+            onClick={handleClickSize(s)}
           />
         ))}
       </div>

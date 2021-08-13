@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     borderRadius: 5,
     background: "#222",
     objectFit: "contain",
+    cursor: "pointer",
   },
   toolbar: {
     position: "absolute",

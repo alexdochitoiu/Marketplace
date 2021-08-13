@@ -7,18 +7,16 @@ import Image from "./Image";
 import * as imageService from "src/services/photo";
 import { IImage } from "src/types/IImage";
 import * as routes from "src/constants/routes";
+import NoItems from "src/components/shared/NoItems";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
     display: "flex",
-  },
-  grid: {
+    flexWrap: "wrap",
     padding: 15,
     height: "calc(100vh - 80px)",
-    width: "100%",
     overflowY: "auto",
-    display: "flex",
-    flexWrap: "wrap",
+    alignItems: "flex-start",
   },
   fab: {
     position: "absolute",
@@ -72,6 +70,22 @@ export default function () {
 
   return (
     <div className={classes.root}>
+      {images.length === 0 && (
+        <NoItems
+          primaryText="Nu exista imagini"
+          secondaryText={
+            <>
+              Apasa
+              <PhotoCameraIcon
+                fontSize="small"
+                color="primary"
+                style={{ margin: "0 3px " }}
+              />
+              pentru a adauga
+            </>
+          }
+        />
+      )}
       <Dialog open={Boolean(openedImage)} onClose={() => setOpenedImage(null)}>
         {openedImage && (
           <img
@@ -85,16 +99,14 @@ export default function () {
           />
         )}
       </Dialog>
-      <Grid className={classes.grid}>
-        {images.map((image) => (
-          <Image
-            key={image.name}
-            image={image}
-            onClick={() => setOpenedImage(image)}
-            onDelete={handleDelete}
-          />
-        ))}
-      </Grid>
+      {images.map((image) => (
+        <Image
+          key={image.name}
+          image={image}
+          onClick={() => setOpenedImage(image)}
+          onDelete={handleDelete}
+        />
+      ))}
       <input
         accept="image/*"
         style={{ display: "none" }}

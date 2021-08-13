@@ -20,7 +20,6 @@ const useStyles = makeStyles({
   root: {
     margin: 5,
     width: 220,
-    minHeight: 240,
   },
   title: {
     textAlign: "center",
@@ -74,16 +73,18 @@ export default function ({ category, onDelete, onEdit }: IProps) {
       />
       <Divider />
       <CardContent className={classes.content}>
-        <Typography
-          variant="body2"
-          color="textSecondary"
-          component="pre"
-          style={{ whiteSpace: "pre-wrap", marginBottom: 10 }}
-        >
-          {category.description.length > 100
-            ? `${category.description.slice(0, 100)}...`
-            : category.description}
-        </Typography>
+        {category.description && (
+          <Typography
+            variant="body2"
+            color="textSecondary"
+            component="pre"
+            style={{ whiteSpace: "pre-wrap", marginBottom: 10 }}
+          >
+            {category.description.length > 100
+              ? `${category.description.slice(0, 100)}...`
+              : category.description}
+          </Typography>
+        )}
         <Avatar
           className={classes.avatar}
           src={category.image}

@@ -1,5 +1,10 @@
+import { Link } from "react-router-dom";
 import "./Logo.styles.css";
 
 export default function () {
-  return <div className="logo">Brand</div>;
+  return (
+    <Link to="/">
+      <div className="logo">Brand</div>
+    </Link>
+  );
 }

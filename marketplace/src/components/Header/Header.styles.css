@@ -27,6 +27,7 @@ ul {
 
 .main-menu > li:hover {
   color: var(--primary);
+  background-color: #eee;
 }
 
 .main-menu > li:hover > .sub-menu {
@@ -52,7 +53,7 @@ ul {
   margin-left: -30px;
 }
 
-.sub-menu:after {
+/* .sub-menu:after {
   bottom: 100%;
   left: 25%;
   border: solid transparent;
@@ -65,7 +66,7 @@ ul {
   border-bottom-color: #ffffff;
   border-width: 10px;
   margin-left: -10px;
-}
+} */
 
 .sub-menu > li {
   border-left: 0 solid var(--primary);
@@ -78,6 +79,7 @@ ul {
   border-left-width: 8px;
   padding-left: 18px;
   color: var(--primary);
+  background-color: #eee;
 }
 
 .btn {

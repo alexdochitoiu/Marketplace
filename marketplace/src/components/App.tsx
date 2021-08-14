@@ -1,6 +1,10 @@
 import { createTheme, ThemeProvider } from "@material-ui/core";
+import { Route, Router, Switch } from "react-router-dom";
 import "./App.styles.css";
 import Header from "./Header";
+import history from "src/constants/history";
+import Footer from "./Footer";
+import Home from "./pages/Home";
 
 const theme = createTheme({
   palette: {
@@ -16,10 +20,13 @@ const theme = createTheme({
 export default function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div>
+      <Router history={history}>
         <Header />
-        <div>Content</div>
-      </div>
+        <Switch>
+          <Route exact={true} path="/" component={Home} />
+        </Switch>
+        <Footer />
+      </Router>
     </ThemeProvider>
   );
 }

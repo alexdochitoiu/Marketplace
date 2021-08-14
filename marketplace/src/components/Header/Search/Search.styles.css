@@ -40,5 +40,5 @@
   border-radius: 2px;
   background-color: #fff;
   border: 1px solid #eee;
-  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
+  transition: all 500ms cubic-bezier(0, 0.11, 0.35, 1.75);
 }

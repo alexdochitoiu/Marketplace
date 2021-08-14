@@ -1,0 +1,18 @@
+:root {
+  --primary: #91610f;
+  --secondary: #222;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.padding-10 {
+  padding: 10px 0;
+}
+
+.flex-row {
+  display: flex;
+  align-items: center;
+}

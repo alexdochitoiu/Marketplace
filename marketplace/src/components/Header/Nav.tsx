@@ -17,7 +17,9 @@ export default function () {
         </li>
         <li>Blog</li>
         <li>Despre noi</li>
-        <li>Contact</li>
+        <a href="/contact">
+          <li>Contact</li>
+        </a>
       </ul>
     </nav>
   );

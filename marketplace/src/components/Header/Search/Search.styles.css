@@ -6,6 +6,8 @@
 
 .input-search {
   width: 0;
+  height: 30px;
+  color: #000 !important;
   border-style: none;
   padding: 5px;
   outline: none;
@@ -25,12 +27,13 @@
 }
 
 .btn-search {
+  color: #000 !important;
   border-style: none;
   outline: none;
   cursor: pointer;
   position: absolute;
-  right: -8px;
-  top: 4px;
+  right: -5px;
+  top: 10px;
   background-color: transparent;
 }
 

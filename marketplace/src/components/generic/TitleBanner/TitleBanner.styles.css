@@ -1,0 +1,14 @@
+.title-banner {
+  height: 100px;
+  background: var(--secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+.title-banner > h2 {
+  letter-spacing: 6px;
+  font-weight: bolder;
+  text-transform: uppercase;
+}

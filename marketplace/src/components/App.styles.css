@@ -34,3 +34,30 @@ a {
   align-items: center;
   flex-wrap: wrap;
 }
+
+button,
+input,
+select,
+textarea {
+  color: #7e7e7e;
+  font-family: Oswald, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+input,
+textarea {
+  background: #eceff8;
+  border: 2px solid #eceff8;
+  height: 45px;
+  box-shadow: none;
+  padding-left: 10px;
+  font-size: 14px;
+  color: #626262;
+  width: 100%;
+}
+
+*:focus {
+  outline: none;
+}

@@ -67,7 +67,7 @@ export default function () {
               {MAIL}
             </a>
             <a className="info-link">INFORMATII</a>
-            <a>CONTACT</a>
+            <a href="/contact">CONTACT</a>
             <a href="https://anpc.ro/">ANPC</a>
           </div>
         </div>

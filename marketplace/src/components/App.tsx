@@ -11,6 +11,7 @@ import Products from "./pages/Products";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import ProductsByCategory from "./pages/Products/ProductsByCategory";
+import BackToTopButton from "./BackToTopButton";
 
 const theme = createTheme({
   palette: {
@@ -40,6 +41,7 @@ export default function App() {
           <Route exact={true} path="/despre-noi" component={AboutUs} />
           <Route exact={true} path="/contact" component={Contact} />
         </Switch>
+        <BackToTopButton />
         <Footer />
       </Router>
     </ThemeProvider>

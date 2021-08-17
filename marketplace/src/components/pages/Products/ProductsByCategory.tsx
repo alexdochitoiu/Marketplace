@@ -1,7 +1,7 @@
 import React from "react";
 import TitleBanner from "src/components/generic/TitleBanner";
 import * as categoryService from "src/services/category";
-import "./styles.css";
+import "./Products.styles.css";
 import ICategory from "src/types/ICategory";
 import { useRouteMatch } from "react-router-dom";
 

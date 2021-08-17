@@ -1,0 +1,25 @@
+#back-to-top {
+  background: #a8741a none repeat scroll 0 0;
+  position: fixed;
+  right: -50px;
+  bottom: 50px;
+  width: 38px;
+  height: 40px;
+  text-align: center;
+  color: #fff;
+  line-height: 40px;
+  overflow: hidden;
+  font-size: 22px;
+  display: block;
+  box-shadow: 0 0 25px 0 rgb(0 0 0 / 5%);
+  z-index: 999;
+  transition: all 0.5s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+#back-to-top:hover {
+  bottom: 55px;
+  border-color: var(--primary);
+  background: var(--secondary);
+}

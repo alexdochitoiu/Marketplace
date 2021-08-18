@@ -1,14 +1,18 @@
 import "./style.css";
 
-interface IProps {
+interface IProps extends React.HTMLProps<HTMLAnchorElement> {
   text: string;
-  href?: string;
+  animation: "slide" | "fade";
 }
 
-export default function (props: IProps) {
+export default function ({ animation, href, text, ...rest }: IProps) {
   return (
-    <a href={props.href} className="custom-button">
-      {props.text}
+    <a
+      href={href}
+      className={`custom-button animationType-${animation}`}
+      {...rest}
+    >
+      {text}
     </a>
   );
 }

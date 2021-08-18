@@ -4,6 +4,7 @@ import IProduct from "src/types/IProduct";
 import * as productService from "src/services/product";
 import ProductCard from "./ProductCard";
 import "./Products.styles.css";
+import ProductFilter from "./ProductFilter";
 
 export default function () {
   const [products, setProducts] = React.useState<IProduct[]>([]);
@@ -17,7 +18,8 @@ export default function () {
   return (
     <div>
       <TitleBanner title="Articole" />
-      <div className="container">
+      <div className="products-root">
+        <ProductFilter />
         <div className="products-container">
           {products.map((p, idx) => (
             <ProductCard key={idx} product={p} />

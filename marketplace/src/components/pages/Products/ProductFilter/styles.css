@@ -1,0 +1,81 @@
+.filter-sidebar {
+  width: 280px;
+  margin-right: 20px;
+}
+
+.sidebar-title {
+  color: #3e3e3e;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+.sidebar-item {
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  border-bottom: 1px solid #eee;
+}
+
+.sidebar-item form {
+  position: relative;
+}
+
+.sidebar-item form > input {
+  background: #f1f1f1 none repeat scroll 0 0;
+  border: medium none;
+  box-shadow: none;
+  color: #333;
+  font-size: 13px;
+  width: 200px;
+  padding: 0 15px;
+  border-radius: 0;
+}
+
+.sidebar-item form > button {
+  background-color: #dedede;
+  border: medium none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 20px;
+  height: 45px;
+  line-height: 45px;
+  padding: 0 14px;
+  position: absolute;
+  right: -15px;
+  top: 0;
+  transition: all 0.3s ease 0s;
+  border-radius: 0;
+}
+
+.sidebar-item form > button:hover {
+  color: white;
+  background-color: var(--primary);
+}
+
+.filter-sidebar ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.filter-sidebar ul > li {
+  font-family: poppins, sans-serif;
+  border-bottom: 1px solid #f1f1f1;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  color: #353535;
+  font-size: 14px;
+}
+
+.filter-sidebar ul > li > a {
+  color: var(--secondary);
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-sidebar ul > li > a:hover {
+  color: var(--primary);
+}

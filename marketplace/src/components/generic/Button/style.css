@@ -32,6 +32,10 @@
   color: white;
 }
 
-.custom-button:hover::before {
+.animationType-fade.custom-button:hover {
+  background-color: var(--primary);
+}
+
+.animationType-slide.custom-button:hover::before {
   transform: scaleX(1);
 }

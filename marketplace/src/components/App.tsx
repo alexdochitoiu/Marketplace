@@ -12,6 +12,7 @@ import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import ProductsByCategory from "./pages/Products/ProductsByCategory";
 import BackToTopButton from "./BackToTopButton";
+import Product from "./pages/Product";
 
 const theme = createTheme({
   palette: {
@@ -32,6 +33,7 @@ export default function App() {
         <Switch>
           <Route exact={true} path="/" component={Home} />
           <Route exact={true} path="/produse" component={Products} />
+          <Route exact={true} path="/produse/:productId" component={Product} />
           <Route
             exact={true}
             path="/categorii/:categoryId"

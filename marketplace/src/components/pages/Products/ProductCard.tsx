@@ -1,6 +1,7 @@
 import IProduct from "src/types/IProduct";
 import { BiShoppingBag, BiHeart } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
+import history from "src/constants/history";
 import imageNotAvailable from "src/assets/images/no-image-available.jpg";
 
 interface IProps {
@@ -31,7 +32,10 @@ export default function ({ product }: IProps) {
           <div className="product-favorite">
             <BiHeart />
           </div>
-          <div className="product-view">
+          <div
+            className="product-view"
+            onClick={() => history.push(`/produse/${product._id}`)}
+          >
             <AiOutlineEye />
           </div>
         </div>

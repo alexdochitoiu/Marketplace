@@ -5,10 +5,6 @@
   cursor: pointer;
 }
 
-.product-outOfStock {
-  filter: grayscale(1);
-}
-
 .product-isPromo {
   position: absolute;
   top: 0;
@@ -20,6 +16,7 @@
 }
 
 .product-card > .product-img {
+  display: flex;
   box-shadow: 0 2px 6px rgb(85 85 85 / 20%);
 }
 
@@ -107,7 +104,6 @@
   display: flex;
   justify-content: center;
   left: 0;
-  /* opacity: 0; */
   position: absolute;
   right: 0;
   text-align: center;
@@ -148,17 +144,4 @@
 .product-action > div:hover {
   background-color: var(--primary);
   color: #fff;
-}
-
-.products-root {
-  display: flex;
-  margin: 0 auto;
-  margin-top: 25px;
-  max-width: 1400px;
-  justify-content: center;
-}
-
-.products-container {
-  display: flex;
-  flex-wrap: wrap;
 }

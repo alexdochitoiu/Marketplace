@@ -7,7 +7,11 @@ export default function () {
       <button className="btn-search">
         <BsSearch className="btn search-icon" />
       </button>
-      <input className="input-search" type="text" placeholder="Cautare..." />
+      <input
+        className="input-search"
+        type="text"
+        placeholder="Cautare..."
+      />
     </div>
   );
 }

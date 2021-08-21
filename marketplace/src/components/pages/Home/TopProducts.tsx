@@ -1,7 +1,7 @@
 import React from "react";
 import IProduct from "src/types/IProduct";
 import * as productService from "src/services/product";
-import ProductCard from "../Products/ProductCard";
+import ProductCard from "../Products/ProductsList/ProductCard";
 
 type TopProductType = "best-seller" | "sale" | "last-models" | "limited";
 
@@ -17,7 +17,7 @@ export default function () {
         type === "best-seller" || type === "last-models"
           ? data
           : data.reverse();
-      setProducts(prod);
+      setProducts(prod.slice(0, 4));
       setAnimation(true);
     });
   }, [type]);

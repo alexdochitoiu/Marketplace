@@ -3,21 +3,21 @@ import { BiShoppingBag, BiHeart } from "react-icons/bi";
 import { AiOutlineEye } from "react-icons/ai";
 import history from "src/constants/history";
 import imageNotAvailable from "src/assets/images/no-image-available.jpg";
+import "./styles.css";
 
 interface IProps {
   product: IProduct;
 }
+
 export default function ({ product }: IProps) {
   const isPromo = !!product.promoPrice;
   const isOutOfStock = product.quantity <= 0;
   return (
-    <div
-      className={"product-card" + (isOutOfStock ? " product-outOfStock" : "")}
-    >
+    <div className="product-card">
       <div className="product-img">
-        {isPromo && (
+        {(isPromo || isOutOfStock) && (
           <div className="product-isPromo">
-            {isOutOfStock ? "STOC EPUIZAT!" : "REDUCERE"}
+            {isOutOfStock ? "STOC EPUIZAT" : "REDUCERE"}
           </div>
         )}
         <img
@@ -27,14 +27,13 @@ export default function ({ product }: IProps) {
             product.images.length > 0 ? product.images[0] : imageNotAvailable
           }
         />
-
         <div className="product-action">
           <div className="product-favorite">
             <BiHeart />
           </div>
           <div
             className="product-view"
-            onClick={() => history.push(`/produse/${product._id}`)}
+            onClick={() => history.push(`/produs/${product._id}`)}
           >
             <AiOutlineEye />
           </div>

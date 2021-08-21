@@ -1,5 +1,6 @@
 .filter-sidebar {
   width: 280px;
+  margin: 10px;
   margin-right: 20px;
 }
 
@@ -27,7 +28,7 @@
   box-shadow: none;
   color: #333;
   font-size: 13px;
-  width: 200px;
+  width: 220px;
   padding: 0 15px;
   border-radius: 0;
 }
@@ -69,6 +70,21 @@
   justify-content: space-between;
   color: #353535;
   font-size: 14px;
+}
+
+.filter-sidebar ul > li:last-child {
+  border-bottom: none;
+}
+
+.filter-sidebar ul > li.active {
+  display: flex;
+  align-items: center;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.filter-sidebar ul > li.active > a {
+  color: var(--primary);
 }
 
 .filter-sidebar ul > li > a {

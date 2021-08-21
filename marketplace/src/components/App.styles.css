@@ -1,6 +1,11 @@
 :root {
-  --primary: #91610f;
+  --primary: #a8741a;
   --secondary: #222;
+}
+
+::selection {
+  color: #fff;
+  background: var(--primary);
 }
 
 h1,

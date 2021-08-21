@@ -1,16 +1,15 @@
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { Route, Router, Switch } from "react-router-dom";
 import "./App.styles.css";
+import "animate.css";
 import Header from "./Header";
 import history from "src/constants/history";
 import Footer from "./Footer";
 import Home from "./pages/Home";
 import Contact from "./pages/Contact";
-import "animate.css";
 import Products from "./pages/Products";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
-import ProductsByCategory from "./pages/Products/ProductsByCategory";
 import BackToTopButton from "./BackToTopButton";
 import Product from "./pages/Product";
 
@@ -32,13 +31,12 @@ export default function App() {
         <Header />
         <Switch>
           <Route exact={true} path="/" component={Home} />
-          <Route exact={true} path="/produse" component={Products} />
-          <Route exact={true} path="/produse/:productId" component={Product} />
           <Route
             exact={true}
-            path="/categorii/:categoryId"
-            component={ProductsByCategory}
+            path={["/produse", "/produse/:categoryId"]}
+            component={Products}
           />
+          <Route exact={true} path="/produs/:productId" component={Product} />
           <Route exact={true} path="/blog" component={Blog} />
           <Route exact={true} path="/despre-noi" component={AboutUs} />
           <Route exact={true} path="/contact" component={Contact} />

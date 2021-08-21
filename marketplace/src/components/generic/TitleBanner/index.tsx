@@ -14,7 +14,7 @@ export default function (props: IProps) {
         backgroundImage: `url(${props.backgroundImage || blackFurBackground})`,
       }}
     >
-      <h2>{props.title}</h2>
+      <h2 className="animate__animated animate__pulse">{props.title}</h2>
     </div>
   );
 }

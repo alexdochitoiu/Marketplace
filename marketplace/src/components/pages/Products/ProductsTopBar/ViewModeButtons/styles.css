@@ -1,0 +1,28 @@
+.ViewModeButtons_root {
+  width: 80px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.ViewModeButtons_root > div {
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ViewModeButtons_root > .active > svg {
+  color: var(--primary);
+}
+
+.ViewModeButtons_root svg {
+  color: #555;
+  transition: all 0.3s ease-in-out;
+}
+
+.ViewModeButtons_root > div:hover svg {
+  color: var(--primary);
+}

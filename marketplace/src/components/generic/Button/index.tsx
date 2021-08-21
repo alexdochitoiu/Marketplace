@@ -1,7 +1,7 @@
 import "./style.css";
 
 interface IProps extends React.HTMLProps<HTMLAnchorElement> {
-  text: string;
+  text?: string;
   animation: "slide" | "fade";
 }
 
@@ -9,10 +9,12 @@ export default function ({ animation, href, text, ...rest }: IProps) {
   return (
     <a
       href={href}
-      className={`custom-button animationType-${animation}`}
+      className={`custom-button animationType-${animation} ${
+        rest.className || ""
+      }`}
       {...rest}
     >
-      {text}
+      {text || rest.children}
     </a>
   );
 }

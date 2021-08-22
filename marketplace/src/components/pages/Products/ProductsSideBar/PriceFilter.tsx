@@ -14,7 +14,7 @@ const CustomSlider = withStyles({
 })(Slider);
 
 export default function () {
-  const [value, setValue] = React.useState<number[]>([100, 8000]);
+  const [value, setValue] = React.useState<number[]>([0, 10000]);
 
   const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);

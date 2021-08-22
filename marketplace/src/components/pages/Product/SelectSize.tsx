@@ -12,7 +12,7 @@ export default function ({ sizes }) {
       fullWidth={true}
       style={{
         background: "#f4f4f4",
-        height: 51,
+        height: 40,
         textAlign: "center",
         textTransform: "uppercase",
         fontFamily: "Oswald, sans-serif",

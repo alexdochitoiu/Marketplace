@@ -12,6 +12,7 @@ import SelectQuantity from "./SelectQuantity";
 import "./styles.css";
 import SelectSize from "./SelectSize";
 import SizeGuide from "./SizeGuide";
+import ColorCard from "./ColorCard";
 
 const useStyles = makeStyles({
   root: {
@@ -111,15 +112,25 @@ export default function () {
               {product.description}
             </p>
             <div>
-              <h3 style={{ marginBottom: 10, color: "#444" }}>
+              <h3 style={{ marginTop: 20, marginBottom: 10, color: "#444" }}>
                 Selectează mărimea produsului:
               </h3>
               <SelectSize sizes={product.sizes} />
               <SizeGuide />
             </div>
+            <div style={{ marginTop: 20 }}>
+              <h3 style={{ marginBottom: 10, color: "#444" }}>
+                Alege culoarea:
+              </h3>
+              <div style={{ display: "flex" }}>
+                <ColorCard color="#444" selected={true} />
+                <ColorCard color="crimson" />
+                <ColorCard color="steelblue" />
+              </div>
+            </div>
             <div
               className="product-listItem-actions"
-              style={{ justifyContent: "space-between" }}
+              style={{ justifyContent: "space-between", marginTop: 50 }}
             >
               <SelectQuantity
                 value={selectedQuantity}

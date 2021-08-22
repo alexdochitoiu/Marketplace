@@ -43,7 +43,7 @@ const getSizes = (sizeType: IProduct["sizeType"]): string[] => {
     }
     return result;
   }
-  const clothesSizes = [32, 52];
+  const clothesSizes = [36, 50];
   let result = [];
   for (let i = clothesSizes[0]; i <= clothesSizes[1]; i += 2) {
     result.push(`${i}`);

@@ -9,6 +9,7 @@ import { makeStyles } from "@material-ui/core";
 import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
 import SelectQuantity from "./SelectQuantity";
+import "./styles.css";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +34,7 @@ const useStyles = makeStyles({
 export default function () {
   const classes = useStyles();
   const [product, setProduct] = React.useState<IProduct | null>(null);
+  const [selectedQuantity, setSelectedQuantity] = React.useState("1");
   const router = useRouteMatch<any>();
 
   React.useEffect(() => {
@@ -107,7 +109,10 @@ export default function () {
               {product.description}
             </p>
             <div className="product-listItem-actions">
-              <SelectQuantity />
+              <SelectQuantity
+                value={selectedQuantity}
+                onChange={(e) => setSelectedQuantity(e.target.value)}
+              />
               <Button
                 animation="slide"
                 text="Adauga in cos"
@@ -116,7 +121,7 @@ export default function () {
               <Button
                 animation="slide"
                 style={{
-                  marginLeft: 10,
+                  marginLeft: 30,
                   padding: 11,
                   border: "1px solid #ddd",
                 }}

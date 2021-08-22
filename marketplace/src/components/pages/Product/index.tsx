@@ -10,6 +10,8 @@ import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
 import SelectQuantity from "./SelectQuantity";
 import "./styles.css";
+import SelectSize from "./SelectSize";
+import SizeGuide from "./SizeGuide";
 
 const useStyles = makeStyles({
   root: {
@@ -108,7 +110,17 @@ export default function () {
             <p className="product-listItem-description">
               {product.description}
             </p>
-            <div className="product-listItem-actions">
+            <div>
+              <h3 style={{ marginBottom: 10, color: "#444" }}>
+                Selectează mărimea produsului:
+              </h3>
+              <SelectSize sizes={product.sizes} />
+              <SizeGuide />
+            </div>
+            <div
+              className="product-listItem-actions"
+              style={{ justifyContent: "space-between" }}
+            >
               <SelectQuantity
                 value={selectedQuantity}
                 onChange={(e) => setSelectedQuantity(e.target.value)}
@@ -116,7 +128,13 @@ export default function () {
               <Button
                 animation="slide"
                 text="Adauga in cos"
-                style={{ border: "1px solid #ddd" }}
+                style={{
+                  flexGrow: 1,
+                  border: "1px solid #ddd",
+                  color: "#fff",
+                  background: "#444",
+                  textAlign: "center",
+                }}
               />
               <Button
                 animation="slide"

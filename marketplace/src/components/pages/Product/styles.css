@@ -9,3 +9,7 @@ input#quantity::-webkit-inner-spin-button {
 input#quantity[type="number"] {
   -moz-appearance: textfield;
 }
+
+.oswald-font {
+  font-family: Oswald, sans-serif;
+}

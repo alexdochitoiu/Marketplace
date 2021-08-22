@@ -1,5 +1,4 @@
 import { makeStyles } from "@material-ui/core";
-import React from "react";
 import { BiPlus, BiMinus } from "react-icons/bi";
 
 const useStyles = makeStyles({
@@ -22,10 +21,10 @@ const useStyles = makeStyles({
     color: "#666",
     position: "absolute",
     top: 18,
-    transition: "all 0.3s ease-in",
+    transition: "all 0.2s ease-in",
     "&:hover": {
-      color: "var(--primary)",
-      backgroundColor: "#fff",
+      color: "#fff",
+      backgroundColor: "var(--primary)",
     },
   },
 });

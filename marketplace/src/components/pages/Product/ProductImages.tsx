@@ -48,7 +48,7 @@ export default function ({ images }: IProps) {
         largeImage={{ src: images[index], width: 1200, height: 1300 }}
         imageClassName={classes.image}
         enlargedImageClassName={classes.image}
-        enlargedImageContainerStyle={{ zIndex: 1000 }}
+        enlargedImageContainerStyle={{ background: "#fff", zIndex: 1000 }}
       />
       <div className={classes.nav}>
         {images.map((img, idx) => (

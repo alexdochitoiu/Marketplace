@@ -1,8 +1,9 @@
-import { makeStyles, MenuItem, Select } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { sortingOptions } from "src/redux/types";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "src/redux/types";
 import { doChangeProductsSortBy } from "src/redux/actions";
+import Select from "src/components/generic/Select";
 
 const useStyles = makeStyles({
   root: {
@@ -10,9 +11,6 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
-  selectRoot: {
-    padding: "5px 15px",
-  }
 });
 
 export default function () {
@@ -25,21 +23,12 @@ export default function () {
         Sorteaza dupa:
       </h4>
       <Select
-        variant="outlined"
+        options={[...sortingOptions]}
         value={sortBy}
         onChange={(e) => {
           dispatch(doChangeProductsSortBy(e.target.value as typeof sortBy));
         }}
-        classes={{
-          root: classes.selectRoot
-        }}
-      >
-        {sortingOptions.map((o) => (
-          <MenuItem key={o.value} value={o.value}>
-            {o.label}
-          </MenuItem>
-        ))}
-      </Select>
+      />
     </div>
   );
 }

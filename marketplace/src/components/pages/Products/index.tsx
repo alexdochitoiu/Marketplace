@@ -36,6 +36,9 @@ export default function () {
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const sortBy = useSelector((state: RootState) => state.productsSortBy);
   const priceInterval = useSelector((state: RootState) => state.priceInterval);
+  const productSearchValue = useSelector(
+    (state: RootState) => state.productSearchValue
+  );
 
   React.useEffect(() => {
     if (categoryId) {
@@ -62,7 +65,11 @@ export default function () {
 
   let displayProducts = products;
 
-  displayProducts = filterProducts(displayProducts, priceInterval, "");
+  displayProducts = filterProducts(
+    displayProducts,
+    priceInterval,
+    productSearchValue
+  );
   displayProducts = sortProducts(displayProducts, sortBy);
   return (
     <div>

@@ -13,3 +13,22 @@ export const doChangeProductsSortBy = (
   type: ActionType.CHANGE_PRODUCT_SORT_BY,
   payload: { productsSortBy },
 });
+
+export const doChangeProductSearchValue = (
+  productSearchValue: string
+): IAction => ({
+  type: ActionType.CHANGE_PRODUCT_SEARCH_VALUE,
+  payload: { productSearchValue },
+});
+
+export const doChangePriceInterval = (
+  priceInterval: [number, number]
+): IAction => ({
+  type: ActionType.CHANGE_PRICE_INTERVAL,
+  payload: { priceInterval },
+});
+
+export const doChangeMaxPrice = (maxPrice: number): IAction => ({
+  type: ActionType.CHANGE_MAX_PRICE,
+  payload: { maxPrice },
+});

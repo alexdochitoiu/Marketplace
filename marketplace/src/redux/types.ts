@@ -3,6 +3,9 @@ import reducer from "./reducer";
 export enum ActionType {
   CHANGE_PRODUCT_VIEW_MODE = "CHANGE_PRODUCT_VIEW_MODE",
   CHANGE_PRODUCT_SORT_BY = "CHANGE_PRODUCT_SORT_BY",
+  CHANGE_PRODUCT_SEARCH_VALUE = "CHANGE_PRODUCT_SEARCH_VALUE",
+  CHANGE_PRICE_INTERVAL = "CHANGE_PRICE_INTERVAL",
+  CHANGE_MAX_PRICE = "CHANGE_MAX_PRICE",
 }
 
 export const sortingOptions = [
@@ -16,6 +19,9 @@ export const sortingOptions = [
 export interface IState {
   productsViewMode: "grid" | "list";
   productsSortBy: typeof sortingOptions[number]["value"];
+  productSearchValue: string;
+  priceInterval: [number, number];
+  maxPrice: number;
 }
 
 export interface IAction {

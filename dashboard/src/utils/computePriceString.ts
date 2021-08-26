@@ -16,10 +16,10 @@ export default function (
     .map((s) => parseInt(`${s[field]}`, 10));
 
   if (field === "promoPrice") {
-    const priceArray = sizes
-      .filter((s) => !!s.price)
-      .map((s) => parseInt(`${s.price}`, 10));
-    arr = [...arr, ...priceArray];
+    const priceArray = sizes.map((s) =>
+      parseInt(`${s.promoPrice || s.price}`, 10)
+    );
+    arr = [...priceArray];
   }
   const min = Math.min(...arr);
   const max = Math.max(...arr);

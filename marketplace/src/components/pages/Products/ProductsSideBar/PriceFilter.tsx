@@ -1,6 +1,9 @@
 import { Slider, withStyles } from "@material-ui/core";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "src/components/generic/Button";
+import { doChangePriceInterval } from "src/redux/actions";
+import { RootState } from "src/redux/types";
 
 const CustomSlider = withStyles({
   valueLabel: {
@@ -14,10 +17,13 @@ const CustomSlider = withStyles({
 })(Slider);
 
 export default function () {
-  const [value, setValue] = React.useState<number[]>([0, 10000]);
+  const dispatch = useDispatch();
+  const priceInterval = useSelector((state: RootState) => state.priceInterval);
+  const maxPrice = useSelector((state: RootState) => state.maxPrice);
+  const [value, setValue] = React.useState(priceInterval);
 
-  const handleChange = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number[]);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
   return (
@@ -27,7 +33,7 @@ export default function () {
         value={value}
         step={50}
         min={0}
-        max={10000}
+        max={maxPrice}
         onChange={handleChange}
         valueLabelDisplay="auto"
         aria-labelledby="price-slider"
@@ -47,6 +53,7 @@ export default function () {
             marginTop: 0,
             border: "1px solid #ccc",
           }}
+          onClick={() => dispatch(doChangePriceInterval(value))}
         />
         <h4>
           {value[0]} - {value[1]} RON

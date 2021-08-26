@@ -9,9 +9,10 @@ import { useRouteMatch } from "react-router-dom";
 import ICategory from "src/types/ICategory";
 import ProductsList from "./ProductsList";
 import { makeStyles } from "@material-ui/core";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
-import { sortProducts } from "src/utils";
+import { filterProducts, sortProducts } from "src/utils";
+import { doChangeMaxPrice } from "src/redux/actions";
 
 const useStyles = makeStyles({
   root: {
@@ -29,10 +30,12 @@ const useStyles = makeStyles({
 export default function () {
   const classes = useStyles();
   const router = useRouteMatch<any>();
+  const dispatch = useDispatch();
   const { categoryId } = router.params;
   const [category, setCategory] = React.useState<ICategory | null>(null);
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const sortBy = useSelector((state: RootState) => state.productsSortBy);
+  const priceInterval = useSelector((state: RootState) => state.priceInterval);
 
   React.useEffect(() => {
     if (categoryId) {
@@ -49,8 +52,18 @@ export default function () {
     }
   }, []);
 
-  const sortedProducts = sortProducts(products, sortBy);
+  const maxPrice = Math.max(
+    ...products.map((p) => Math.max(...p.sizes.map((s) => s.price)))
+  );
 
+  React.useEffect(() => {
+    dispatch(doChangeMaxPrice(maxPrice));
+  }, [maxPrice]);
+
+  let displayProducts = products;
+
+  displayProducts = filterProducts(displayProducts, priceInterval, "");
+  displayProducts = sortProducts(displayProducts, sortBy);
   return (
     <div>
       <TitleBanner
@@ -63,7 +76,7 @@ export default function () {
         <ProductsSideBar />
         <div className={classes.productsWrapper}>
           <ProductsTopBar />
-          <ProductsList products={sortedProducts} />
+          <ProductsList products={displayProducts} />
         </div>
       </div>
     </div>

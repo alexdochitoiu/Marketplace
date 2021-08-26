@@ -44,7 +44,10 @@ export default function Products() {
     });
   }, []);
 
-  const handleDone = (product: IProductModel) => {
+  const handleDone = (
+    product: IProductModel,
+    operation: "create" | "update"
+  ) => {
     const data = new FormData();
     data.append("title", product.title);
     data.append("productCode", product.productCode);
@@ -62,11 +65,11 @@ export default function Products() {
       [...product.images].map((img) => data.append("images", img));
     }
 
-    if (dialog === "create") {
+    if (operation === "create") {
       productService
         .create(data)
         .then(({ data }) => setProducts([...products, data]));
-    } else if (dialog === "update" && productToUpdate) {
+    } else if (operation === "update" && productToUpdate) {
       productService
         .update(productToUpdate._id, data)
         .then(({ data }) => {
@@ -122,6 +125,12 @@ export default function Products() {
           product={p}
           onDelete={handleDelete}
           onEdit={handleEdit}
+          onDuplicate={(p) =>
+            handleDone(
+              { ...p, title: `Copy - ${p.title}`, category: p.category?._id },
+              "create"
+            )
+          }
         />
       ))}
       {dialog && (

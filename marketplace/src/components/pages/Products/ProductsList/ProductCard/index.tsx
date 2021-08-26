@@ -42,7 +42,6 @@ export default function ({ product }: IProps) {
       </div>
       <div className="product-content">
         <div className="product-title-price">
-          <h4 className="product-title">{product.title}</h4>
           <div className="flex-row product-price">
             <h4
               style={{ whiteSpace: "nowrap" }}
@@ -56,6 +55,7 @@ export default function ({ product }: IProps) {
               </h4>
             )}
           </div>
+          <h4 className="product-title">{product.title}</h4>
         </div>
         <div className="product-cart-category">
           <div className="product-category">{product.category?.title}</div>

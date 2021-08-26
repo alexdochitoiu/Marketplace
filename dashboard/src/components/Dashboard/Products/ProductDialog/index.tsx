@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 interface IProps {
   mode: "create" | "update" | null;
   onClose: () => void;
-  onDone: (product: IProductModel) => void;
+  onDone: (product: IProductModel, operation: "create" | "update") => void;
   product?: IProduct;
 }
 
@@ -88,13 +88,19 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const data = isProduct(productDetails)
-      ? {
+    if (isProduct(productDetails)) {
+      // update
+      onDone(
+        {
           ...productDetails,
           category: productDetails.category?._id,
-        }
-      : productDetails;
-    onDone(data);
+        },
+        "update"
+      );
+    } else {
+      // create
+      onDone(productDetails, "create");
+    }
   };
 
   const handleChange =

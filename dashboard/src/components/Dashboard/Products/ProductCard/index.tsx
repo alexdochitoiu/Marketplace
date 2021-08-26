@@ -21,6 +21,8 @@ import clsx from "clsx";
 import history from "src/constants/history";
 import * as routes from "src/constants/routes";
 import { computePriceString } from "src/utils";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import ProductMenu from "./ProductMenu";
 
 const useStyles = makeStyles({
   root: {
@@ -52,11 +54,18 @@ const useStyles = makeStyles({
     fontWeight: "normal",
   },
   categoryBox: {
+    position: "relative",
     display: "flex",
     padding: "8px 0",
     background: "#555",
     color: "#fff",
     justifyContent: "center",
+  },
+  optionBtn: {
+    position: "absolute",
+    right: 2,
+    top: "calc(50% - 13px)",
+    color: "#fff",
   },
 });
 
@@ -64,11 +73,13 @@ interface IProps {
   product: IProduct;
   onDelete: (id: string) => void;
   onEdit: (product: IProduct) => void;
+  onDuplicate: (product: IProduct) => void;
 }
 
-export default function ({ product, onDelete, onEdit }: IProps) {
+export default function ({ product, onDelete, onEdit, onDuplicate }: IProps) {
   const classes = useStyles();
   const [deleteConfirmation, setDeleteConfirmation] = React.useState(false);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const isPromo = !!product.sizes.find((s) => s.promoPrice);
   return (
     <Card variant="outlined" className={classes.root}>
@@ -76,6 +87,19 @@ export default function ({ product, onDelete, onEdit }: IProps) {
         <Typography variant="body2">
           {product.category?.title || <i>Fara categorie</i>}
         </Typography>
+        <IconButton
+          className={classes.optionBtn}
+          size="small"
+          onClick={(e) => setAnchorEl(e.currentTarget)}
+        >
+          <MoreVertIcon fontSize="small" />
+        </IconButton>
+        <ProductMenu
+          product={product}
+          anchorEl={anchorEl}
+          onClose={() => setAnchorEl(null)}
+          onDuplicate={onDuplicate}
+        />
       </div>
       <ConfirmationDialog
         open={deleteConfirmation}
@@ -93,10 +117,13 @@ export default function ({ product, onDelete, onEdit }: IProps) {
       <CardHeader
         title={product.title}
         className={classes.title}
-        titleTypographyProps={{ style: { fontSize: 20 } }}
+        titleTypographyProps={{ style: { fontSize: 18 } }}
       />
       <Divider />
       <CardContent className={classes.content}>
+        <Typography style={{ marginBottom: 8 }} variant="body2">
+          Cod produs: <b>{product.productCode}</b>
+        </Typography>
         <Typography
           variant="body2"
           color="textSecondary"

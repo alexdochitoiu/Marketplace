@@ -1,6 +1,6 @@
 import React from "react";
 import TitleBanner from "src/components/generic/TitleBanner";
-import IProduct from "src/types/IProduct";
+import IProduct, { ISize } from "src/types/IProduct";
 import * as productService from "src/services/product";
 import { useRouteMatch } from "react-router-dom";
 import ProductImages from "./ProductImages";
@@ -12,8 +12,9 @@ import SelectQuantity from "./SelectQuantity";
 import "./styles.css";
 import SelectSize from "./SelectSize";
 import SizeGuide from "./SizeGuide";
-import ColorCard from "./ProductColor";
-import { computePriceString, isPromo } from "src/utils";
+import ProductColor from "./ProductColor";
+import ProductPrice from "./ProductPrice";
+import QuantityInfoText from "./QuantityInfoText";
 
 const useStyles = makeStyles({
   root: {
@@ -38,13 +39,20 @@ const useStyles = makeStyles({
 export default function () {
   const classes = useStyles();
   const [product, setProduct] = React.useState<IProduct | null>(null);
+  const [pcProducts, setPCProducts] = React.useState<IProduct[]>([]);
   const [selectedQuantity, setSelectedQuantity] = React.useState("1");
+  const [selectedSize, setSelectedSize] = React.useState<ISize | null>(null);
   const router = useRouteMatch<any>();
 
   React.useEffect(() => {
     const { productId } = router.params;
     if (productId) {
-      productService.getById(productId).then(({ data }) => setProduct(data));
+      productService.getById(productId).then(({ data }) => {
+        setProduct(data);
+        productService
+          .getProductsByProductCode(data.productCode)
+          .then(({ data: pcData }) => setPCProducts(pcData));
+      });
     }
   }, []);
 
@@ -77,43 +85,22 @@ export default function () {
                 {product.category.title.toUpperCase()}
               </a>
             )}
-            <div
-              className="product-listItem-price"
-              style={{ display: "flex", alignItems: "center" }}
+            <ProductPrice product={product} selectedSize={selectedSize} />
+            <p
+              className="product-listItem-description"
+              style={{ maxHeight: "initial" }}
             >
-              <h4
-                style={
-                  isPromo(product)
-                    ? {
-                        color: "#888",
-                        textDecoration: "line-through",
-                        fontSize: 24,
-                        marginRight: 16,
-                      }
-                    : { color: "var(--primary)", fontSize: 28 }
-                }
-              >
-                {computePriceString(product.sizes, "price")} RON
-              </h4>
-              {isPromo(product) && (
-                <h4
-                  style={{
-                    color: "var(--primary)",
-                    fontSize: 28,
-                  }}
-                >
-                  {computePriceString(product.sizes, "promoPrice")} RON
-                </h4>
-              )}
-            </div>
-            <p className="product-listItem-description">
               {product.description}
             </p>
             <div>
               <h3 style={{ marginTop: 20, marginBottom: 10, color: "#444" }}>
                 Selectează mărimea produsului:
               </h3>
-              <SelectSize sizes={product.sizes} />
+              <SelectSize
+                defaultSize={selectedSize}
+                sizes={product.sizes}
+                onChange={(size) => setSelectedSize(size)}
+              />
               <SizeGuide />
             </div>
             <div style={{ marginTop: 20 }}>
@@ -121,14 +108,23 @@ export default function () {
                 Alege culoarea:
               </h3>
               <div style={{ display: "flex" }}>
-                <ColorCard color="#444" selected={true} />
-                <ColorCard color="crimson" />
-                <ColorCard color="steelblue" />
+                {pcProducts.map(
+                  (pcp) =>
+                    pcp.color && (
+                      <a key={pcp._id} href={`/produs/${pcp._id}`}>
+                        <ProductColor
+                          product={pcp}
+                          selected={product._id === pcp._id}
+                        />
+                      </a>
+                    )
+                )}
               </div>
             </div>
+            <QuantityInfoText selectedSize={selectedSize} />
             <div
               className="product-listItem-actions"
-              style={{ justifyContent: "space-between", marginTop: 50 }}
+              style={{ justifyContent: "space-between", marginTop: 20 }}
             >
               <SelectQuantity
                 value={selectedQuantity}

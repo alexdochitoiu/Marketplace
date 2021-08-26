@@ -2,7 +2,7 @@ import ICategory from "./ICategory";
 
 type SizeType = "universal" | "hat" | "clothes";
 
-interface ISize {
+export interface ISize {
   size: string;
   price: number;
   promoPrice?: number;

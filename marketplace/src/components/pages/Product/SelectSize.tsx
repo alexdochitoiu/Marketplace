@@ -1,11 +1,13 @@
 import Select from "src/components/generic/Select";
-import IProduct from "src/types/IProduct";
+import IProduct, { ISize } from "src/types/IProduct";
 
 interface IProps {
   sizes: IProduct["sizes"];
+  defaultSize: ISize | null;
+  onChange: (size: ISize | null) => void;
 }
 
-export default function ({ sizes }: IProps) {
+export default function ({ defaultSize, sizes, onChange }: IProps) {
   const options = [
     { value: "default", label: "Alege o mărime" },
     ...sizes.map((s) => ({
@@ -13,9 +15,21 @@ export default function ({ sizes }: IProps) {
       label: s.size,
     })),
   ];
+
+  const handleChange = (e) => {
+    if (e.target.value === "default") {
+      onChange(null);
+      return;
+    }
+    const size = sizes.find((s) => s.size === e.target.value);
+    if (size) {
+      onChange(size);
+    }
+  };
+
   return (
     <Select
-      defaultValue="default"
+      defaultValue={defaultSize ? defaultSize.size : "default"}
       options={options}
       fullWidth={true}
       style={{
@@ -26,6 +40,7 @@ export default function ({ sizes }: IProps) {
         fontFamily: "Oswald, sans-serif",
       }}
       classes={{ select: "oswald-font" }}
+      onChange={handleChange}
     />
   );
 }

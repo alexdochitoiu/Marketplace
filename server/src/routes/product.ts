@@ -7,6 +7,7 @@ const router = express.Router();
 
 router.get("/", controller.getAllProducts);
 router.get("/:id", controller.getProduct);
+router.get("/product-code/:productCode", controller.getProductsByProductCode);
 router.post(
   "/create",
   checkAuth,

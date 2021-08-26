@@ -154,10 +154,22 @@ const deleteProduct = (
     });
 };
 
+const getProductsByProductCode = (req: Request, res: Response) => {
+  const { productCode } = req.params;
+  Product.find({ productCode })
+    .populate("category")
+    .then(async (products) => res.status(200).json(products))
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
 export default {
   createProduct,
   getProduct,
   getAllProducts,
   updateProduct,
   deleteProduct,
+  getProductsByProductCode,
 };

@@ -77,7 +77,34 @@ const getProduct = (
 const getAllProducts = (req: Request, res: Response) => {
   Product.find()
     .populate("category")
-    .then(async (products) => res.status(200).json(products))
+    .then((products) => res.status(200).json(products))
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
+const getProductsByProductCode = (req: Request, res: Response) => {
+  const { productCode } = req.params;
+  Product.find({ productCode })
+    .populate("category")
+    .then((products) => res.status(200).json(products))
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
+const getProductsByCategory = (req: Request, res: Response) => {
+  const { categoryId } = req.params;
+  if (!categoryId) {
+    return res.status(404).json([]);
+  }
+  return Product.find({
+    category: categoryId === "alte-produse" ? null : { _id: categoryId },
+  })
+    .populate("category")
+    .then((products) => res.status(200).json(products))
     .catch((error) => {
       log.error(error);
       res.status(500).json({ error });
@@ -154,22 +181,12 @@ const deleteProduct = (
     });
 };
 
-const getProductsByProductCode = (req: Request, res: Response) => {
-  const { productCode } = req.params;
-  Product.find({ productCode })
-    .populate("category")
-    .then(async (products) => res.status(200).json(products))
-    .catch((error) => {
-      log.error(error);
-      res.status(500).json({ error });
-    });
-};
-
 export default {
   createProduct,
   getProduct,
   getAllProducts,
+  getProductsByProductCode,
+  getProductsByCategory,
   updateProduct,
   deleteProduct,
-  getProductsByProductCode,
 };

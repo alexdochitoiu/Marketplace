@@ -19,7 +19,9 @@ export default function () {
       <ul>
         <li className={router.url === "/produse" ? "active" : ""}>
           <a href="/produse">Toate</a>
-          <span>(89)</span>
+          <span>
+            ({categories.reduce((acc, curr) => acc + curr.productsCount, 0)})
+          </span>
         </li>
         {categories.map((c) => (
           <li
@@ -27,7 +29,7 @@ export default function () {
             className={router.url === `/produse/${c._id}` ? "active" : ""}
           >
             <a href={`/produse/${c._id}`}>{c.title}</a>
-            <span>({c.title.length})</span>
+            <span>({c.productsCount})</span>
           </li>
         ))}
       </ul>

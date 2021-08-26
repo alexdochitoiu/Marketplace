@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { HOST } from "../config";
 import log from "../logger";
 import Category, { CategoryDocument } from "../models/category";
+import Product from "../models/product";
 
 const url = `${HOST}/public/images/`;
 
@@ -56,12 +57,51 @@ const getCategory = (
     });
 };
 
-const getAllCategories = (
+interface ICategoryResult {
+  _id: string;
+  title: string;
+  description?: string;
+  image?: string;
+  productsCount: number;
+}
+
+const getAllCategories = async (
   req: Request,
-  res: Response<ResponseType<CategoryDocument[]>>
+  res: Response<ResponseType<ICategoryResult[]>>
 ) => {
+  const noCategoryProductsCount = await Product.find({
+    category: null,
+  })
+    .countDocuments()
+    .exec();
   Category.find()
-    .then((categories) => res.status(200).json(categories))
+    .exec()
+    .then((categories) => {
+      const pResult = Promise.all(
+        categories.map(async (c) => {
+          const productsCount = await Product.find({
+            category: { _id: c._id },
+          })
+            .countDocuments()
+            .exec();
+          return {
+            // @ts-ignore
+            ...c._doc,
+            productsCount,
+          } as ICategoryResult;
+        })
+      );
+      pResult.then((result) =>
+        res.status(200).json([
+          ...result,
+          {
+            _id: "alte-produse",
+            title: "Alte produse",
+            productsCount: noCategoryProductsCount,
+          },
+        ])
+      );
+    })
     .catch((error) => {
       log.error(error);
       res.status(500).json({ error });

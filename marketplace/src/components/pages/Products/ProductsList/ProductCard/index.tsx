@@ -58,7 +58,7 @@ export default function ({ product }: IProps) {
           <h4 className="product-title">{product.title}</h4>
         </div>
         <div className="product-cart-category">
-          <div className="product-category">{product.category?.title}</div>
+          <div className="product-category">{product.category?.title || "Alte produse"}</div>
           <div className="product-cart">
             <BiShoppingBag /> ADAUGA IN COS
           </div>

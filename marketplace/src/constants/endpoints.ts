@@ -9,3 +9,5 @@ export const GET_PRODUCT = HOST + "/api/product/:id";
 export const GET_PRODUCTS = HOST + "/api/product";
 export const GET_PRODUCTS_BY_PRODUCT_CODE =
   HOST + "/api/product/product-code/:productCode";
+export const GET_PRODUCTS_BY_CATEGORY =
+  HOST + "/api/product/category/:categoryId";

@@ -8,18 +8,22 @@ const router = express.Router();
 router.get("/", controller.getAllProducts);
 router.get("/:id", controller.getProduct);
 router.get("/product-code/:productCode", controller.getProductsByProductCode);
+router.get("/category/:categoryId", controller.getProductsByCategory);
+
 router.post(
   "/create",
   checkAuth,
   upload.array("images", 4),
   controller.createProduct
 );
+
 router.put(
   "/update/:id",
   checkAuth,
   upload.array("images", 4),
   controller.updateProduct
 );
+
 router.delete("/delete/:id", checkAuth, controller.deleteProduct);
 
 export = router;

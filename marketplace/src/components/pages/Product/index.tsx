@@ -50,7 +50,7 @@ export default function () {
       productService.getById(productId).then(({ data }) => {
         setProduct(data);
         productService
-          .getProductsByProductCode(data.productCode)
+          .getByProductCode(data.productCode)
           .then(({ data: pcData }) => setPCProducts(pcData));
       });
     }
@@ -111,7 +111,14 @@ export default function () {
                 {pcProducts.map(
                   (pcp) =>
                     pcp.color && (
-                      <a key={pcp._id} href={`/produs/${pcp._id}`}>
+                      <a
+                        key={pcp._id}
+                        href={
+                          product._id !== pcp._id
+                            ? `/produs/${pcp._id}`
+                            : undefined
+                        }
+                      >
                         <ProductColor
                           product={pcp}
                           selected={product._id === pcp._id}

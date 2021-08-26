@@ -55,6 +55,7 @@ export default function ({ product, selected }: IProps) {
   );
   return (
     <Tooltip
+      open={selected ? false : undefined}
       title={<TooltipContent />}
       placement="top"
       arrow={true}

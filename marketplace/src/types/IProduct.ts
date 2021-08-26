@@ -20,4 +20,6 @@ export default interface IProduct {
   sizes: ISize[];
   color?: string;
   active: boolean;
+  createdAt?: string;
+  updatedAt?: string;
 }

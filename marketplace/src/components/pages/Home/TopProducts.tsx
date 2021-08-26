@@ -2,8 +2,30 @@ import React from "react";
 import IProduct from "src/types/IProduct";
 import * as productService from "src/services/product";
 import ProductCard from "../Products/ProductsList/ProductCard";
+import { sortProducts } from "src/utils";
 
 type TopProductType = "best-seller" | "sale" | "last-models" | "limited";
+
+const getTopProducts = (
+  products: IProduct[],
+  type: TopProductType
+): IProduct[] => {
+  if (type === "sale") {
+    return products
+      .filter((p) => p.sizes.find((s) => s.promoPrice))
+      .slice(0, 4);
+  }
+  if (type === "limited") {
+    return products
+      .filter((p) => p.sizes.find((s) => s.quantity > 0 && s.quantity < 3))
+      .slice(0, 4);
+  }
+  if (type === "last-models") {
+    return sortProducts(products, "newest").slice(0, 4);
+  }
+
+  return products.slice(0, 4);
+};
 
 export default function () {
   const [animation, setAnimation] = React.useState(false);
@@ -13,11 +35,7 @@ export default function () {
   React.useEffect(() => {
     setAnimation(false);
     productService.getAll().then(({ data }) => {
-      const prod =
-        type === "best-seller" || type === "last-models"
-          ? data
-          : data.reverse();
-      setProducts(prod.slice(0, 4));
+      setProducts(getTopProducts(data, type));
       setAnimation(true);
     });
   }, [type]);

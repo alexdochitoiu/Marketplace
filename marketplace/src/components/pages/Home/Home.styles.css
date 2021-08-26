@@ -48,4 +48,5 @@
 
 .top-products {
   display: flex;
+  justify-content: center;
 }

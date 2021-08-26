@@ -1,6 +1,7 @@
 import { Chip, makeStyles } from "@material-ui/core";
 import clsx from "clsx";
 import IProduct from "src/types/IProduct";
+import { computePriceString } from "src/utils";
 
 const useStyles = makeStyles({
   infoBar: {
@@ -27,18 +28,14 @@ interface IProps {
 export default function ({ product }: IProps) {
   const classes = useStyles();
 
+  const isPromo = !!product.sizes.find((s) => s.promoPrice);
   const Price = () => (
     <>
-      <b
-        style={{ fontSize: 15 }}
-        className={clsx({ [classes.promoPrice]: product.promoPrice })}
-      >
-        {product.price}
-      </b>
-      {product.promoPrice && (
-        <b style={{ fontSize: 16, marginLeft: 8 }}>{product.promoPrice}</b>
-      )}
-      <span style={{ marginLeft: 8 }}>RON</span>
+      <b className={clsx({ [classes.promoPrice]: isPromo })}>
+        {computePriceString(product.sizes, "price")}
+      </b>{" "}
+      {isPromo && <b>{computePriceString(product.sizes, "promoPrice")}</b>}
+      {" RON"}
     </>
   );
 
@@ -57,7 +54,8 @@ export default function ({ product }: IProps) {
         size="small"
         label={
           <span>
-            Stoc: <b>{product.quantity}</b>
+            Total pe stoc:{" "}
+            <b>{product.sizes.reduce((acc, curr) => acc + curr.quantity, 0)}</b>
           </span>
         }
       />

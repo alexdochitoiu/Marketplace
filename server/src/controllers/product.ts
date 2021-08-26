@@ -17,12 +17,10 @@ const createProduct = async (
 ) => {
   const {
     title,
+    productCode,
     description,
     images: imagesAsUrl,
     category,
-    price,
-    promoPrice,
-    quantity,
     sizeType,
     sizes,
     color,
@@ -36,12 +34,10 @@ const createProduct = async (
   const images = imageNames.length > 0 ? imageNames : imagesAsUrl;
   Product.create({
     title,
+    productCode,
     description,
     category,
     images,
-    price,
-    promoPrice,
-    quantity,
     sizeType,
     sizes: JSON.parse(sizes),
     color,
@@ -95,12 +91,10 @@ const updateProduct = (
   const { id } = req.params;
   const {
     title,
+    productCode,
     description,
     images: imagesAsUrl,
     category,
-    price,
-    promoPrice,
-    quantity,
     sizeType,
     sizes,
     color,
@@ -116,12 +110,10 @@ const updateProduct = (
     id,
     {
       title,
+      productCode,
       description,
       category,
       images,
-      price,
-      promoPrice,
-      quantity,
       sizeType,
       sizes: JSON.parse(sizes),
       color,

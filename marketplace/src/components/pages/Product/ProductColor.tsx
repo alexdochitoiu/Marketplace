@@ -5,14 +5,21 @@ const useStyles = makeStyles({
   root: {
     cursor: "pointer",
     marginRight: 10,
-    width: 50,
+    width: 30,
+    height: 30,
+    borderRadius: "50%",
     padding: 5,
     border: "1px solid rgb(221, 221, 221)",
     background: "#f4f4f4",
     transition: "all 0.3s ease-in-out",
   },
   selected: {
-    width: 100,
+    borderColor: "#444",
+  },
+  swatch: {
+    borderRadius: "50%",
+    width: "100%",
+    height: "100%",
   },
 });
 
@@ -25,7 +32,7 @@ export default function ({ color, selected }: IProps) {
   const classes = useStyles();
   return (
     <div className={clsx(classes.root, { [classes.selected]: selected })}>
-      <div style={{ background: color, width: "100%", height: 30 }} />
+      <div className={classes.swatch} style={{ background: color }} />
     </div>
   );
 }

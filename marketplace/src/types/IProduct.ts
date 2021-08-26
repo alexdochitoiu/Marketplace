@@ -1,20 +1,23 @@
 import ICategory from "./ICategory";
-import IColorGroup from "./IColorGroup";
 
 type SizeType = "universal" | "hat" | "clothes";
+
+interface ISize {
+  size: string;
+  price: number;
+  promoPrice?: number;
+  quantity: number;
+}
 
 export default interface IProduct {
   _id: string;
   title: string;
+  productCode: string;
   description: string;
   category?: ICategory;
   images: string[];
-  price: number;
-  promoPrice?: number;
-  quantity: number;
-  color?: string;
-  colorGroup?: IColorGroup;
   sizeType: SizeType;
-  sizes: string[];
+  sizes: ISize[];
+  color?: string;
   active: boolean;
 }

@@ -12,7 +12,8 @@ import SelectQuantity from "./SelectQuantity";
 import "./styles.css";
 import SelectSize from "./SelectSize";
 import SizeGuide from "./SizeGuide";
-import ColorCard from "./ColorCard";
+import ColorCard from "./ProductColor";
+import { computePriceString, isPromo } from "src/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -55,9 +56,6 @@ export default function () {
     );
   }
 
-  const isPromo = !!product.promoPrice;
-  const isOutOfStock = product.quantity <= 0;
-
   return (
     <div>
       <TitleBanner title={product.title} />
@@ -85,7 +83,7 @@ export default function () {
             >
               <h4
                 style={
-                  isPromo
+                  isPromo(product)
                     ? {
                         color: "#888",
                         textDecoration: "line-through",
@@ -95,16 +93,16 @@ export default function () {
                     : { color: "var(--primary)", fontSize: 28 }
                 }
               >
-                {product.price} RON
+                {computePriceString(product.sizes, "price")} RON
               </h4>
-              {isPromo && (
+              {isPromo(product) && (
                 <h4
                   style={{
                     color: "var(--primary)",
                     fontSize: 28,
                   }}
                 >
-                  {product.promoPrice} RON
+                  {computePriceString(product.sizes, "promoPrice")} RON
                 </h4>
               )}
             </div>

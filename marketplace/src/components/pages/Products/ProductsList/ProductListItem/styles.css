@@ -83,10 +83,10 @@
 .product-listItem-price {
   display: flex;
   margin: 15px 0 16px;
+  color: var(--primary);
 }
 
 .product-listItem-price h4 {
-  color: #707070;
   font-size: 19px;
   font-weight: 700;
 }

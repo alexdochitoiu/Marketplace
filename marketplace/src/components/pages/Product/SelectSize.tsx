@@ -1,9 +1,17 @@
 import Select from "src/components/generic/Select";
+import IProduct from "src/types/IProduct";
 
-export default function ({ sizes }) {
+interface IProps {
+  sizes: IProduct["sizes"];
+}
+
+export default function ({ sizes }: IProps) {
   const options = [
     { value: "default", label: "Alege o mărime" },
-    ...sizes.map((s) => ({ value: s, label: s })),
+    ...sizes.map((s) => ({
+      value: s.size,
+      label: s.size,
+    })),
   ];
   return (
     <Select

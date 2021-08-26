@@ -47,17 +47,13 @@ export default function Products() {
   const handleDone = (product: IProductModel) => {
     const data = new FormData();
     data.append("title", product.title);
+    data.append("productCode", product.productCode);
     data.append("description", product.description);
-    data.append("quantity", `${product.quantity}`);
-    data.append("price", `${product.price}`);
     data.append("sizeType", product.sizeType);
     data.append("sizes", JSON.stringify(product.sizes));
     data.append("active", `${product.active}`);
     if (product.category) {
       data.append("category", product.category);
-    }
-    if (product.promoPrice) {
-      data.append("promoPrice", `${product.promoPrice}`);
     }
     if (product.color) {
       data.append("color", product.color);

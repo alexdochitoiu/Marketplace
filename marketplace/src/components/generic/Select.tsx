@@ -22,8 +22,14 @@ const useStyles = makeStyles({
   },
 });
 
+interface IOption {
+  value: string;
+  label: string;
+  disabled?: boolean;
+}
+
 interface IProps extends SelectProps {
-  options: Array<{ value: string; label: string }>;
+  options: IOption[];
 }
 
 export default function ({ options, ...props }: IProps) {
@@ -45,7 +51,7 @@ export default function ({ options, ...props }: IProps) {
       {...props}
     >
       {options.map((o) => (
-        <MenuItem key={o.value} value={o.value}>
+        <MenuItem key={o.value} value={o.value} disabled={o.disabled}>
           {o.label}
         </MenuItem>
       ))}

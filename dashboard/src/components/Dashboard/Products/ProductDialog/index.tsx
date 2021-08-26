@@ -20,6 +20,7 @@ import ICategory from "src/types/ICategory";
 import SizesPicker from "./SizesPicker";
 import ProductImages from "./ProductImages";
 import ColorPicker from "src/components/shared/ColorPicker";
+import SizeTable from "./SizeTable";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -69,13 +70,11 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
   >(
     product || {
       title: "",
+      productCode: "",
       description: "",
       images: [],
-      price: 0,
-      promoPrice: undefined,
-      quantity: 0,
       sizeType: "universal",
-      sizes: ["Universala"],
+      sizes: [{ size: "Universala", price: 0, quantity: 0 }],
       active: true,
     }
   );
@@ -127,7 +126,7 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
     setProductDetails({
       ...productDetails,
       sizeType,
-      sizes,
+      sizes: sizes.map((s) => ({ size: s, price: 0, quantity: 0 })),
     });
   };
 
@@ -216,36 +215,13 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             />
             <TextField
               margin="normal"
-              value={productDetails.quantity}
-              onChange={handleChange("quantity")}
+              value={productDetails.productCode}
+              onChange={handleChange("productCode")}
               size="small"
               variant="outlined"
               required={true}
-              label="Stoc"
-              style={{ marginLeft: 8, width: 150 }}
-            />
-          </div>
-          <div style={{ display: "flex" }}>
-            <TextField
-              margin="normal"
-              fullWidth={true}
-              value={productDetails.price}
-              onChange={handleChange("price")}
-              size="small"
-              variant="outlined"
-              required={true}
-              label="Pret"
-              style={{ marginRight: 8 }}
-            />
-            <TextField
-              margin="normal"
-              fullWidth={true}
-              value={productDetails.promoPrice || ""}
-              onChange={handleChange("promoPrice")}
-              size="small"
-              variant="outlined"
-              label="Pret promotional"
-              style={{ marginLeft: 8 }}
+              label="Cod produs"
+              style={{ marginLeft: 8, width: 200 }}
             />
           </div>
           <Divider />
@@ -284,8 +260,14 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
           </div>
           <SizesPicker
             sizeType={productDetails.sizeType}
-            sizes={productDetails.sizes}
+            sizes={productDetails.sizes.map((s) => s.size)}
             onChange={handleChangeSizes}
+          />
+          <SizeTable
+            sizes={productDetails.sizes}
+            onChange={(sizes) =>
+              setProductDetails({ ...productDetails, sizes })
+            }
           />
           <Divider />
           <ProductImages

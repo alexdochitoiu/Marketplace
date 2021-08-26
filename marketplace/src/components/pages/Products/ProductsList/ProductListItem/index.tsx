@@ -5,20 +5,21 @@ import imageNotAvailable from "src/assets/images/no-image-available.jpg";
 import "./styles.css";
 import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
+import { isPromo, isOutOfStock, computePriceString } from "src/utils";
 
 interface IProps {
   product: IProduct;
 }
 
 export default function ({ product }: IProps) {
-  const isPromo = !!product.promoPrice;
-  const isOutOfStock = product.quantity <= 0;
+  const promoProduct = isPromo(product);
+  const outOfStockProduct = isOutOfStock(product);
   return (
     <div className="product-listItem">
       <div className="product-img">
-        {(isPromo || isOutOfStock) && (
+        {(promoProduct || outOfStockProduct) && (
           <div className="product-isPromo">
-            {isOutOfStock ? "STOC EPUIZAT" : "REDUCERE"}
+            {outOfStockProduct ? "STOC EPUIZAT" : "REDUCERE"}
           </div>
         )}
         <img
@@ -47,12 +48,14 @@ export default function ({ product }: IProps) {
         <div className="product-listItem-price">
           <h4
             style={{ whiteSpace: "nowrap" }}
-            className={isPromo ? "product-promo-price" : ""}
+            className={promoProduct ? "product-promo-price" : ""}
           >
-            {product.price} RON
+            {computePriceString(product.sizes, "price")} RON
           </h4>
-          {isPromo && (
-            <h4 style={{ marginLeft: 8 }}>{product.promoPrice} RON</h4>
+          {promoProduct && (
+            <h4 style={{ marginLeft: 8, whiteSpace: "nowrap" }}>
+              {computePriceString(product.sizes, "promoPrice")} RON
+            </h4>
           )}
         </div>
         <p className="product-listItem-description">{product.description}</p>

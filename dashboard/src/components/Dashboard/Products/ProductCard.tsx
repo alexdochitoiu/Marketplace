@@ -20,6 +20,7 @@ import IProduct from "src/types/IProduct";
 import clsx from "clsx";
 import history from "src/constants/history";
 import * as routes from "src/constants/routes";
+import { computePriceString } from "src/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -65,18 +66,10 @@ interface IProps {
   onEdit: (product: IProduct) => void;
 }
 
-const computeSizesLabel = (sizes: string[]) => {
-  const l = sizes.length;
-  if (l === 1) return sizes[0];
-  return (
-    sizes[0] + " " + sizes[1] + " ... " + sizes[l - 2] + " " + sizes[l - 1]
-  );
-};
-
 export default function ({ product, onDelete, onEdit }: IProps) {
   const classes = useStyles();
   const [deleteConfirmation, setDeleteConfirmation] = React.useState(false);
-
+  const isPromo = !!product.sizes.find((s) => s.promoPrice);
   return (
     <Card variant="outlined" className={classes.root}>
       <div className={classes.categoryBox}>
@@ -140,18 +133,21 @@ export default function ({ product, onDelete, onEdit }: IProps) {
         >
           <Typography variant="body2" style={{ marginTop: 8 }}>
             Pret:{" "}
-            <b className={clsx({ [classes.promoPrice]: product.promoPrice })}>
-              {product.price}{" "}
-            </b>
-            {product.promoPrice && <b>{product.promoPrice}</b>}
+            <b className={clsx({ [classes.promoPrice]: isPromo })}>
+              {computePriceString(product.sizes, "price")}
+            </b>{" "}
+            {isPromo && (
+              <b>{computePriceString(product.sizes, "promoPrice")}</b>
+            )}
           </Typography>
           <Typography style={{ marginTop: 8 }} variant="body2">
-            Stoc: <b>{product.quantity}</b>
+            Total pe stoc:{" "}
+            <b>{product.sizes.reduce((acc, curr) => acc + curr.quantity, 0)}</b>
           </Typography>
           <Chip
             style={{ marginTop: 8 }}
             size="small"
-            label={computeSizesLabel(product.sizes)}
+            label={product.sizes.map((s) => s.size).join(", ")}
           />
         </div>
       </CardContent>

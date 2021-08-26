@@ -10,6 +10,7 @@ import NoItems from "src/components/shared/NoItems";
 import Loading from "src/components/shared/Loading";
 import InfoBar from "./InfoBar";
 import Images from "./Images";
+import SizeTable from "../ProductDialog/SizeTable";
 
 const useStyles = makeStyles({
   root: {
@@ -103,28 +104,21 @@ export default function () {
         {product.images.length > 0 && <Images images={product.images} />}
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            margin: "10px 0",
+            margin: "20px 0",
           }}
         >
-          <div style={{ display: "flex", alignItems: "center" }}>
+          <div>
             <Typography variant="caption" style={{ fontWeight: "bold" }}>
               Marimi
             </Typography>
-            <div style={{ marginLeft: 10 }}>
-              {product.sizes.map((s) => (
-                <Chip
-                  key={s}
-                  size="small"
-                  label={s}
-                  style={{ margin: "1px 3px" }}
-                />
-              ))}
+            <div style={{ marginTop: 10 }}>
+              <SizeTable sizes={product.sizes} readonly={true} />
             </div>
           </div>
           {product.color && (
-            <div style={{ display: "flex", alignItems: "center" }}>
+            <div
+              style={{ display: "flex", alignItems: "center", marginTop: 20 }}
+            >
               <Typography variant="caption" style={{ fontWeight: "bold" }}>
                 Culoare
               </Typography>

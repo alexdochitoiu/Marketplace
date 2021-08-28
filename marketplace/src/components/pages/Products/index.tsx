@@ -70,7 +70,9 @@ export default function () {
     priceInterval,
     productSearchValue
   );
+
   displayProducts = sortProducts(displayProducts, sortBy);
+
   return (
     <div>
       <TitleBanner
@@ -82,7 +84,7 @@ export default function () {
       <div className={classes.root}>
         <ProductsSideBar />
         <div className={classes.productsWrapper}>
-          <ProductsTopBar />
+          <ProductsTopBar productsCount={displayProducts.length} />
           <ProductsList products={displayProducts} />
         </div>
       </div>

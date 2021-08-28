@@ -1,25 +1,61 @@
 import IProduct from "src/types/IProduct";
 import { BiShoppingBag, BiHeart } from "react-icons/bi";
+import { FaHeart } from "react-icons/fa";
 import { AiOutlineEye } from "react-icons/ai";
 import history from "src/constants/history";
 import imageNotAvailable from "src/assets/images/no-image-available.jpg";
 import "./styles.css";
-import { computePriceString, isPromo, isOutOfStock } from "src/utils";
+import {
+  computePriceString,
+  isPromo,
+  isOutOfStock,
+  addOrRemoveFromWishlist,
+  isAddedToWishlist,
+} from "src/utils";
+import React from "react";
+import SnackBar from "src/components/generic/SnackBar";
+import FavoriteSnackContent from "../FavoriteSnackContent";
+import { Tooltip } from "@material-ui/core";
 
 interface IProps {
   product: IProduct;
 }
 
 export default function ({ product }: IProps) {
+  const [snack, setSnack] = React.useState<React.ReactNode | null>(null);
   const promoProduct = isPromo(product);
   const outOfStockProduct = isOutOfStock(product);
+
+  const handleHeartClick = () => {
+    const operation = addOrRemoveFromWishlist(product._id);
+    setSnack(<FavoriteSnackContent operation={operation} />);
+  };
+
+  const isWishlist = isAddedToWishlist(product._id);
+
   return (
     <div className="product-card">
+      <SnackBar
+        message={snack}
+        open={Boolean(snack)}
+        onClose={() => setSnack(null)}
+      />
       <div className="product-img">
         {(promoProduct || outOfStockProduct) && (
           <div className="product-isPromo">
             {outOfStockProduct ? "STOC EPUIZAT" : "REDUCERE"}
           </div>
+        )}
+        {isWishlist && (
+          <Tooltip title="Sterge din lista de favorite">
+            <div
+              className="product-isPromo"
+              style={{ left: "initial", right: 1, cursor: "pointer" }}
+              onClick={handleHeartClick}
+            >
+              <FaHeart style={{ width: 18, height: 18, fill: "red" }} />
+            </div>
+          </Tooltip>
         )}
         <img
           width={280}
@@ -29,13 +65,18 @@ export default function ({ product }: IProps) {
           }
         />
         <div className="product-action">
-          <div className="product-favorite">
-            <BiHeart />
-          </div>
-          <div
-            className="product-view"
-            onClick={() => history.push(`/produs/${product._id}`)}
+          <Tooltip
+            title={
+              isWishlist
+                ? "Sterge din lista de favorite"
+                : "Adauga la lista de favorite"
+            }
           >
+            <div onClick={handleHeartClick}>
+              {isWishlist ? <FaHeart /> : <BiHeart />}
+            </div>
+          </Tooltip>
+          <div onClick={() => history.push(`/produs/${product._id}`)}>
             <AiOutlineEye />
           </div>
         </div>
@@ -58,7 +99,9 @@ export default function ({ product }: IProps) {
           <h4 className="product-title">{product.title}</h4>
         </div>
         <div className="product-cart-category">
-          <div className="product-category">{product.category?.title || "Alte produse"}</div>
+          <div className="product-category">
+            {product.category?.title || "Alte produse"}
+          </div>
           <div className="product-cart">
             <BiShoppingBag /> ADAUGA IN COS
           </div>

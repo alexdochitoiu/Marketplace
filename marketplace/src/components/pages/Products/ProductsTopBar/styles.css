@@ -16,3 +16,9 @@
 .products-sort h4 > span {
   font-family: Oswald;
 }
+
+.filter-chip {
+  border-radius: 0 !important;
+  margin: 0 10px;
+  height: 29px !important;
+}

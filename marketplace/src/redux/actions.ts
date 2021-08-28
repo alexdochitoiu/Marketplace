@@ -22,7 +22,7 @@ export const doChangeProductSearchValue = (
 });
 
 export const doChangePriceInterval = (
-  priceInterval: [number, number]
+  priceInterval: [number, number] | null
 ): IAction => ({
   type: ActionType.CHANGE_PRICE_INTERVAL,
   payload: { priceInterval },

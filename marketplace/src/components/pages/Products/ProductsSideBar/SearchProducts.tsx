@@ -11,6 +11,12 @@ export default function () {
   );
   const [value, setValue] = React.useState(productSearchValue);
 
+  React.useEffect(() => {
+    if (!productSearchValue) {
+      setValue("");
+    }
+  }, [productSearchValue]);
+
   const handleClick = (e) => {
     e.preventDefault();
     dispatch(doChangeProductSearchValue(value));

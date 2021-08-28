@@ -20,7 +20,7 @@ export interface IState {
   productsViewMode: "grid" | "list";
   productsSortBy: typeof sortingOptions[number]["value"];
   productSearchValue: string;
-  priceInterval: [number, number];
+  priceInterval: [number, number] | null;
   maxPrice: number;
 }
 

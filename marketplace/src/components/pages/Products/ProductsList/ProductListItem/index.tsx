@@ -5,22 +5,57 @@ import imageNotAvailable from "src/assets/images/no-image-available.jpg";
 import "./styles.css";
 import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
-import { isPromo, isOutOfStock, computePriceString } from "src/utils";
+import {
+  isPromo,
+  isOutOfStock,
+  computePriceString,
+  addOrRemoveFromWishlist,
+  isAddedToWishlist,
+} from "src/utils";
+import React from "react";
+import { FaHeart } from "react-icons/fa";
+import FavoriteSnackContent from "../FavoriteSnackContent";
+import SnackBar from "src/components/generic/SnackBar";
+import { Tooltip } from "@material-ui/core";
 
 interface IProps {
   product: IProduct;
 }
 
 export default function ({ product }: IProps) {
+  const [snack, setSnack] = React.useState<React.ReactNode | null>(null);
   const promoProduct = isPromo(product);
   const outOfStockProduct = isOutOfStock(product);
+
+  const handleHeartClick = () => {
+    const operation = addOrRemoveFromWishlist(product._id);
+    setSnack(<FavoriteSnackContent operation={operation} />);
+  };
+
+  const isWishlist = isAddedToWishlist(product._id);
   return (
     <div className="product-listItem">
+      <SnackBar
+        message={snack}
+        open={Boolean(snack)}
+        onClose={() => setSnack(null)}
+      />
       <div className="product-img">
         {(promoProduct || outOfStockProduct) && (
           <div className="product-isPromo">
             {outOfStockProduct ? "STOC EPUIZAT" : "REDUCERE"}
           </div>
+        )}
+        {isWishlist && (
+          <Tooltip title="Sterge din lista de favorite">
+            <div
+              className="product-isPromo"
+              style={{ left: "initial", right: 1, cursor: "pointer" }}
+              onClick={handleHeartClick}
+            >
+              <FaHeart style={{ width: 18, height: 18, fill: "red" }} />
+            </div>
+          </Tooltip>
         )}
         <img
           width={280}
@@ -65,12 +100,31 @@ export default function ({ product }: IProps) {
             text="Adauga in cos"
             style={{ border: "1px solid #ddd" }}
           />
-          <Button
-            animation="slide"
-            style={{ marginLeft: 10, padding: 11, border: "1px solid #ddd" }}
+          <Tooltip
+            title={
+              isWishlist
+                ? "Sterge din lista de favorite"
+                : "Adauga la lista de favorite"
+            }
           >
-            <BiHeart style={{ width: 25, height: 25 }} />
-          </Button>
+            <div>
+              <Button
+                onClick={handleHeartClick}
+                animation="slide"
+                style={{
+                  marginLeft: 10,
+                  padding: 11,
+                  border: "1px solid #ddd",
+                }}
+              >
+                {isWishlist ? (
+                  <FaHeart style={{ width: 25, height: 25 }} />
+                ) : (
+                  <BiHeart style={{ width: 25, height: 25 }} />
+                )}
+              </Button>
+            </div>
+          </Tooltip>
         </div>
       </div>
     </div>

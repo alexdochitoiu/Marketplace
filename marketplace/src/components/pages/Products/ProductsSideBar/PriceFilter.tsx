@@ -20,7 +20,19 @@ export default function () {
   const dispatch = useDispatch();
   const priceInterval = useSelector((state: RootState) => state.priceInterval);
   const maxPrice = useSelector((state: RootState) => state.maxPrice);
-  const [value, setValue] = React.useState(priceInterval);
+  const [value, setValue] = React.useState([0, 5000]);
+
+  React.useEffect(() => {
+    if (maxPrice >= 0) {
+      setValue([value[0], maxPrice]);
+    }
+  }, [maxPrice]);
+
+  React.useEffect(() => {
+    if(priceInterval === null) {
+      setValue([0, maxPrice]);
+    }
+  }, [priceInterval])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -53,7 +65,9 @@ export default function () {
             marginTop: 0,
             border: "1px solid #ccc",
           }}
-          onClick={() => dispatch(doChangePriceInterval(value))}
+          onClick={() =>
+            dispatch(doChangePriceInterval(value as [number, number]))
+          }
         />
         <h4>
           {value[0]} - {value[1]} RON

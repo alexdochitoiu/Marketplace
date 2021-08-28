@@ -4,7 +4,7 @@ const initialAppState: IState = {
   productsViewMode: "grid",
   productsSortBy: "default",
   productSearchValue: "",
-  priceInterval: [0, 5000],
+  priceInterval: null,
   maxPrice: 5000,
 };
 

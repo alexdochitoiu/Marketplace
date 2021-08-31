@@ -32,3 +32,8 @@ export const doChangeMaxPrice = (maxPrice: number): IAction => ({
   type: ActionType.CHANGE_MAX_PRICE,
   payload: { maxPrice },
 });
+
+export const doChangeWishlist = (wishlist: string[]): IAction => ({
+  type: ActionType.CHANGE_WISHLIST,
+  payload: { wishlist },
+});

@@ -6,6 +6,7 @@ const initialAppState: IState = {
   productSearchValue: "",
   priceInterval: null,
   maxPrice: 5000,
+  wishlist: [],
 };
 
 export default function (state = initialAppState, action: IAction): IState {
@@ -15,6 +16,7 @@ export default function (state = initialAppState, action: IAction): IState {
     case ActionType.CHANGE_PRODUCT_SEARCH_VALUE:
     case ActionType.CHANGE_PRICE_INTERVAL:
     case ActionType.CHANGE_MAX_PRICE:
+    case ActionType.CHANGE_WISHLIST:
       return {
         ...state,
         ...action.payload,

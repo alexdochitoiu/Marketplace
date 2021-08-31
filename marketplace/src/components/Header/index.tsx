@@ -5,6 +5,7 @@ import Search from "./Search";
 import CartButton from "./CartButton";
 import React from "react";
 import clsx from "clsx";
+import WishlistButton from "./WishlistButton";
 
 export default function () {
   const [sticky, setSticky] = React.useState(false);
@@ -33,6 +34,7 @@ export default function () {
         <Nav />
         <div className="flex-row">
           <Search />
+          <WishlistButton />
           <CartButton />
         </div>
       </div>

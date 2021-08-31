@@ -74,6 +74,20 @@ const getProduct = (
     });
 };
 
+const getProductsByIds = (
+  req: Request,
+  res: Response<ResponseType<ProductDocument[]>>
+) => {
+  const { ids } = req.body;
+  Product.find({_id: { $in: ids }})
+    .populate("category")
+    .then((products) => res.status(200).json(products))
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
 const getAllProducts = (req: Request, res: Response) => {
   Product.find()
     .populate("category")
@@ -187,6 +201,7 @@ export default {
   getAllProducts,
   getProductsByProductCode,
   getProductsByCategory,
+  getProductsByIds,
   updateProduct,
   deleteProduct,
 };

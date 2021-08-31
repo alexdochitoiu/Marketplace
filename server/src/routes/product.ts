@@ -9,6 +9,7 @@ router.get("/", controller.getAllProducts);
 router.get("/:id", controller.getProduct);
 router.get("/product-code/:productCode", controller.getProductsByProductCode);
 router.get("/category/:categoryId", controller.getProductsByCategory);
+router.post("/ids", controller.getProductsByIds);
 
 router.post(
   "/create",

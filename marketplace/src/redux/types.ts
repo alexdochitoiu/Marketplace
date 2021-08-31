@@ -6,6 +6,7 @@ export enum ActionType {
   CHANGE_PRODUCT_SEARCH_VALUE = "CHANGE_PRODUCT_SEARCH_VALUE",
   CHANGE_PRICE_INTERVAL = "CHANGE_PRICE_INTERVAL",
   CHANGE_MAX_PRICE = "CHANGE_MAX_PRICE",
+  CHANGE_WISHLIST = "CHANGE_WISHLIST",
 }
 
 export const sortingOptions = [
@@ -22,6 +23,7 @@ export interface IState {
   productSearchValue: string;
   priceInterval: [number, number] | null;
   maxPrice: number;
+  wishlist: string[];
 }
 
 export interface IAction {

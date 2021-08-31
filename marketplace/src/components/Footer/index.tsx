@@ -41,10 +41,10 @@ export default function () {
         <div>
           <Logo />
           <ul className="footer-nav">
-            <a>
+            <a href="/produse">
               <li>Produse</li>
             </a>
-            <a>
+            <a href="/favorite">
               <li>Favorite</li>
             </a>
             <a>

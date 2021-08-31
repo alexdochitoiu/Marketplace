@@ -3,12 +3,16 @@ import {
   GET_PRODUCT,
   GET_PRODUCTS,
   GET_PRODUCTS_BY_CATEGORY,
+  GET_PRODUCTS_BY_IDS,
   GET_PRODUCTS_BY_PRODUCT_CODE,
 } from "src/constants/endpoints";
 import IProduct from "src/types/IProduct";
 
 const getById = async (id: string) =>
   axios.get<IProduct>(GET_PRODUCT.replace(":id", id));
+
+const getByIds = async (ids: string[]) =>
+  axios.post<IProduct[]>(GET_PRODUCTS_BY_IDS, { ids });
 
 const getAll = async () => axios.get<IProduct[]>(GET_PRODUCTS);
 
@@ -22,4 +26,4 @@ const getByCategory = async (categoryId: string) =>
     GET_PRODUCTS_BY_CATEGORY.replace(":categoryId", categoryId)
   );
 
-export { getById, getAll, getByProductCode, getByCategory };
+export { getById, getAll, getByProductCode, getByCategory, getByIds };

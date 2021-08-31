@@ -12,6 +12,7 @@ import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
 import BackToTopButton from "./BackToTopButton";
 import Product from "./pages/Product";
+import Wishlist from "./pages/Wishlist";
 
 const theme = createTheme({
   palette: {
@@ -40,6 +41,7 @@ export default function App() {
           <Route exact={true} path="/blog" component={Blog} />
           <Route exact={true} path="/despre-noi" component={AboutUs} />
           <Route exact={true} path="/contact" component={Contact} />
+          <Route exact={true} path="/favorite" component={Wishlist} />
         </Switch>
         <BackToTopButton />
         <Footer />

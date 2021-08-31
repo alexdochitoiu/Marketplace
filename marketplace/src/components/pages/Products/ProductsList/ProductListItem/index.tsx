@@ -5,18 +5,15 @@ import imageNotAvailable from "src/assets/images/no-image-available.jpg";
 import "./styles.css";
 import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
-import {
-  isPromo,
-  isOutOfStock,
-  computePriceString,
-  addOrRemoveFromWishlist,
-  isAddedToWishlist,
-} from "src/utils";
+import { isPromo, isOutOfStock, computePriceString } from "src/utils";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
 import FavoriteSnackContent from "../FavoriteSnackContent";
 import SnackBar from "src/components/generic/SnackBar";
 import { Tooltip } from "@material-ui/core";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/types";
+import useAddOrRemoveFromWishlist from "src/utils/customHooks/useAddOrRemoveFromWishlist";
 
 interface IProps {
   product: IProduct;
@@ -24,6 +21,8 @@ interface IProps {
 
 export default function ({ product }: IProps) {
   const [snack, setSnack] = React.useState<React.ReactNode | null>(null);
+  const wishlist = useSelector((state: RootState) => state.wishlist);
+  const addOrRemoveFromWishlist = useAddOrRemoveFromWishlist();
   const promoProduct = isPromo(product);
   const outOfStockProduct = isOutOfStock(product);
 
@@ -32,7 +31,7 @@ export default function ({ product }: IProps) {
     setSnack(<FavoriteSnackContent operation={operation} />);
   };
 
-  const isWishlist = isAddedToWishlist(product._id);
+  const isWishlist = wishlist.indexOf(product._id) !== -1;
   return (
     <div className="product-listItem">
       <SnackBar

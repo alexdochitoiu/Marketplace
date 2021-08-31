@@ -5,9 +5,10 @@ import * as productService from "src/services/product";
 import { useRouteMatch } from "react-router-dom";
 import ProductImages from "./ProductImages";
 import history from "src/constants/history";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Tooltip } from "@material-ui/core";
 import Button from "src/components/generic/Button";
 import { BiHeart } from "react-icons/bi";
+import { FaHeart } from "react-icons/fa";
 import SelectQuantity from "./SelectQuantity";
 import "./styles.css";
 import SelectSize from "./SelectSize";
@@ -15,6 +16,11 @@ import SizeGuide from "./SizeGuide";
 import ProductColor from "./ProductColor";
 import ProductPrice from "./ProductPrice";
 import QuantityInfoText from "./QuantityInfoText";
+import { useSelector } from "react-redux";
+import { RootState } from "src/redux/types";
+import useAddOrRemoveFromWishlist from "src/utils/customHooks/useAddOrRemoveFromWishlist";
+import SnackBar from "src/components/generic/SnackBar";
+import FavoriteSnackContent from "../Products/ProductsList/FavoriteSnackContent";
 
 const useStyles = makeStyles({
   root: {
@@ -38,10 +44,13 @@ const useStyles = makeStyles({
 
 export default function () {
   const classes = useStyles();
+  const wishlist = useSelector((state: RootState) => state.wishlist);
+  const addOrRemoveFromWishlist = useAddOrRemoveFromWishlist();
   const [product, setProduct] = React.useState<IProduct | null>(null);
   const [pcProducts, setPCProducts] = React.useState<IProduct[]>([]);
   const [selectedQuantity, setSelectedQuantity] = React.useState("1");
   const [selectedSize, setSelectedSize] = React.useState<ISize | null>(null);
+  const [snack, setSnack] = React.useState<React.ReactNode | null>(null);
   const router = useRouteMatch<any>();
 
   React.useEffect(() => {
@@ -64,8 +73,20 @@ export default function () {
     );
   }
 
+  const handleHeartClick = () => {
+    const operation = addOrRemoveFromWishlist(product._id);
+    setSnack(<FavoriteSnackContent operation={operation} />);
+  };
+
+  const isWishlist = wishlist.indexOf(product._id) !== -1;
+
   return (
     <div>
+      <SnackBar
+        message={snack}
+        open={Boolean(snack)}
+        onClose={() => setSnack(null)}
+      />
       <TitleBanner title={product.title} />
       <div className="container">
         <div className={classes.root}>
@@ -148,16 +169,31 @@ export default function () {
                   textAlign: "center",
                 }}
               />
-              <Button
-                animation="slide"
-                style={{
-                  marginLeft: 30,
-                  padding: 11,
-                  border: "1px solid #ddd",
-                }}
+              <Tooltip
+                title={
+                  isWishlist
+                    ? "Sterge din lista de favorite"
+                    : "Adauga la lista de favorite"
+                }
               >
-                <BiHeart style={{ width: 25, height: 25 }} />
-              </Button>
+                <div>
+                  <Button
+                    animation="slide"
+                    style={{
+                      marginLeft: 30,
+                      padding: 11,
+                      border: "1px solid #ddd",
+                    }}
+                    onClick={handleHeartClick}
+                  >
+                    {isWishlist ? (
+                      <FaHeart style={{ width: 25, height: 25 }} />
+                    ) : (
+                      <BiHeart style={{ width: 25, height: 25 }} />
+                    )}
+                  </Button>
+                </div>
+              </Tooltip>
             </div>
           </div>
         </div>

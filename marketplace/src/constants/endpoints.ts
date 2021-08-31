@@ -11,3 +11,4 @@ export const GET_PRODUCTS_BY_PRODUCT_CODE =
   HOST + "/api/product/product-code/:productCode";
 export const GET_PRODUCTS_BY_CATEGORY =
   HOST + "/api/product/category/:categoryId";
+export const GET_PRODUCTS_BY_IDS = HOST + "/api/product/ids";

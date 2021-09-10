@@ -40,6 +40,13 @@ a {
   flex-wrap: wrap;
 }
 
+.snack-icon {
+  color: var(--primary);
+  margin-right: 8px;
+  width: 24px;
+  height: 24px;
+}
+
 button,
 input,
 select,
@@ -65,4 +72,15 @@ textarea {
 
 *:focus {
   outline: none;
+}
+
+.link-btn {
+  color: #333;
+  fill: #333 !important;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+}
+
+.link-btn:hover {
+  color: var(--primary);
 }

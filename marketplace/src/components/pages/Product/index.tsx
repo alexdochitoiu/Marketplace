@@ -16,11 +16,14 @@ import SizeGuide from "./SizeGuide";
 import ProductColor from "./ProductColor";
 import ProductPrice from "./ProductPrice";
 import QuantityInfoText from "./QuantityInfoText";
-import { useSelector } from "react-redux";
-import { RootState } from "src/redux/types";
+import { useDispatch, useSelector } from "react-redux";
+import { ICartItem, RootState } from "src/redux/types";
 import useAddOrRemoveFromWishlist from "src/utils/customHooks/useAddOrRemoveFromWishlist";
 import SnackBar from "src/components/generic/SnackBar";
-import FavoriteSnackContent from "../Products/ProductsList/FavoriteSnackContent";
+import FavoriteSnackContent from "../../generic/SnackContent/FavoriteSnackContent";
+import CartSnackContent from "src/components/generic/SnackContent/CartSnackContent";
+import { doChangeCart } from "src/redux/actions";
+import { uuid } from "uuidv4";
 
 const useStyles = makeStyles({
   root: {
@@ -46,10 +49,13 @@ export default function () {
   const classes = useStyles();
   const wishlist = useSelector((state: RootState) => state.wishlist);
   const addOrRemoveFromWishlist = useAddOrRemoveFromWishlist();
+  const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
   const [product, setProduct] = React.useState<IProduct | null>(null);
   const [pcProducts, setPCProducts] = React.useState<IProduct[]>([]);
   const [selectedQuantity, setSelectedQuantity] = React.useState("1");
   const [selectedSize, setSelectedSize] = React.useState<ISize | null>(null);
+  const [error, setError] = React.useState("");
   const [snack, setSnack] = React.useState<React.ReactNode | null>(null);
   const router = useRouteMatch<any>();
 
@@ -72,6 +78,30 @@ export default function () {
       </div>
     );
   }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setError(
+        "Trebuie să selectezi o mărime pentru a putea adăuga produsul în coș!"
+      );
+      return;
+    }
+
+    const item: ICartItem = {
+      id: uuid(),
+      productId: product._id,
+      selectedQuantity: selectedQuantity,
+      selectedSize: selectedSize.size,
+    };
+
+    dispatch(doChangeCart([...cart, item]));
+    setSnack(<CartSnackContent />);
+  };
+
+  const handleSelectSize = (size: ISize | null) => {
+    setSelectedSize(size);
+    setError("");
+  };
 
   const handleHeartClick = () => {
     const operation = addOrRemoveFromWishlist(product._id);
@@ -120,8 +150,9 @@ export default function () {
               <SelectSize
                 defaultSize={selectedSize}
                 sizes={product.sizes}
-                onChange={(size) => setSelectedSize(size)}
+                onChange={handleSelectSize}
               />
+              {error && <h3 style={{ color: "red" }}>{error}</h3>}
               <SizeGuide />
             </div>
             <div style={{ marginTop: 20 }}>
@@ -168,6 +199,7 @@ export default function () {
                   background: "#444",
                   textAlign: "center",
                 }}
+                onClick={handleAddToCart}
               />
               <Tooltip
                 title={

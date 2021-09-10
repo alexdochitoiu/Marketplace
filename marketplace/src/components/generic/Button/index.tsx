@@ -9,10 +9,10 @@ export default function ({ animation, href, text, ...rest }: IProps) {
   return (
     <a
       href={href}
+      {...rest}
       className={`custom-button animationType-${animation} ${
         rest.className || ""
       }`}
-      {...rest}
     >
       {text || rest.children}
     </a>

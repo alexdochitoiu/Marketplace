@@ -1,14 +1,15 @@
 import { makeStyles } from "@material-ui/core";
 import { BiPlus, BiMinus } from "react-icons/bi";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles<any, any>({
   root: {
     position: "relative",
     marginRight: 30,
+    width: 80,
   },
   input: {
-    fontSize: 16,
-    height: 49,
+    fontSize: ({ size }) => (size == "small" ? 13 : 16),
+    height: ({ size }) => (size == "small" ? 30 : 49),
     margin: 0,
     padding: "0 25px",
     textAlign: "center",
@@ -20,7 +21,7 @@ const useStyles = makeStyles({
     cursor: "pointer",
     color: "#666",
     position: "absolute",
-    top: 18,
+    top: ({ size }) => (size == "small" ? 8 : 18),
     transition: "all 0.2s ease-in",
     "&:hover": {
       color: "#fff",
@@ -32,10 +33,11 @@ const useStyles = makeStyles({
 interface IProps {
   value: string;
   onChange: (e: any) => void;
+  size?: "small" | "normal";
 }
 
-export default function ({ value, onChange }: IProps) {
-  const classes = useStyles();
+export default function ({ value, onChange, size = "normal" }: IProps) {
+  const classes = useStyles({ size });
 
   const handleChangeFromButtons = (type: "increment" | "decrement") => {
     if (!value) {

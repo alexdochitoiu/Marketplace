@@ -26,8 +26,8 @@ export default function () {
             {categories.length > 0 && (
               <ul className="sub-menu">
                 {categories.map((c, idx) => (
-                  <a href={"/produse/" + c._id}>
-                    <li key={idx}>{c.title}</li>
+                  <a key={idx} href={"/produse/" + c._id}>
+                    <li>{c.title}</li>
                   </a>
                 ))}
               </ul>

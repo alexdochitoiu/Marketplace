@@ -1,4 +1,4 @@
-import { ActionType, IAction, IState } from "./types";
+import { ActionType, IAction, ICartItem, IState } from "./types";
 
 export const doChangeProductsViewMode = (
   productsViewMode: IState["productsViewMode"]
@@ -36,4 +36,9 @@ export const doChangeMaxPrice = (maxPrice: number): IAction => ({
 export const doChangeWishlist = (wishlist: string[]): IAction => ({
   type: ActionType.CHANGE_WISHLIST,
   payload: { wishlist },
+});
+
+export const doChangeCart = (cart: ICartItem[]): IAction => ({
+  type: ActionType.CHANGE_CART,
+  payload: { cart },
 });

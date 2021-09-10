@@ -7,6 +7,7 @@ const initialAppState: IState = {
   priceInterval: null,
   maxPrice: 5000,
   wishlist: [],
+  cart: [],
 };
 
 export default function (state = initialAppState, action: IAction): IState {
@@ -17,6 +18,7 @@ export default function (state = initialAppState, action: IAction): IState {
     case ActionType.CHANGE_PRICE_INTERVAL:
     case ActionType.CHANGE_MAX_PRICE:
     case ActionType.CHANGE_WISHLIST:
+    case ActionType.CHANGE_CART:
       return {
         ...state,
         ...action.payload,

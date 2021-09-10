@@ -1,0 +1,15 @@
+.total-price-root {
+  padding: 10px;
+  width: 400px;
+  border: 1px solid #eee;
+}
+
+.total-price-root > div {
+  justify-content: space-between;
+  padding: 5px 10px;
+  color: #444;
+}
+
+.total-price-root > div > h4:first-child {
+  font-family: Poppins, sans-serif;
+}

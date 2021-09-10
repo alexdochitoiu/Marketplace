@@ -47,7 +47,7 @@ export default function () {
             <a href="/favorite">
               <li>Favorite</li>
             </a>
-            <a>
+            <a href="/cos-de-cumparaturi">
               <li>Cosul meu</li>
             </a>
             <a>

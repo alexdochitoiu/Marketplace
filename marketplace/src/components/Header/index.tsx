@@ -4,7 +4,6 @@ import "./Header.styles.css";
 import Search from "./Search";
 import CartButton from "./CartButton";
 import React from "react";
-import clsx from "clsx";
 import WishlistButton from "./WishlistButton";
 
 export default function () {

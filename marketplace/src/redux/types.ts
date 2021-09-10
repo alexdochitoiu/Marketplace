@@ -7,6 +7,7 @@ export enum ActionType {
   CHANGE_PRICE_INTERVAL = "CHANGE_PRICE_INTERVAL",
   CHANGE_MAX_PRICE = "CHANGE_MAX_PRICE",
   CHANGE_WISHLIST = "CHANGE_WISHLIST",
+  CHANGE_CART = "CHANGE_CART",
 }
 
 export const sortingOptions = [
@@ -17,6 +18,13 @@ export const sortingOptions = [
   { value: "sale", label: "La reducere" },
 ] as const;
 
+export interface ICartItem {
+  id: string;
+  productId: string;
+  selectedSize: string;
+  selectedQuantity: string;
+}
+
 export interface IState {
   productsViewMode: "grid" | "list";
   productsSortBy: typeof sortingOptions[number]["value"];
@@ -24,6 +32,7 @@ export interface IState {
   priceInterval: [number, number] | null;
   maxPrice: number;
   wishlist: string[];
+  cart: ICartItem[];
 }
 
 export interface IAction {

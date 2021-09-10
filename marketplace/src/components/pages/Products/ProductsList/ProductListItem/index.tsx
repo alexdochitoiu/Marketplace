@@ -8,7 +8,7 @@ import { BiHeart } from "react-icons/bi";
 import { isPromo, isOutOfStock, computePriceString } from "src/utils";
 import React from "react";
 import { FaHeart } from "react-icons/fa";
-import FavoriteSnackContent from "../FavoriteSnackContent";
+import FavoriteSnackContent from "../../../../generic/SnackContent/FavoriteSnackContent";
 import SnackBar from "src/components/generic/SnackBar";
 import { Tooltip } from "@material-ui/core";
 import { useSelector } from "react-redux";
@@ -98,6 +98,7 @@ export default function ({ product }: IProps) {
             animation="slide"
             text="Adauga in cos"
             style={{ border: "1px solid #ddd" }}
+            href={`/produs/${product._id}`}
           />
           <Tooltip
             title={

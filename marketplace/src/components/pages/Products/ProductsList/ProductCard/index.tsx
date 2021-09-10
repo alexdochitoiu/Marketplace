@@ -8,7 +8,7 @@ import "./styles.css";
 import { computePriceString, isPromo, isOutOfStock } from "src/utils";
 import React from "react";
 import SnackBar from "src/components/generic/SnackBar";
-import FavoriteSnackContent from "../FavoriteSnackContent";
+import FavoriteSnackContent from "../../../../generic/SnackContent/FavoriteSnackContent";
 import { Tooltip } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
@@ -101,9 +101,11 @@ export default function ({ product }: IProps) {
           <div className="product-category">
             {product.category?.title || "Alte produse"}
           </div>
-          <div className="product-cart">
-            <BiShoppingBag /> ADAUGA IN COS
-          </div>
+          <a href={`/produs/${product._id}`}>
+            <div className="product-cart">
+              <BiShoppingBag /> SELECTEAZA OPTIUNILE
+            </div>
+          </a>
         </div>
       </div>
     </div>

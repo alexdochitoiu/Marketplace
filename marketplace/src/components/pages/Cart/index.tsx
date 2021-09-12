@@ -112,7 +112,7 @@ export default function () {
             alignItems: "flex-end",
           }}
         >
-          <TotalPrice />
+          <TotalPrice cart={cart} />
           <div
             className="flex-row"
             style={{
@@ -136,6 +136,7 @@ export default function () {
                 border: "1px solid #ccc",
                 padding: "12px 40px",
               }}
+              href="/checkout"
             />
           </div>
         </div>

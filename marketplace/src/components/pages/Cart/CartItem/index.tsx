@@ -7,9 +7,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import { AiOutlineFrown } from "react-icons/ai";
 import * as productService from "src/services/product";
 import SelectQuantity from "../../Product/SelectQuantity";
-import ProductPrice from "../../Product/ProductPrice";
 import ItemPrice from "./ItemPrice";
-import { BiHeart } from "react-icons/bi";
 import FavoriteButton from "./FavoriteButton";
 
 const useStyles = makeStyles({

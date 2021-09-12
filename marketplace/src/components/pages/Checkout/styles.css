@@ -1,0 +1,17 @@
+.checkout-form input:focus,
+.checkout-form textarea:focus {
+  transition: 0.25s all ease-in;
+  background-color: #f5f5f5;
+  border-width: 2px;
+}
+
+.checkout label {
+  color: #3e3e3e;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: #eee;
+  display: flex;
+  padding: 3px;
+  justify-content: center;
+}

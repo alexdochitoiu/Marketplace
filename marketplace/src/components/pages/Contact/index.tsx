@@ -5,6 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { PHONE, MAIL } from "src/constants/contact";
 import { Divider } from "@material-ui/core";
 import TitleBanner from "src/components/generic/TitleBanner";
+import GoogleMap from "./GoogleMap";
 
 export default function () {
   return (
@@ -59,6 +60,7 @@ export default function () {
           </form>
         </div>
       </div>
+      <GoogleMap />
     </div>
   );
 }

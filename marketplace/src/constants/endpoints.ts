@@ -2,6 +2,8 @@ import { HOST } from "./host";
 
 // categories
 export const GET_CATEGORY = HOST + "/api/category/:id";
+export const GET_CATEGORIES_BY_SECTION =
+  HOST + "/api/category/section/:sectionType";
 export const GET_CATEGORIES = HOST + "/api/category";
 
 // products

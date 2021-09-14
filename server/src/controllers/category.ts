@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { HOST } from "../config";
 import log from "../logger";
-import Category, { CategoryDocument } from "../models/category";
+import Category, { CategoryDocument, SectionType } from "../models/category";
 import Product from "../models/product";
 
 const url = `${HOST}/public/images/`;
@@ -16,7 +16,7 @@ const createCategory = async (
   req: Request,
   res: Response<ResponseType<CategoryDocument>>
 ) => {
-  const { title, description, image: imageAsUrl } = req.body;
+  const { title, description, image: imageAsUrl, section } = req.body;
   const imageName = req.file?.filename;
   const alreadyExists = Boolean(await Category.findOne({ title }));
   if (alreadyExists) {
@@ -25,6 +25,7 @@ const createCategory = async (
     const image = imageName ? url + imageName : imageAsUrl;
     Category.create({
       title,
+      section,
       description,
       image,
     })
@@ -108,18 +109,35 @@ const getAllCategories = async (
     });
 };
 
+const getCategoriesBySection = (
+  req: Request,
+  res: Response<ResponseType<CategoryDocument[]>>
+) => {
+  const section = req.params.sectionType as SectionType;
+  Category.find({ section })
+    .exec()
+    .then((categories) => {
+      res.status(200).json(categories);
+    })
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
 const updateCategory = (
   req: Request,
   res: Response<ResponseType<CategoryDocument>>
 ) => {
   const { id } = req.params;
-  const { title, description, image: imageAsUrl } = req.body;
+  const { title, description, image: imageAsUrl, section } = req.body;
   const imageName = req.file?.filename;
   const image = imageName ? url + imageName : imageAsUrl;
   Category.findByIdAndUpdate(
     id,
     {
       title,
+      section,
       description,
       image,
     },
@@ -161,6 +179,7 @@ export default {
   createCategory,
   getCategory,
   getAllCategories,
+  getCategoriesBySection,
   updateCategory,
   deleteCategory,
 };

@@ -79,7 +79,7 @@ const getProductsByIds = (
   res: Response<ResponseType<ProductDocument[]>>
 ) => {
   const { ids } = req.body;
-  Product.find({_id: { $in: ids }})
+  Product.find({ _id: { $in: ids } })
     .populate("category")
     .then((products) => res.status(200).json(products))
     .catch((error) => {

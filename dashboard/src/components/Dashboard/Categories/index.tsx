@@ -38,9 +38,10 @@ export default function () {
     });
   }, []);
 
-  const handleDone = ({ title, description, image }: any) => {
+  const handleDone = ({ title, description, image, section }: any) => {
     const data = new FormData();
     data.append("title", title);
+    data.append("section", section);
     data.append("description", description);
     if (image) {
       data.append("image", image);

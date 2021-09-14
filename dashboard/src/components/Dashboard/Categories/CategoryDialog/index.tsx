@@ -4,7 +4,12 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   makeStyles,
+  Radio,
+  RadioGroup,
   TextField,
   Theme,
 } from "@material-ui/core";
@@ -55,6 +60,9 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
   const classes = useStyles();
   const uploadImage = React.useRef<HTMLInputElement | null>(null);
   const [title, setTitle] = React.useState(category ? category.title : "");
+  const [section, setSection] = React.useState<ICategory["section"]>(
+    category ? category.section : "other"
+  );
   const [description, setDescription] = React.useState(
     category ? category.description : ""
   );
@@ -66,7 +74,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onDone({ title, description, image });
+    onDone({ title, description, image, section });
   };
 
   const handleImageChange = (e: any) => {
@@ -109,6 +117,38 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             required={true}
             label="Titlu"
           />
+          <FormControl
+            component="fieldset"
+            style={{ marginRight: 8, marginTop: 10, width: "100%" }}
+          >
+            <FormLabel>Secțiune</FormLabel>
+            <RadioGroup
+              value={section}
+              onChange={(e: any) => setSection(e.target.value)}
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <FormControlLabel
+                value="men"
+                control={<Radio />}
+                label="Bărbați"
+              />
+              <FormControlLabel
+                value="women"
+                control={<Radio />}
+                label="Femei"
+              />
+              <FormControlLabel
+                value="kids"
+                control={<Radio />}
+                label="Copii"
+              />
+              <FormControlLabel
+                value="other"
+                control={<Radio />}
+                label="Altele"
+              />
+            </RadioGroup>
+          </FormControl>
           <TextField
             margin="normal"
             fullWidth={true}

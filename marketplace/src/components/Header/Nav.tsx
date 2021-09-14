@@ -9,7 +9,7 @@ export default function () {
   const [menu, setMenu] = React.useState(false);
 
   React.useEffect(() => {
-    categoryService.getAll().then(({ data }) => {
+    categoryService.getBySection("kids").then(({ data }) => {
       setCategories(data);
     });
   });
@@ -80,6 +80,20 @@ export default function () {
           <a>
             <li className="flex-row">
               Copii <FaAngleDown />
+              {categories.length > 0 && (
+                <ul className="sub-menu">
+                  {categories.map((c, idx) => (
+                    <a key={idx} href={"/produse/" + c._id}>
+                      <li>{c.title}</li>
+                    </a>
+                  ))}
+                </ul>
+              )}
+            </li>
+          </a>
+          <a>
+            <li className="flex-row">
+              Altele <FaAngleDown />
               {categories.length > 0 && (
                 <ul className="sub-menu">
                   {categories.map((c, idx) => (

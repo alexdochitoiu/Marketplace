@@ -24,19 +24,21 @@ export default function ({ cart }: IProps) {
           {totalPrice + shippingFee} RON
         </h4>
       </div>
-      <div className="flex-row" style={{ marginTop: 10 }}>
-        <h4 style={{ fontSize: 14 }}>Economisești</h4>
-        <h4
-          style={{
-            fontSize: 15,
-            color: "#e40606",
-            fontWeight: 500,
-            fontFamily: "Poppins, sans-serif",
-          }}
-        >
-          {totalDiscount} RON
-        </h4>
-      </div>
+      {totalDiscount > 0 && (
+        <div className="flex-row" style={{ marginTop: 10 }}>
+          <h4 style={{ fontSize: 14 }}>Economisești</h4>
+          <h4
+            style={{
+              fontSize: 15,
+              color: "#e40606",
+              fontWeight: 500,
+              fontFamily: "Poppins, sans-serif",
+            }}
+          >
+            {totalDiscount} RON
+          </h4>
+        </div>
+      )}
     </div>
   );
 }

@@ -9,8 +9,6 @@ import productRoutes from "./routes/product";
 import photoRoutes from "./routes/photo";
 
 const port = parseInt(process.env.PORT!);
-const host = process.env.HOST!;
-
 const app = express();
 
 app.use(cors());
@@ -29,8 +27,8 @@ app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/photo", photoRoutes);
 
-const server = app.listen(port, host, () => {
-  log.info(`Server started on http://${host}:${port}`);
+const server = app.listen(port, () => {
+  log.info(`Marketpalce Server listening on port ${port} ...`);
 });
 
 export default server;

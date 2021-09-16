@@ -30,8 +30,15 @@ export default function () {
                   }
                 : {}
             }
+            className="flex-row"
           >
-            Produse
+            Produse{" "}
+            <FaAngleDown
+              style={{
+                transition: "0.3s transform ease-in",
+                transform: !menu ? "rotate(-90deg)" : "initial",
+              }}
+            />
           </li>
         </a>
         <a href="/blog">

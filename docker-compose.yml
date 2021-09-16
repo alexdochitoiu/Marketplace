@@ -1,0 +1,28 @@
+version: '3'
+services:
+  server:
+    build:
+      context: ./server
+    container_name: marketplace_server
+    environment:
+      PORT: ${PORT}
+      MONGO_URI: ${MONGO_URI}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+    depends_on: 
+      - database
+    restart: always
+    ports:
+      - 4000:4000
+    links:
+      - mongo
+    networks: 
+    - back-tier
+  mongo:
+    container_name: marketplace_database
+    image: mongo
+    ports:
+      - 27017:27017
+    networks:
+      - back-tier
+networks:
+  back-tier:

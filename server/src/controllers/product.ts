@@ -125,6 +125,24 @@ const getProductsByCategory = (req: Request, res: Response) => {
     });
 };
 
+const getProductsBySection = (req: Request, res: Response) => {
+  const { sectionType } = req.params;
+  if (!sectionType) {
+    return res.status(404).json([]);
+  }
+  return Product.find()
+    .populate("category")
+    .then((products) => {
+      res
+        .status(200)
+        .json(products.filter((p) => p.category?.section === sectionType));
+    })
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
 const updateProduct = (
   req: Request,
   res: Response<ResponseType<ProductDocument>>
@@ -202,6 +220,7 @@ export default {
   getProductsByProductCode,
   getProductsByCategory,
   getProductsByIds,
+  getProductsBySection,
   updateProduct,
   deleteProduct,
 };

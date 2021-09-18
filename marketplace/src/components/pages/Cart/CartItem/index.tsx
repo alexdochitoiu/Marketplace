@@ -9,13 +9,15 @@ import * as productService from "src/services/product";
 import SelectQuantity from "../../Product/SelectQuantity";
 import ItemPrice from "./ItemPrice";
 import FavoriteButton from "./FavoriteButton";
+import { getSectionLabel } from "src/utils";
 
 const useStyles = makeStyles({
   root: {
     marginTop: 8,
     marginBottom: 8,
     padding: 15,
-    border: "1px solid #eee",
+    border: "1px solid #ddd",
+    background: "#fff",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
@@ -92,12 +94,21 @@ export default function ({ item, onRemove, onChangeQuantity }: IProps) {
                 <h4>{product.title}</h4>
               </a>
               {product.category && (
-                <a
-                  className={classes.category}
-                  href={`/produse/${product.category._id}`}
-                >
-                  {product.category.title.toUpperCase()}
-                </a>
+                <div className="flex-row">
+                  <a
+                    className={classes.category}
+                    href={`/produse/section/${product.category.section}`}
+                  >
+                    {getSectionLabel(product.category.section).toUpperCase()}
+                  </a>
+                  <span style={{ color: "#555", margin: "0 6px" }}>/</span>
+                  <a
+                    className={classes.category}
+                    href={`/produse/${product.category._id}`}
+                  >
+                    {product.category.title.toUpperCase()}
+                  </a>
+                </div>
               )}
             </div>
             <div className="flex-row">

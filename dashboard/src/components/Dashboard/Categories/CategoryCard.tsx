@@ -4,6 +4,7 @@ import {
   CardActions,
   CardContent,
   CardHeader,
+  Chip,
   Divider,
   IconButton,
   makeStyles,
@@ -15,6 +16,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import ConfirmationDialog from "src/components/shared/ConfirmationDialog";
 import React from "react";
+import { getSection } from "src/utils/getSection";
 
 const useStyles = makeStyles({
   root: {
@@ -73,6 +75,11 @@ export default function ({ category, onDelete, onEdit }: IProps) {
       />
       <Divider />
       <CardContent className={classes.content}>
+        <Chip
+          size="small"
+          label={getSection(category.section)}
+          style={{ margin: 4 }}
+        />
         {category.description && (
           <Typography
             variant="body2"

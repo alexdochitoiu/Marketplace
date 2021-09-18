@@ -21,6 +21,7 @@ import SizesPicker from "./SizesPicker";
 import ProductImages from "./ProductImages";
 import ColorPicker from "src/components/shared/ColorPicker";
 import SizeTable from "./SizeTable";
+import SectionRadio from "../../Categories/CategoryDialog/SectionRadio";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -64,6 +65,7 @@ const isProduct = (p: any): p is IProduct => !!p._id;
 
 export default function ({ mode, onClose, onDone, product }: IProps) {
   const classes = useStyles();
+  const [section, setSection] = React.useState<ICategory["section"]>("other");
   const [categories, setCategories] = React.useState<ICategory[]>([]);
   const [productDetails, setProductDetails] = React.useState<
     IProduct | IProductModel
@@ -88,6 +90,9 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    if (!productDetails.category) {
+      return alert("Trebuie sa alegi o categorie pentru produs!");
+    }
     if (isProduct(productDetails)) {
       // update
       onDone(
@@ -201,11 +206,15 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
             minRows={2}
             maxRows={4}
           />
+          <SectionRadio
+            value={section}
+            onChange={(e) => setSection(e.target.value)}
+          />
           <div style={{ display: "flex" }}>
             <Autocomplete
               defaultValue={defaultCategory}
               fullWidth={true}
-              options={categories}
+              options={categories.filter((c) => c.section === section)}
               getOptionLabel={(option) => option.title}
               onChange={handleChangeCategory}
               renderInput={(params) => (

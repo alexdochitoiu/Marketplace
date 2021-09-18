@@ -24,6 +24,7 @@ import FavoriteSnackContent from "../../generic/SnackContent/FavoriteSnackConten
 import CartSnackContent from "src/components/generic/SnackContent/CartSnackContent";
 import { doChangeCart } from "src/redux/actions";
 import { uuid } from "uuidv4";
+import { getSectionLabel } from "src/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -129,12 +130,21 @@ export default function () {
               {product.title}
             </h3>
             {product.category && (
-              <a
-                className={classes.category}
-                href={`/produse/${product.category._id}`}
-              >
-                {product.category.title.toUpperCase()}
-              </a>
+              <div className="flex-row">
+                <a
+                  className={classes.category}
+                  href={`/produse/section/${product.category.section}`}
+                >
+                  {getSectionLabel(product.category.section).toUpperCase()}
+                </a>
+                <span style={{ margin: "0 8px", color: "#666" }}>/</span>
+                <a
+                  className={classes.category}
+                  href={`/produse/${product.category._id}`}
+                >
+                  {product.category.title.toUpperCase()}
+                </a>
+              </div>
             )}
             <ProductPrice product={product} selectedSize={selectedSize} />
             <p

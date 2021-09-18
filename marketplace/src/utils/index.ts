@@ -1,6 +1,7 @@
 import IProduct from "src/types/IProduct";
 import computePriceString from "./computePriceString";
 import { filterProducts } from "./filterProducts";
+import { getSectionLabel } from "./getSectionLabel";
 import { sortProducts } from "./sortProducts";
 
 const isPromo = (product: IProduct): boolean =>
@@ -15,4 +16,5 @@ export {
   computePriceString,
   sortProducts,
   filterProducts,
+  getSectionLabel,
 };

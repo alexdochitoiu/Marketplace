@@ -1,7 +1,8 @@
 .total-price-root {
   padding: 10px;
   width: 400px;
-  border: 1px solid #eee;
+  border: 1px solid #ddd;
+  background-color: #fff;
 }
 
 .total-price-root > div {

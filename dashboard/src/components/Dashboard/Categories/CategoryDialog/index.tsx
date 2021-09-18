@@ -19,6 +19,7 @@ import PanoramaIcon from "@material-ui/icons/Panorama";
 import CancelIcon from "@material-ui/icons/Cancel";
 import ImagePicker from "../../../shared/ImagePicker";
 import { IImage } from "src/types/IImage";
+import SectionRadio from "./SectionRadio";
 
 const useStyles = makeStyles((theme: Theme) => ({
   title: {
@@ -117,38 +118,10 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
             required={true}
             label="Titlu"
           />
-          <FormControl
-            component="fieldset"
-            style={{ marginRight: 8, marginTop: 10, width: "100%" }}
-          >
-            <FormLabel>Secțiune</FormLabel>
-            <RadioGroup
-              value={section}
-              onChange={(e: any) => setSection(e.target.value)}
-              style={{ flexDirection: "row", justifyContent: "space-between" }}
-            >
-              <FormControlLabel
-                value="men"
-                control={<Radio />}
-                label="Bărbați"
-              />
-              <FormControlLabel
-                value="women"
-                control={<Radio />}
-                label="Femei"
-              />
-              <FormControlLabel
-                value="kids"
-                control={<Radio />}
-                label="Copii"
-              />
-              <FormControlLabel
-                value="other"
-                control={<Radio />}
-                label="Altele"
-              />
-            </RadioGroup>
-          </FormControl>
+          <SectionRadio
+            value={section}
+            onChange={(e) => setSection(e.target.value)}
+          />
           <TextField
             margin="normal"
             fullWidth={true}

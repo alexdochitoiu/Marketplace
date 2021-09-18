@@ -9,15 +9,90 @@ import TermsAndConditions from "./TermsAndConditions";
 import { useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
 import { Redirect } from "react-router";
+import { BiErrorAlt } from "react-icons/bi";
+import React from "react";
+
+interface IFormError {
+  field: string;
+  message: string;
+}
 
 export default function () {
   const cart = useSelector((state: RootState) => state.cart);
+  const [form, setForm] = React.useState({
+    lastName: "",
+    firstName: "",
+    phone: "",
+    email: "",
+    county: "",
+    city: "",
+    address: "",
+    zipCode: "",
+    orderNotes: "",
+  });
+  const [termsAccepted, setTermsAccepted] = React.useState(false);
+  const [errors, setErrors] = React.useState<IFormError[]>([]);
+
   if (cart.length === 0) {
     return <Redirect to="/cos-de-cumparaturi" />;
   }
+
+  React.useEffect(() => {
+    setErrors([]);
+  }, [termsAccepted, form]);
+
+  const DisplayError = ({ field }) => {
+    const err = errors.find((e) => e.field === field);
+    return err ? (
+      <span
+        className="flex-row"
+        style={{ color: "red", fontSize: 12, margin: "0 4px" }}
+      >
+        <BiErrorAlt style={{ fontSize: 16, marginRight: 6 }} />
+        {err.message}
+      </span>
+    ) : null;
+  };
+
+  const handleDone = () => {
+    const err: IFormError[] = [];
+    if (!termsAccepted) {
+      err.push({
+        field: "termsAndConditions",
+        message:
+          "Te rog citește și acceptă termenii și condițiile pentru a putea plasa comanda",
+      });
+    }
+    Object.keys(form).map((k) => {
+      if (form[k].length === 0 && k !== "orderNotes") {
+        err.push({
+          field: k,
+          message: `Acest câmp este obligatoriu!`,
+        });
+      }
+    });
+    if (err.length === 0) {
+      alert(JSON.stringify(form));
+    }
+
+    setErrors(err);
+  };
+
+  const handleFormChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleTermsAcceptedChange = (e) => {
+    setTermsAccepted(e.target.checked);
+    setErrors(errors.filter((e) => e.field !== "termsAndConditions"));
+  };
+
   return (
     <div className="checkout">
-      <TitleBanner title="Checkout" />
+      <TitleBanner title="Plasare comandă" />
       <div
         className="container"
         style={{ marginTop: 20, display: "flex", flex: "1 1" }}
@@ -34,12 +109,48 @@ export default function () {
               Persoana de contact
             </label>
             <div>
-              <input type="text" placeholder="Nume *" />
-              <input type="text" placeholder="Prenume *" />
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.lastName}
+                  name="lastName"
+                  onChange={handleFormChange}
+                  placeholder="Nume *"
+                />
+                <DisplayError field="lastName" />
+              </div>
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.firstName}
+                  name="firstName"
+                  onChange={handleFormChange}
+                  placeholder="Prenume *"
+                />
+                <DisplayError field="firstName" />
+              </div>
             </div>
             <div>
-              <input type="text" placeholder="Telefon *" />
-              <input type="text" placeholder="Email *" />
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.phone}
+                  name="phone"
+                  onChange={handleFormChange}
+                  placeholder="Telefon *"
+                />
+                <DisplayError field="phone" />
+              </div>
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.email}
+                  name="email"
+                  onChange={handleFormChange}
+                  placeholder="Email *"
+                />
+                <DisplayError field="email" />
+              </div>
             </div>
             <label className="flex-row" style={{ marginTop: 15 }}>
               <MdContactMail
@@ -48,14 +159,49 @@ export default function () {
               Adresa de facturare
             </label>
             <div>
-              <input type="text" placeholder="Judet *" />
-              <input type="text" placeholder="Localitate *" />
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.county}
+                  name="county"
+                  onChange={handleFormChange}
+                  placeholder="Judet *"
+                />
+                <DisplayError field="county" />
+              </div>
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.city}
+                  onChange={handleFormChange}
+                  name="city"
+                  placeholder="Localitate *"
+                />
+                <DisplayError field="city" />
+              </div>
             </div>
             <div>
-              <input type="text" placeholder="Adresa *" />
-              <input type="text" placeholder="Cod poștal *" />
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.address}
+                  name="address"
+                  onChange={handleFormChange}
+                  placeholder="Adresa *"
+                />
+                <DisplayError field="address" />
+              </div>
+              <div style={{ width: "100%", margin: 10 }}>
+                <input
+                  type="text"
+                  value={form.zipCode}
+                  name="zipCode"
+                  onChange={handleFormChange}
+                  placeholder="Cod poștal *"
+                />
+                <DisplayError field="zipCode" />
+              </div>
             </div>
-
             <label className="flex-row" style={{ marginTop: 15 }}>
               <CgNotes style={{ width: 20, height: 20, marginRight: 8 }} />
               Note comandă
@@ -63,6 +209,9 @@ export default function () {
             <textarea
               style={{ width: "calc(100% - 20px)" }}
               rows={12}
+              value={form.orderNotes}
+              name="orderNotes"
+              onChange={handleFormChange}
               placeholder="Note comandă (opțional)"
             />
             <p
@@ -81,9 +230,19 @@ export default function () {
           <h4 className="contact-title" style={{ marginBottom: 20 }}>
             COMANDA TA
           </h4>
-          <div style={{ padding: 10, border: "1px solid #ccc" }}>
+          <div
+            style={{
+              padding: 10,
+              border: "1px solid #ccc",
+              background: "#fff",
+            }}
+          >
             <OrderSummary />
-            <TermsAndConditions />
+            <TermsAndConditions
+              value={termsAccepted}
+              onChange={handleTermsAcceptedChange}
+            />
+            <DisplayError field="termsAndConditions" />
             <Button
               style={{
                 border: "1px solid #ccc",
@@ -96,6 +255,7 @@ export default function () {
               }}
               animation="slide"
               text="Plasează comanda"
+              onClick={handleDone}
             />
           </div>
         </div>

@@ -70,11 +70,6 @@ const getAllCategories = async (
   req: Request,
   res: Response<ResponseType<ICategoryResult[]>>
 ) => {
-  const noCategoryProductsCount = await Product.find({
-    category: null,
-  })
-    .countDocuments()
-    .exec();
   Category.find()
     .exec()
     .then((categories) => {
@@ -92,16 +87,7 @@ const getAllCategories = async (
           } as ICategoryResult;
         })
       );
-      pResult.then((result) =>
-        res.status(200).json([
-          ...result,
-          {
-            _id: "alte-produse",
-            title: "Alte produse",
-            productsCount: noCategoryProductsCount,
-          },
-        ])
-      );
+      pResult.then((result) => res.status(200).json(result));
     })
     .catch((error) => {
       log.error(error);

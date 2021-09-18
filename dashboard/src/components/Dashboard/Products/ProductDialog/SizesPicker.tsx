@@ -33,18 +33,17 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 const getSizes = (sizeType: IProduct["sizeType"]): string[] => {
+  let result: string[] = [];
   if (sizeType === "universal") {
     return ["Universala"];
   } else if (sizeType === "hat") {
     const hatSizes = [53, 61];
-    let result = [];
     for (let i = hatSizes[0]; i <= hatSizes[1]; i++) {
       result.push(`${i}`);
     }
     return result;
   }
   const clothesSizes = [36, 50];
-  let result = [];
   for (let i = clothesSizes[0]; i <= clothesSizes[1]; i += 2) {
     result.push(`${i}`);
   }

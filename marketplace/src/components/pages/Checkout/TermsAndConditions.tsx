@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function () {
+export default function ({ value, onChange }) {
   const classes = useStyles();
   return (
     <>
@@ -25,8 +25,8 @@ export default function () {
         className={classes.root}
         control={
           <Checkbox
-            // checked={state.checkedB}
-            // onChange={handleChange}
+            checked={value}
+            onChange={onChange}
             size="small"
             name="terms"
             color="primary"

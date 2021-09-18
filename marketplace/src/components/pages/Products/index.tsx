@@ -11,7 +11,7 @@ import ProductsList from "./ProductsList";
 import { makeStyles } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
-import { filterProducts, sortProducts } from "src/utils";
+import { filterProducts, getSectionLabel, sortProducts } from "src/utils";
 import { doChangeMaxPrice } from "src/redux/actions";
 
 const useStyles = makeStyles({
@@ -31,7 +31,7 @@ export default function () {
   const classes = useStyles();
   const router = useRouteMatch<any>();
   const dispatch = useDispatch();
-  const { categoryId } = router.params;
+  const { categoryId, sectionType } = router.params;
   const [category, setCategory] = React.useState<ICategory | null>(null);
   const [products, setProducts] = React.useState<IProduct[]>([]);
   const sortBy = useSelector((state: RootState) => state.productsSortBy);
@@ -48,10 +48,16 @@ export default function () {
       categoryService.getById(categoryId).then(({ data }) => {
         setCategory(data);
       });
-    } else {
-      productService.getAll().then(({ data }) => {
-        setProducts(data);
-      });
+    } else if (sectionType) {
+      if (sectionType === "all") {
+        productService.getAll().then(({ data }) => {
+          setProducts(data);
+        });
+      } else {
+        productService.getBySection(sectionType).then(({ data }) => {
+          setProducts(data);
+        });
+      }
     }
   }, []);
 
@@ -60,7 +66,11 @@ export default function () {
   );
 
   React.useEffect(() => {
+    if (maxPrice === -Infinity) {
+      return;
+    }
     dispatch(doChangeMaxPrice(maxPrice));
+    console.log(maxPrice);
   }, [maxPrice]);
 
   let displayProducts = products;
@@ -75,12 +85,7 @@ export default function () {
 
   return (
     <div>
-      <TitleBanner
-        title={
-          category?.title ||
-          (categoryId === "alte-produse" ? "Alte produse" : "Articole")
-        }
-      />
+      <TitleBanner title={category?.title || getSectionLabel(sectionType)} />
       <div className={classes.root}>
         <ProductsSideBar />
         <div className={classes.productsWrapper}>

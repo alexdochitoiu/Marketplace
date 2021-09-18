@@ -81,7 +81,7 @@ export default function () {
   }
 
   return (
-    <div>
+    <div style={{ marginBottom: -30, background: "#f5f5f5", paddingBottom: 30 }}>
       <SnackBar
         message={snack}
         open={Boolean(snack)}
@@ -131,10 +131,12 @@ export default function () {
             </a>
             <Button
               animation="slide"
-              text="Checkout"
+              text="Pasul următor"
               style={{
                 border: "1px solid #ccc",
                 padding: "12px 40px",
+                background: "#555",
+                color: "#fff",
               }}
               href="/checkout"
             />

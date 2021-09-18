@@ -36,7 +36,7 @@ export default function App() {
           <Route exact={true} path="/" component={Home} />
           <Route
             exact={true}
-            path={["/produse", "/produse/:categoryId"]}
+            path={["/produse/section/:sectionType", "/produse/:categoryId"]}
             component={Products}
           />
           <Route exact={true} path="/produs/:productId" component={Product} />

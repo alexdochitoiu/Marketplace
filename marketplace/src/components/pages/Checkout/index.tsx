@@ -37,10 +37,6 @@ export default function () {
     return <Redirect to="/cos-de-cumparaturi" />;
   }
 
-  React.useEffect(() => {
-    setErrors([]);
-  }, [termsAccepted, form]);
-
   const DisplayError = ({ field }) => {
     const err = errors.find((e) => e.field === field);
     return err ? (
@@ -72,9 +68,10 @@ export default function () {
       }
     });
     if (err.length === 0) {
-      alert(JSON.stringify(form));
-    }
 
+      // TODO: Implement service for ordering
+      console.log({ form, cart });
+    }
     setErrors(err);
   };
 
@@ -83,6 +80,7 @@ export default function () {
       ...form,
       [e.target.name]: e.target.value,
     });
+    setErrors(errors.filter((err) => err.field !== e.target.name));
   };
 
   const handleTermsAcceptedChange = (e) => {

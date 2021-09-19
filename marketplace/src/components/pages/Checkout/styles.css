@@ -25,3 +25,35 @@
   padding: 3px;
   justify-content: center;
 }
+
+.input-box {
+  width: 100%;
+  margin: 10px;
+  position: relative;
+}
+
+input::placeholder {
+  transition: 0.25s all ease-in;
+}
+
+input:focus::placeholder {
+  color: transparent;
+  font-size: 8px;
+}
+
+input:not(:placeholder-shown) + .custom-label,
+input:focus + .custom-label {
+  opacity: 1;
+  font-size: 12px;
+}
+
+.custom-label {
+  transition: 0.25s all ease-in;
+  position: absolute;
+  font-size: 8px;
+  opacity: 0;
+  color: grey;
+  margin-top: -5px;
+  margin-left: 10px;
+  top: 0;
+}

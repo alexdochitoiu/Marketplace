@@ -68,8 +68,13 @@ export default function () {
       }
     });
     if (err.length === 0) {
-
       // TODO: Implement service for ordering
+      /*
+        1. create table for orders to database
+        2. controller for order system
+        3. emailing sistem
+          ...
+      */
       console.log({ form, cart });
     }
     setErrors(err);
@@ -107,7 +112,7 @@ export default function () {
               Persoana de contact
             </label>
             <div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.lastName}
@@ -115,9 +120,10 @@ export default function () {
                   onChange={handleFormChange}
                   placeholder="Nume *"
                 />
+                <span className="custom-label">Nume *</span>
                 <DisplayError field="lastName" />
               </div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.firstName}
@@ -125,11 +131,12 @@ export default function () {
                   onChange={handleFormChange}
                   placeholder="Prenume *"
                 />
+                <span className="custom-label">Prenume *</span>
                 <DisplayError field="firstName" />
               </div>
             </div>
             <div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.phone}
@@ -137,9 +144,10 @@ export default function () {
                   onChange={handleFormChange}
                   placeholder="Telefon *"
                 />
+                <span className="custom-label">Telefon *</span>
                 <DisplayError field="phone" />
               </div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.email}
@@ -147,6 +155,7 @@ export default function () {
                   onChange={handleFormChange}
                   placeholder="Email *"
                 />
+                <span className="custom-label">Email *</span>
                 <DisplayError field="email" />
               </div>
             </div>
@@ -157,17 +166,18 @@ export default function () {
               Adresa de facturare
             </label>
             <div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.county}
                   name="county"
                   onChange={handleFormChange}
-                  placeholder="Judet *"
+                  placeholder="Județ *"
                 />
+                <span className="custom-label">Județ *</span>
                 <DisplayError field="county" />
               </div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.city}
@@ -175,21 +185,23 @@ export default function () {
                   name="city"
                   placeholder="Localitate *"
                 />
+                <span className="custom-label">Localitate *</span>
                 <DisplayError field="city" />
               </div>
             </div>
             <div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.address}
                   name="address"
                   onChange={handleFormChange}
-                  placeholder="Adresa *"
+                  placeholder="Adresă *"
                 />
+                <span className="custom-label">Adresă *</span>
                 <DisplayError field="address" />
               </div>
-              <div style={{ width: "100%", margin: 10 }}>
+              <div className="input-box">
                 <input
                   type="text"
                   value={form.zipCode}
@@ -197,6 +209,7 @@ export default function () {
                   onChange={handleFormChange}
                   placeholder="Cod poștal *"
                 />
+                <span className="custom-label">Cod poștal *</span>
                 <DisplayError field="zipCode" />
               </div>
             </div>

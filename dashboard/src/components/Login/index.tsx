@@ -96,7 +96,7 @@ export default function Login() {
               variant="outlined"
               margin="normal"
               required={true}
-              label="Nume utilizator"
+              label="Nume utilizator sau email"
               name="username"
               autoFocus={true}
               fullWidth={true}

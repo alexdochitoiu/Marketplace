@@ -16,3 +16,6 @@ export const GET_PRODUCTS_BY_CATEGORY =
 export const GET_PRODUCTS_BY_SECTION =
   HOST + "/api/product/section/:sectionType";
 export const GET_PRODUCTS_BY_IDS = HOST + "/api/product/ids";
+
+// order
+export const CREATE_ORDER = HOST + "/api/order/create";

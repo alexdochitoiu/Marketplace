@@ -11,6 +11,8 @@ import { RootState } from "src/redux/types";
 import { Redirect } from "react-router";
 import { BiErrorAlt } from "react-icons/bi";
 import React from "react";
+import axios from "axios";
+import { CREATE_ORDER } from "src/constants/endpoints";
 
 interface IFormError {
   field: string;
@@ -68,14 +70,22 @@ export default function () {
       }
     });
     if (err.length === 0) {
-      // TODO: Implement service for ordering
-      /*
-        1. create table for orders to database
-        2. controller for order system
-        3. emailing sistem
-          ...
-      */
-      console.log({ form, cart });
+      const { orderNotes, ...clientInfo } = form;
+      axios
+        .post(CREATE_ORDER, {
+          cart: cart.map(({ productId, ...c }) => ({
+            ...c,
+            product: productId,
+          })),
+          clientInfo,
+          orderNotes,
+        })
+        .then((order) => {
+          console.log(order);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
     setErrors(err);
   };

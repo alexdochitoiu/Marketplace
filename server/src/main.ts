@@ -7,6 +7,7 @@ import categoryRoutes from "./routes/category";
 import dashboardRoutes from "./routes/dashboard";
 import productRoutes from "./routes/product";
 import photoRoutes from "./routes/photo";
+import orderRoutes from "./routes/order";
 
 const port = parseInt(process.env.PORT!);
 const app = express();
@@ -26,6 +27,7 @@ app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);
 app.use("/api/photo", photoRoutes);
+app.use("/api/order", orderRoutes);
 
 const server = app.listen(port, () => {
   log.info(`Marketpalce Server listening on port ${port} ...`);

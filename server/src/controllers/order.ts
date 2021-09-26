@@ -62,4 +62,21 @@ const getOrders = (req: Request, res: Response) => {
     });
 };
 
-export default { createOrder, getOrders };
+const getOrder = (req: Request, res: Response) => {
+  const { id } = req.params;
+  Order.findById(id)
+    .populate({
+      path: "cart",
+      populate: { path: "product", model: "Product" },
+    })
+    .exec()
+    .then((order) => {
+      res.status(200).json(order);
+    })
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
+export default { createOrder, getOrders, getOrder };

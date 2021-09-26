@@ -11,8 +11,7 @@ import { RootState } from "src/redux/types";
 import { Redirect } from "react-router";
 import { BiErrorAlt } from "react-icons/bi";
 import React from "react";
-import axios from "axios";
-import { CREATE_ORDER } from "src/constants/endpoints";
+import * as orderService from "src/services/order";
 
 interface IFormError {
   field: string;
@@ -71,21 +70,20 @@ export default function () {
     });
     if (err.length === 0) {
       const { orderNotes, ...clientInfo } = form;
-      axios
-        .post(CREATE_ORDER, {
-          cart: cart.map(({ productId, ...c }) => ({
-            ...c,
-            product: productId,
-          })),
-          clientInfo,
-          orderNotes,
+      const body = {
+        cart: cart.map(({ productId, ...c }) => ({
+          ...c,
+          product: productId,
+        })),
+        clientInfo,
+        orderNotes,
+      };
+      orderService
+        .create(body)
+        .then(({ data }) => {
+          <Redirect to={`/comanda/${data._id}`} />;
         })
-        .then((order) => {
-          console.log(order);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => alert("A aparut o eroare!"));
     }
     setErrors(err);
   };

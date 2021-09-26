@@ -49,7 +49,7 @@ export default function () {
           Se pare ca nu ai niciun produs adaugat la lista de favorite
         </p>
         <Button
-          href="/produse"
+          href="/produse/section/all"
           text="Produse"
           animation="slide"
           style={{ border: "1px solid #ccc" }}

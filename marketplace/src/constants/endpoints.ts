@@ -19,3 +19,4 @@ export const GET_PRODUCTS_BY_IDS = HOST + "/api/product/ids";
 
 // order
 export const CREATE_ORDER = HOST + "/api/order/create";
+export const GET_ORDER = HOST + "/api/order/:id";

@@ -41,7 +41,7 @@ export default function () {
         <div>
           <Logo />
           <ul className="footer-nav">
-            <a href="/produse">
+            <a href="/produse/section/all">
               <li>Produse</li>
             </a>
             <a href="/favorite">

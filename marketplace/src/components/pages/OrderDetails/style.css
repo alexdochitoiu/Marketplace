@@ -1,0 +1,26 @@
+.order-details {
+  background-color: #eee;
+  margin-bottom: -30px;
+  padding-bottom: 30px;
+}
+
+.order-box {
+  background: #fff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px 0;
+}
+
+.order-chip {
+  font-family: Poppins, sans-serif;
+  border: 1px solid #777;
+  font-size: 12px;
+  padding: 5px 15px;
+  margin: 0 5px;
+  border-radius: 15px;
+  background-color: #999;
+  color: #fff;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+}

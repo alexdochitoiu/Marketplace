@@ -71,7 +71,7 @@ export default function () {
           Se pare ca nu ai niciun produs adaugat in cosul de cumparaturi.
         </p>
         <Button
-          href="/produse"
+          href="/produse/section/all"
           text="Cumpara"
           animation="slide"
           style={{ border: "1px solid #ccc" }}
@@ -122,7 +122,7 @@ export default function () {
             }}
           >
             <a
-              href="/produse"
+              href="/produse/section/all"
               className="flex-row link-btn"
               style={{ marginRight: 16 }}
             >

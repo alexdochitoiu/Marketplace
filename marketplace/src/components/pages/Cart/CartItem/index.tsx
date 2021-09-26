@@ -59,10 +59,6 @@ export default function ({ item, onRemove, onChangeQuantity }: IProps) {
     });
   }, []);
 
-  const selectedSize = product
-    ? product.sizes.find((s) => s.size === item.selectedSize)
-    : null;
-
   return (
     <div className={classes.root}>
       {!product ? (
@@ -125,10 +121,7 @@ export default function ({ item, onRemove, onChangeQuantity }: IProps) {
               <FavoriteButton productId={item.productId} />
             </div>
           </div>
-          <ItemPrice
-            selectedSize={selectedSize!}
-            selectedQuantity={parseInt(item.selectedQuantity, 10)}
-          />
+          <ItemPrice cartItem={{ ...item, product }} />
         </div>
       )}
       <Tooltip title="Șterge produsul din coșul de cumpărături">

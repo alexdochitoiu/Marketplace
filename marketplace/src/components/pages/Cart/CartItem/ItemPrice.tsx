@@ -1,11 +1,19 @@
-import { ISize } from "src/types/IProduct";
+import IOrder from "src/types/IOrder";
 
 interface IProps {
-  selectedSize: ISize;
-  selectedQuantity: number;
+  cartItem: IOrder["cart"][number];
 }
 
-export default function ({ selectedSize, selectedQuantity }: IProps) {
+export default function ({ cartItem }: IProps) {
+  const selectedSize = cartItem.product
+    ? cartItem.product.sizes.find((s) => s.size === cartItem.selectedSize)
+    : null;
+
+  if (!selectedSize) {
+    return null;
+  }
+
+  const selectedQuantity = parseInt(cartItem.selectedQuantity, 10);
   const totalPrice = selectedSize.price * selectedQuantity;
   const totalPromoPrice = (selectedSize.promoPrice || 0) * selectedQuantity;
   return (

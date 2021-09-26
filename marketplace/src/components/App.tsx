@@ -15,6 +15,7 @@ import Product from "./pages/Product";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import OrderDetails from "./pages/OrderDetails";
 
 const theme = createTheme({
   palette: {
@@ -46,6 +47,7 @@ export default function App() {
           <Route exact={true} path="/favorite" component={Wishlist} />
           <Route exact={true} path="/cos-de-cumparaturi" component={Cart} />
           <Route exact={true} path="/checkout" component={Checkout} />
+          <Route exact={true} path="/comanda/:orderId" component={OrderDetails} />
         </Switch>
         <BackToTopButton />
         <Footer />

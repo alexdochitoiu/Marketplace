@@ -48,6 +48,7 @@ export default function Products() {
     product: IProductModel,
     operation: "create" | "update"
   ) => {
+    console.log(product, operation);
     const data = new FormData();
     data.append("title", product.title);
     data.append("productCode", product.productCode);

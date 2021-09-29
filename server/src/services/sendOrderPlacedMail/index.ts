@@ -1,51 +1,68 @@
 import fs from "fs";
 import path from "path";
+import { OrderDocument } from "src/models/order";
 import sendMail from "../sendMail";
 
-export default function ({
-  number,
-  cart,
-  clientInfo,
-  orderNotes,
-  url,
-  orderDetailsUrl,
-  shippingFee,
-}) {
+export default function (order: OrderDocument) {
   const template = fs.readFileSync(
     path.resolve("./src/assets/html/template.html"),
     "utf-8"
   );
 
-  const { product } = cart[0];
-  const size = product.sizes.find((s) => s.size === cart[0].selectedSize);
-  const price =
-    parseInt(cart[0].selectedQuantity, 10) * (size.promoPrice || size.price);
+  const url = process.env.MARKETPLACE_URL!;
+  const brand = process.env.BRAND_NAME!;
 
-  const totalPrice = price + shippingFee;
+  const cartItemTr = `
+    <tr>
+      <td>{{index}}</td>
+      <td><img src="{{productImgSrc}}" width="70" height="70"
+          style="object-fit: contain; border: 1px solid #888; background-color: #fff; margin: 0 15px" /></td>
+      <td style="width: 100%">
+        <h4>{{selectedQuantity}} x {{productName}}</h4>
+        <h4>Mărime: {{selectedSize}}</h4>
+      </td>
+      <td>
+        <h4 style="font-family: Poppins, sans-serif; white-space: nowrap;">{{price}} RON</h4>
+      </td>
+    </tr>
+  `;
+
+  const cartTableContent = order.cart
+    .map((item, index) => {
+      const { product } = item;
+      const size = product.sizes.find((s) => s.size === item.selectedSize);
+      const price =
+        parseInt(item.selectedQuantity, 10) * (size.promoPrice || size.price);
+      return cartItemTr
+        .replace(/{{index}}/g, `${index + 1}`)
+        .replace(/{{productImgSrc}}/g, item.product.images[0])
+        .replace(/{{selectedQuantity}}/g, item.selectedQuantity)
+        .replace(/{{productName}}/g, item.product.title)
+        .replace(/{{selectedSize}}/g, item.selectedSize)
+        .replace(/{{price}}/g, `${price}`);
+    })
+    .join("\n");
 
   const html = template
-    .replace(/{{number}}/g, number)
+    .replace(/{{number}}/g, order.number)
     .replace(/{{url}}/g, url)
-    .replace(/{{orderDetailsUrl}}/g, orderDetailsUrl)
-    .replace(/{{selectedQuantity}}/g, cart[0].selectedQuantity)
-    .replace(/{{selectedSize}}/g, cart[0].selectedSize)
-    .replace(/{{productName}}/g, product.title)
-    .replace(/{{price}}/g, `${price}`)
-    .replace(/{{shippingFee}}/g, shippingFee)
-    .replace(/{{totalPrice}}/g, totalPrice)
-    .replace(/{{lastName}}/g, clientInfo.lastName)
-    .replace(/{{firstName}}/g, clientInfo.firstName)
-    .replace(/{{address}}/g, clientInfo.address)
-    .replace(/{{city}}/g, clientInfo.city)
-    .replace(/{{county}}/g, clientInfo.county)
-    .replace(/{{zipCode}}/g, clientInfo.zipCode)
-    .replace(/{{email}}/g, clientInfo.email)
-    .replace(/{{phone}}/g, clientInfo.phone)
-    .replace(/{{orderNotes}}/g, orderNotes);
+    .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
+    .replace(/{{cartTableContent}}/g, cartTableContent)
+    .replace(/{{shippingFee}}/g, `${order.cartPrice.shippingFee}`)
+    .replace(/{{totalPrice}}/g, `${order.cartPrice.totalPrice}`)
+    .replace(/{{lastName}}/g, order.clientInfo.lastName)
+    .replace(/{{firstName}}/g, order.clientInfo.firstName)
+    .replace(/{{address}}/g, order.clientInfo.address)
+    .replace(/{{city}}/g, order.clientInfo.city)
+    .replace(/{{county}}/g, order.clientInfo.county)
+    .replace(/{{zipCode}}/g, order.clientInfo.zipCode)
+    .replace(/{{email}}/g, order.clientInfo.email)
+    .replace(/{{phone}}/g, order.clientInfo.phone)
+    .replace(/{{orderNotes}}/g, order.orderNotes || "-");
 
   return sendMail({
-    to: clientInfo.email,
-    subject: `Comanda a fost plasată (Număr comandă: ${number})`,
+    to: order.clientInfo.email,
+    subject: `${brand} | Comanda #${order.number} a fost înregistrată`,
     text: "",
     html,
   });

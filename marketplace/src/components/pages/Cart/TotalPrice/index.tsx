@@ -6,7 +6,7 @@ interface IProps {
   cart: ICartItem[];
 }
 export default function ({ cart }: IProps) {
-  const cartPrice = useTotalCartPrice();
+  const cartPrice = useTotalCartPrice({ cart });
   const { totalPrice, totalDiscount, shippingFee } = cartPrice;
   return (
     <div className="total-price-root">

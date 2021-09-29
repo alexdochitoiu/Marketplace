@@ -9,6 +9,11 @@ export default interface IOrder {
     selectedSize: string;
     selectedQuantity: string;
   }>;
+  cartPrice: {
+    shippingFee: number;
+    totalPrice: number;
+    totalDiscount: number;
+  };
   clientInfo: {
     lastName: string;
     firstName: string;

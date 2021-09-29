@@ -164,6 +164,8 @@ const updateProduct = (
     ? (req.files as Express.Multer.File[]).map((f) => url + f.filename)
     : [];
 
+  console.log(req.body);
+
   const images = [...imageNames, imagesAsUrl].flat().filter((i) => i);
   Product.findByIdAndUpdate(
     id,

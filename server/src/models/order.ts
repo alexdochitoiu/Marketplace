@@ -9,6 +9,11 @@ export interface OrderDocument extends mongoose.Document {
     selectedSize: string;
     selectedQuantity: string;
   }>;
+  cartPrice: {
+    shippingFee: number;
+    totalPrice: number;
+    totalDiscount: number;
+  };
   clientInfo: {
     lastName: string;
     firstName: string;
@@ -41,6 +46,11 @@ const OrderSchema = new mongoose.Schema(
         selectedQuantity: String,
       },
     ],
+    cartPrice: {
+      shippingFee: Number,
+      totalPrice: Number,
+      totalDiscount: Number,
+    },
     clientInfo: {
       lastName: String,
       firstName: String,

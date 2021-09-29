@@ -67,7 +67,7 @@ const CartItem = ({ item }: ICartItemProps) => {
 
 export default function () {
   const cart = useSelector((state: RootState) => state.cart);
-  const cartPrice = useTotalCartPrice();
+  const cartPrice = useTotalCartPrice({ cart });
   return (
     <div>
       <label className="flex-row" style={{ justifyContent: "space-between" }}>

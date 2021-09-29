@@ -13,14 +13,25 @@
 
 .order-chip {
   font-family: Poppins, sans-serif;
-  border: 1px solid #777;
+  border-radius: 15px;
   font-size: 12px;
   padding: 5px 15px;
   margin: 0 5px;
-  border-radius: 15px;
-  background-color: #999;
+  background: linear-gradient(
+    135deg,
+    rgba(153, 153, 153, 1) 0%,
+    rgba(34, 34, 34, 1) 100%
+  );
   color: #fff;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.75px;
+}
+
+.order-client-info-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 3px 0;
+  border: 1px solid #eee;
+  padding: 3px 15px;
 }

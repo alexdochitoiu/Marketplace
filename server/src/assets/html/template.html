@@ -111,7 +111,7 @@
       </td>
       <td align="right">
         <h4 style="white-space: nowrap">Comanda ta:</h4>
-        <a href="{{orderDetailsUrl}}" style="font-family: Poppins, sans-serif;">{{number}}</a>
+        <a href="{{orderDetailsUrl}}" style="font-family: Poppins, sans-serif;">#{{number}}</a>
       </td>
     </tr>
   </table>
@@ -136,18 +136,7 @@
     <tr>
       <td>
         <table class="product-table">
-          <tr>
-            <td>1.</td>
-            <td><img src="http://localhost:4000/public/images/16319698545774.jpg" width="70" height="70"
-                style="object-fit: contain; border: 1px solid #888; background-color: #fff; margin: 0 15px" /></td>
-            <td style="width: 100%">
-              <h4>{{selectedQuantity}} x {{productName}}</h4>
-              <h4>Mărime: {{selectedSize}}</h4>
-            </td>
-            <td>
-              <h4 style="font-family: Poppins, sans-serif; white-space: nowrap;">{{price}} RON</h4>
-            </td>
-          </tr>
+          {{cartTableContent}}
         </table>
         <table class="total-table">
           <tr>

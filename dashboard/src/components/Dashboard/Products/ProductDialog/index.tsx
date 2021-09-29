@@ -65,7 +65,9 @@ const isProduct = (p: any): p is IProduct => !!p._id;
 
 export default function ({ mode, onClose, onDone, product }: IProps) {
   const classes = useStyles();
-  const [section, setSection] = React.useState<ICategory["section"]>("other");
+  const [section, setSection] = React.useState<ICategory["section"]>(
+    product?.category?.section || "other"
+  );
   const [categories, setCategories] = React.useState<ICategory[]>([]);
   const [productDetails, setProductDetails] = React.useState<
     IProduct | IProductModel
@@ -95,10 +97,11 @@ export default function ({ mode, onClose, onDone, product }: IProps) {
     }
     if (isProduct(productDetails)) {
       // update
+      const c = productDetails.category;
       onDone(
         {
           ...productDetails,
-          category: productDetails.category?._id,
+          category: typeof c === "string" ? c : c?._id,
         },
         "update"
       );

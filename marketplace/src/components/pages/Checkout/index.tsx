@@ -6,12 +6,15 @@ import { CgNotes } from "react-icons/cg";
 import "./styles.css";
 import OrderSummary from "./OrderSummary";
 import TermsAndConditions from "./TermsAndConditions";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
 import { Redirect } from "react-router";
 import { BiErrorAlt } from "react-icons/bi";
 import React from "react";
 import * as orderService from "src/services/order";
+import useTotalCartPrice from "src/utils/customHooks/useTotalCartPrice";
+import history from "src/constants/history";
+import { doChangeCart } from "src/redux/actions";
 
 interface IFormError {
   field: string;
@@ -20,6 +23,7 @@ interface IFormError {
 
 export default function () {
   const cart = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
   const [form, setForm] = React.useState({
     lastName: "",
     firstName: "",
@@ -33,6 +37,7 @@ export default function () {
   });
   const [termsAccepted, setTermsAccepted] = React.useState(false);
   const [errors, setErrors] = React.useState<IFormError[]>([]);
+  const cartPrice = useTotalCartPrice({ cart });
 
   if (cart.length === 0) {
     return <Redirect to="/cos-de-cumparaturi" />;
@@ -75,13 +80,15 @@ export default function () {
           ...c,
           product: productId,
         })),
+        cartPrice,
         clientInfo,
         orderNotes,
       };
       orderService
         .create(body)
         .then(({ data }) => {
-          <Redirect to={`/comanda/${data._id}`} />;
+          history.push(`/comanda/${data._id}?success=1`);
+          dispatch(doChangeCart([]));
         })
         .catch((err) => alert("A aparut o eroare!"));
     }

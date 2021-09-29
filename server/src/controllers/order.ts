@@ -4,7 +4,7 @@ import log from "../logger";
 import sendOrderPlacedMail from "../services/sendOrderPlacedMail";
 
 const createOrder = (req: Request, res: Response) => {
-  const { cart, clientInfo, orderNotes } = req.body;
+  const { cart, cartPrice, clientInfo, orderNotes } = req.body;
 
   if (cart.length === 0) {
     return res.status(400).json({ error: "Cart empty" });
@@ -14,6 +14,7 @@ const createOrder = (req: Request, res: Response) => {
     number: `${Math.floor(100000 + Math.random() * 900000)}`,
     status: "placed",
     cart,
+    cartPrice,
     clientInfo,
     orderNotes,
   })
@@ -25,15 +26,7 @@ const createOrder = (req: Request, res: Response) => {
         })
         .then((order) => {
           if (order) {
-            sendOrderPlacedMail({
-              number: order.number,
-              cart: order.cart,
-              clientInfo: order.clientInfo,
-              orderNotes: order.orderNotes || "-",
-              url: "#",
-              orderDetailsUrl: "#",
-              shippingFee: 50,
-            });
+            sendOrderPlacedMail(order);
             res.status(201).json(order);
           } else {
             res.status(404).json({ error: "Order not found" });

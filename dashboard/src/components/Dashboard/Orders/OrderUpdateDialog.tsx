@@ -26,6 +26,7 @@ export default function ({ order, onClose, onDone }: IProps) {
   const handleClick = () => {
     if (order?.status !== status) {
       onDone({ _id: order?._id, status });
+      onClose();
     }
   };
 

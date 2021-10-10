@@ -13,6 +13,7 @@ import {
 import Home from "./Home";
 import Products from "./Products";
 import Product from "./Products/Product";
+import Orders from "./Orders";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -65,6 +66,11 @@ export default function () {
             exact={true}
             path={routes.IMAGES}
             component={() => <Photos />}
+          />
+          <Route
+            exact={true}
+            path={routes.ORDERS}
+            component={() => <Orders />}
           />
         </Switch>
       </div>

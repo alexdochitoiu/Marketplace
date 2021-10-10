@@ -19,6 +19,7 @@ import * as auth from "src/services/auth";
 import { useHistory } from "react-router-dom";
 import { DRAWER_OPENED_WIDTH, DRAWER_CLOSED_WIDTH } from "../constants";
 import ButtonItem from "./ButtonItem";
+import ListAltIcon from "@material-ui/icons/ListAlt";
 
 const useStyles = makeStyles((theme: Theme) => ({
   drawer: {
@@ -58,6 +59,11 @@ const items = [
     text: "Imagini",
     icon: <PhotoLibraryIcon />,
     path: routes.IMAGES,
+  },
+  {
+    text: "Comenzi",
+    icon: <ListAltIcon />,
+    path: routes.ORDERS,
   },
 ];
 

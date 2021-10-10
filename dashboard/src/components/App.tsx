@@ -7,6 +7,7 @@ import * as routes from "../constants/routes";
 import { createTheme, ThemeProvider } from "@material-ui/core";
 import { isLoggedIn } from "src/services/auth";
 import history from "src/constants/history";
+import "./style.css";
 
 const theme = createTheme({
   palette: {

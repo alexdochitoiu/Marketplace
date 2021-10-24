@@ -1,0 +1,8 @@
+version: '3'
+services:
+  miral-marketplace:
+    build: .
+    container_name: miral-marketplace
+    command: sh -c "nginx -g 'daemon off;'"
+    ports:
+      - 80:80

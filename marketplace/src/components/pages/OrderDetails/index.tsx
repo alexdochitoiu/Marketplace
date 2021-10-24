@@ -70,7 +70,7 @@ export default function () {
       <TitleBanner title={`Comanda #${order.number}`} />
 
       <div className="container" style={{ marginTop: 30 }}>
-        {location.search && (
+        {window.location.search && (
           <div className="order-box" style={{ margin: "30px 0" }}>
             <h4
               className="flex-row"

@@ -5,7 +5,9 @@
   "main": "main.ts",
   "scripts": {
     "start": "nodemon src/main.ts",
-    "test": "mocha -r ts-node/register test/*.test.ts"
+    "serve": "node dist/main.js",
+    "test": "mocha -r ts-node/register test/*.test.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",

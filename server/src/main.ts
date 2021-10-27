@@ -1,4 +1,5 @@
 import "dotenv-safe/config";
+import path from "path";
 import express, { Request, Response } from "express";
 import cors from "cors";
 import connectDatabase from "./database/connect";
@@ -22,7 +23,7 @@ app.get("/api/health-check", (req: Request, res: Response) =>
 
 connectDatabase();
 
-app.use("/public", express.static("public"));
+app.use("/public", express.static(path.join(__dirname, "../public")));
 app.use("/api/dashboard", dashboardRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/product", productRoutes);

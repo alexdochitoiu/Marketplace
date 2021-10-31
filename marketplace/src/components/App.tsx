@@ -47,7 +47,11 @@ export default function App() {
           <Route exact={true} path="/favorite" component={Wishlist} />
           <Route exact={true} path="/cos-de-cumparaturi" component={Cart} />
           <Route exact={true} path="/checkout" component={Checkout} />
-          <Route exact={true} path="/comanda/:orderId" component={OrderDetails} />
+          <Route
+            exact={true}
+            path="/comanda/:orderId"
+            component={OrderDetails}
+          />
         </Switch>
         <BackToTopButton />
         <Footer />

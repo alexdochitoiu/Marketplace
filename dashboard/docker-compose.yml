@@ -1,8 +1,0 @@
-version: '3'
-services:
-  miral-dashboard:
-    build: .
-    container_name: miral-dashboard
-    command: sh -c "nginx -g 'daemon off;'"
-    ports: 
-      - 80:80

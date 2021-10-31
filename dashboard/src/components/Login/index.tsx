@@ -14,6 +14,7 @@ import * as auth from "src/services/auth";
 import * as routes from "src/constants/routes";
 import React, { useState } from "react";
 import Snackbar from "../shared/Snackbar";
+import { MARKETPLACE_HOST } from "src/constants/host";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,7 +127,11 @@ export default function Login() {
           </form>
         </Card>
         <Box mt={8}>
-          <Link href="/" variant="body2" className={classes.link}>
+          <Link
+            href={MARKETPLACE_HOST}
+            variant="body2"
+            className={classes.link}
+          >
             &#129044; Catre magazin
           </Link>
         </Box>

@@ -9,7 +9,10 @@ export function sendOrderPlacedMail(order: OrderDocument) {
     "utf-8"
   );
 
-  const url = process.env.MARKETPLACE_URL!;
+  const url =
+    process.env.NODE_ENV === "production"
+      ? "http://89.46.7.46"
+      : "http://localhost";
   const brand = process.env.BRAND_NAME!;
 
   const cartItemTr = `
@@ -74,7 +77,10 @@ export function sendOrderProcessedMail(order: OrderDocument) {
     "utf-8"
   );
 
-  const url = process.env.MARKETPLACE_URL!;
+  const url =
+  process.env.NODE_ENV === "production"
+    ? "http://89.46.7.46"
+    : "http://localhost";
   const brand = process.env.BRAND_NAME!;
 
   const html = template
@@ -98,7 +104,10 @@ export function sendOrderSentMail(order: OrderDocument) {
     "utf-8"
   );
 
-  const url = process.env.MARKETPLACE_URL!;
+  const url =
+  process.env.NODE_ENV === "production"
+    ? "http://89.46.7.46"
+    : "http://localhost";
   const brand = process.env.BRAND_NAME!;
 
   const cartItemTr = `

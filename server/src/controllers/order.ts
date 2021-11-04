@@ -86,13 +86,9 @@ const getOrder = (req: Request, res: Response) => {
 
 const updateOrder = (req: Request, res: Response) => {
   const { id } = req.params;
-  Order.findByIdAndUpdate(
-    id,
-    {
-      ...req.body,
-    },
-    { new: true, omitUndefined: true }
-  )
+  const { awb, status } = req.body;
+  const invoice = req.file?.filename;
+  Order.findByIdAndUpdate(id, { status }, { new: true, omitUndefined: true })
     .then((order) => {
       if (!order) {
         res.status(404).json({ error: "Order not found" });
@@ -108,7 +104,7 @@ const updateOrder = (req: Request, res: Response) => {
             } else if (updatedOrder.status === "preparing") {
               sendOrderProcessedMail(updatedOrder);
             } else if (updatedOrder.status === "sent") {
-              sendOrderSentMail(updatedOrder);
+              sendOrderSentMail(updatedOrder, { awb, invoice });
             }
             res.status(200).json(updatedOrder);
           });

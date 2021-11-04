@@ -123,6 +123,7 @@
           <br />
           <h4 style="font-family: Poppins, sans-serif;">Comanda dvs. cu numărul <b>#{{number}}</b> a fost predată
             curierului!</h4>
+          <h4 style="font-family: Poppins, sans-serif;">{{invoiceMessage}}</h4>
         </td>
       </tr>
     </table>
@@ -192,6 +193,20 @@
               <td>
                 <h4 style="font-family: Poppins, sans-serif;">{{orderNotes}}</h4>
               </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <tr>
+        <td style="padding: 20px"><b>AWB:</b></td>
+      </tr>
+      <tr>
+        <td>
+          <table class="product-table client-info">
+            <tr>
+              <td>{{awb}}</td>
             </tr>
           </table>
         </td>

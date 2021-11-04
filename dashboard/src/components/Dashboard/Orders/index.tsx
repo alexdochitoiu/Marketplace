@@ -67,14 +67,26 @@ export default function () {
     setOrderToUpdate(order);
   };
 
-  const handleDone = (data: Partial<IOrder>) => {
+  const handleDone = (data: any) => {
+    const id = data._id;
+    const formData = new FormData();
+    console.log(data);
+    formData.append("status", data.status);
+    if (data.awb) {
+      formData.append("awb", data.awb);
+    }
+    if (data.invoice) {
+      formData.append("invoice", data.invoice);
+    }
+    console.log(formData);
     orderService
-      .update({ id: data?._id, status: data.status })
+      .update(id, formData)
       .then(({ data: updatedOrder }) => {
         setOrders(
           orders.map((o) => (o._id === updatedOrder._id ? updatedOrder : o))
         );
-      });
+      })
+      .catch(({ response: { data } }) => console.log(data.error));
   };
 
   let displayOrders = orders;

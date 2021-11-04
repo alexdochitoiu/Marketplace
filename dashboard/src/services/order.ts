@@ -20,15 +20,12 @@ const remove = async (id: string) =>
     },
   });
 
-const update = async ({ id, status }) =>
-  axios.put<IOrder>(
-    UPDATE_ORDER.replace(":id", id),
-    { status },
-    {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    }
-  );
+const update = async (id: string, data: FormData) =>
+  axios.put<IOrder>(UPDATE_ORDER.replace(":id", id), data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 
 export { getById, getAll, remove, update };

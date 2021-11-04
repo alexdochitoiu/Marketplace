@@ -108,7 +108,7 @@ export function sendOrderProcessedMail(order: OrderDocument) {
   });
 }
 
-export function sendOrderSentMail(order: OrderDocument) {
+export function sendOrderSentMail(order: OrderDocument, { awb, invoice }) {
   const template = fs.readFileSync(
     path.resolve(
       process.env.NODE_ENV === "production"
@@ -159,6 +159,10 @@ export function sendOrderSentMail(order: OrderDocument) {
     .replace(/{{number}}/g, order.number)
     .replace(/{{brand}}/g, brand)
     .replace(/{{url}}/g, url)
+    .replace(
+      /{{invoiceMessage}}/g,
+      invoice ? "Regăsiți factura în secțiunea de atașamente!" : ""
+    )
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{cartTableContent}}/g, cartTableContent)
     .replace(/{{shippingFee}}/g, `${order.cartPrice.shippingFee}`)
@@ -171,12 +175,20 @@ export function sendOrderSentMail(order: OrderDocument) {
     .replace(/{{zipCode}}/g, order.clientInfo.zipCode)
     .replace(/{{email}}/g, order.clientInfo.email)
     .replace(/{{phone}}/g, order.clientInfo.phone)
-    .replace(/{{orderNotes}}/g, order.orderNotes || "-");
+    .replace(/{{orderNotes}}/g, order.orderNotes || "-")
+    .replace(/{{awb}}/g, awb || "-");
 
   return sendMail({
     to: order.clientInfo.email,
     subject: `${brand} | Comanda dvs. #${order.number} a fost trimisă`,
     text: "",
     html,
+    attachments: [
+      {
+        filename: invoice,
+        path: path.resolve("./public/invoices/" + invoice),
+        contentType: "application/pdf",
+      },
+    ],
   });
 }

@@ -2,17 +2,20 @@ import nodemailer from "nodemailer";
 
 const sendMail = async ({ to, subject, text, html }) => {
   const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+    host: "miral-fashion.ro",
+    port: 25,
     secure: false,
     auth: {
-      user: process.env.DASHBOARD_EMAIL,
+      user: "root@miral-fashion.ro",
       pass: process.env.DASHBOARD_PASSWORD,
+    },
+    tls: {
+      rejectUnauthorized: false,
     },
   });
 
   return transporter.sendMail({
-    from: process.env.DASHBOARD_EMAIL,
+    from: `"Miral-Fashion.Ro" <${process.env.DASHBOARD_EMAIL}>`,
     to,
     subject,
     text,

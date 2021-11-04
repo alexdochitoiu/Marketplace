@@ -38,7 +38,7 @@
 
     .logo {
       font-family: 'Brush Script MT', cursive;
-      font-size: 46px;
+      font-size: 32px;
     }
 
     .header td {
@@ -111,94 +111,34 @@
           </a>
         </td>
         <td align="right">
-          <h4 style="white-space: nowrap">Comanda ta:</h4>
+          <h4 style="white-space: nowrap">Număr comandă:</h4>
           <a href="{{orderDetailsUrl}}" style="font-family: Poppins, sans-serif;">#{{number}}</a>
         </td>
       </tr>
     </table>
     <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fff; padding-bottom: 15px;">
-      <tr style="line-height: 30px;">
-        <td style="width: 100%; padding-top: 15px;" align="center">
-          <h4 syle="font-weight: 600">Bună ziua <b>{{firstName}} {{lastName}}</b>,</h4>
+      <tr style="line-height: 30px;" align="center">
+        <td style="width: 100%; padding-top: 15px;">
           <br />
-          <h4 style="font-family: Poppins, sans-serif;">Comanda dvs. cu numărul <b>#{{number}}</b> a fost predată
-            curierului!</h4>
+          <h4 syle="font-weight: 600"><b>{{firstName}} {{lastName}}</b> tocmai a plasat o comandă nouă,</h4>
+          <br />
+          <h4 style="font-family: Poppins, sans-serif;">Numărul comenzii este: <b>#{{number}}</b>!
+          </h4>
         </td>
-      </tr>
-    </table>
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr>
-        <td style="padding: 20px"><b>Următoarele produse au fost trimise:</b< /td>
       </tr>
       <tr>
         <td>
-          <table class="product-table">
-            {{cartTableContent}}
-          </table>
-          <table class="total-table">
-            <tr>
-              <td>
-                <h4>Cost livrare</h4>
-              </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{shippingFee}} RON</h4>
-              </td>
-            </tr>
-            <tr>
-              <td style="background: #eee;">
-                <h4><b>TOTAL</b></h4>
-              </td>
-              <td style="background: #eee;">
-                <h4 style="font-family: Poppins, sans-serif;"><b>{{totalPrice}} RON</b></h4>
-              </td>
-            </tr>
-          </table>
+          <br />
         </td>
       </tr>
     </table>
     <table width="100%">
       <tr>
-        <td style="padding: 20px"><b>Datele de facturare:</b></td>
-      </tr>
-      <tr>
-        <td>
-          <table class="product-table client-info">
-            <tr>
-              <td>Destinatar: </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{lastName}} {{firstName}}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td>Adresa: </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{address}}, {{city}}, {{county}}, {{zipCode}}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td>Email: </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{email}}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td>Telefon: </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{phone}}</h4>
-              </td>
-            </tr>
-            <tr>
-              <td>Nota comandă: </td>
-              <td>
-                <h4 style="font-family: Poppins, sans-serif;">{{orderNotes}}</h4>
-              </td>
-            </tr>
-          </table>
+        <td style="padding-top: 25px; padding-bottom: 30px;" align="center">
+          <a class="button" style="background: #a8741a" href="{{dashboardUrl}}">
+            <span style="color: #fff">Panou de control</span>
+          </a>
         </td>
-      </tr>
-    </table>
-    <table width="100%">
-      <tr>
         <td style="padding-top: 25px; padding-bottom: 30px;" align="center">
           <a class="button" href="{{orderDetailsUrl}}">
             <span style="color: #fff">Detalii comandă</span>

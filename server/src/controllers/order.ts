@@ -6,6 +6,7 @@ import {
   sendOrderProcessedMail,
   sendOrderSentMail,
 } from "../services/sendOrderMail";
+import { sendNotificationMail } from "../services/sendNotificationMail";
 
 const createOrder = (req: Request, res: Response) => {
   const { cart, cartPrice, clientInfo, orderNotes } = req.body;
@@ -31,6 +32,12 @@ const createOrder = (req: Request, res: Response) => {
         .then((order) => {
           if (order) {
             sendOrderPlacedMail(order);
+            sendNotificationMail({
+              orderId: order._id,
+              orderNumber: order.number,
+              clientFirstName: order.clientInfo.firstName,
+              clientLastName: order.clientInfo.lastName,
+            });
             res.status(201).json(order);
           } else {
             res.status(404).json({ error: "Order not found" });

@@ -1,26 +1,5 @@
 version: "3"
 services:
-  miral-server:
-    build:
-      context: ./server
-    container_name: miral-server
-    environment:
-      NODE_ENV: "production"
-      PORT: 4000
-      MONGO_URI: ${MONGO_URI}
-      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
-    restart: always
-    ports:
-      - 4000:4000
-    links:
-      - miral-database
-
-  miral-database:
-    container_name: miral-database
-    image: mongo
-    ports:
-      - 27017:27017
-
   miral-marketplace:
     build: ./marketplace
     container_name: miral-marketplace

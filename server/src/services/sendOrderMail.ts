@@ -5,14 +5,18 @@ import sendMail from "./sendMail";
 
 export function sendOrderPlacedMail(order: OrderDocument) {
   const template = fs.readFileSync(
-    path.resolve("./src/assets/html/orderPlacedMailTemplate.html"),
+    path.resolve(
+      process.env.NODE_ENV === "production"
+        ? "./dist/assets/html/orderPlacedMailTemplate.html"
+        : "./src/assets/html/orderPlacedMailTemplate.html"
+    ),
     "utf-8"
   );
 
   const url =
     process.env.NODE_ENV === "production"
-      ? "http://89.46.7.46"
-      : "http://localhost";
+      ? "http://miral-fashion.ro"
+      : "http://localhost:8000";
   const brand = process.env.BRAND_NAME!;
 
   const cartItemTr = `
@@ -48,6 +52,7 @@ export function sendOrderPlacedMail(order: OrderDocument) {
 
   const html = template
     .replace(/{{number}}/g, order.number)
+    .replace(/{{brand}}/g, brand)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{cartTableContent}}/g, cartTableContent)
@@ -73,18 +78,23 @@ export function sendOrderPlacedMail(order: OrderDocument) {
 
 export function sendOrderProcessedMail(order: OrderDocument) {
   const template = fs.readFileSync(
-    path.resolve("./src/assets/html/orderProcessedMailTemplate.html"),
+    path.resolve(
+      process.env.NODE_ENV === "production"
+        ? "./dist/assets/html/orderProcessedMailTemplate.html"
+        : "./src/assets/html/orderProcessedMailTemplate.html"
+    ),
     "utf-8"
   );
 
   const url =
-  process.env.NODE_ENV === "production"
-    ? "http://89.46.7.46"
-    : "http://localhost";
+    process.env.NODE_ENV === "production"
+      ? "http://miral-fashion.ro"
+      : "http://localhost:8000";
   const brand = process.env.BRAND_NAME!;
 
   const html = template
     .replace(/{{number}}/g, order.number)
+    .replace(/{{brand}}/g, brand)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{lastName}}/g, order.clientInfo.lastName)
@@ -100,14 +110,18 @@ export function sendOrderProcessedMail(order: OrderDocument) {
 
 export function sendOrderSentMail(order: OrderDocument) {
   const template = fs.readFileSync(
-    path.resolve("./src/assets/html/orderSentMailTemplate.html"),
+    path.resolve(
+      process.env.NODE_ENV === "production"
+        ? "./dist/assets/html/orderSentMailTemplate.html"
+        : "./src/assets/html/orderSentMailTemplate.html"
+    ),
     "utf-8"
   );
 
   const url =
-  process.env.NODE_ENV === "production"
-    ? "http://89.46.7.46"
-    : "http://localhost";
+    process.env.NODE_ENV === "production"
+      ? "http://miral-fashion.ro"
+      : "http://localhost:8000";
   const brand = process.env.BRAND_NAME!;
 
   const cartItemTr = `
@@ -143,6 +157,7 @@ export function sendOrderSentMail(order: OrderDocument) {
 
   const html = template
     .replace(/{{number}}/g, order.number)
+    .replace(/{{brand}}/g, brand)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{cartTableContent}}/g, cartTableContent)

@@ -1,4 +1,4 @@
-const PHONE = "+0741 734 289";
-const MAIL = "contact@brand.ro";
+const PHONE = "+40 (756) 238 251";
+const MAIL = "miralfashionlnt@gmail.com";
 
 export { PHONE, MAIL };

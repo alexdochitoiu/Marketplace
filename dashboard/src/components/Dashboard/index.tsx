@@ -14,6 +14,7 @@ import Home from "./Home";
 import Products from "./Products";
 import Product from "./Products/Product";
 import Orders from "./Orders";
+import withAuth from "../withAuth";
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -46,32 +47,44 @@ export default function () {
       <SideDrawer open={open} onChange={(open) => setOpen(open)} />
       <div className={open ? classes.containerShift : classes.container}>
         <Switch>
-          <Route exact={true} path={routes.HOME} component={() => <Home />} />
-          <Route
-            exact={true}
-            path={routes.CATEGORIES}
-            component={() => <Categories />}
-          />
-          <Route
-            exact={true}
-            path={routes.PRODUCTS}
-            component={() => <Products />}
-          />
-          <Route
-            exact={true}
-            path={routes.PRODUCT}
-            component={() => <Product />}
-          />
-          <Route
-            exact={true}
-            path={routes.IMAGES}
-            component={() => <Photos />}
-          />
-          <Route
-            exact={true}
-            path={routes.ORDERS}
-            component={() => <Orders />}
-          />
+          {withAuth(
+            <Route exact={true} path={routes.HOME} component={() => <Home />} />
+          )}
+          {withAuth(
+            <Route
+              exact={true}
+              path={routes.CATEGORIES}
+              component={() => <Categories />}
+            />
+          )}
+          {withAuth(
+            <Route
+              exact={true}
+              path={routes.PRODUCTS}
+              component={() => <Products />}
+            />
+          )}
+          {withAuth(
+            <Route
+              exact={true}
+              path={routes.PRODUCT}
+              component={() => <Product />}
+            />
+          )}
+          {withAuth(
+            <Route
+              exact={true}
+              path={routes.IMAGES}
+              component={() => <Photos />}
+            />
+          )}
+          {withAuth(
+            <Route
+              exact={true}
+              path={routes.ORDERS}
+              component={() => <Orders />}
+            />
+          )}
         </Switch>
       </div>
     </div>

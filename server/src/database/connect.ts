@@ -4,8 +4,8 @@ import log from "../logger";
 export default function () {
   const mongoUri =
     process.env.NODE_ENV === "production"
-      ? "mongodb://miral-database:27017/marketplace-dev"
-      : "mongodb://localhost:27017/marketplace-dev";
+      ? "mongodb+srv://miral-dbuser:GJEkZBOfXL22WUYb@cluster0.tnmqw.mongodb.net/miral-db-prod?retryWrites=true&w=majority"
+      : "mongodb+srv://miral-dbuser:GJEkZBOfXL22WUYb@cluster0.tnmqw.mongodb.net/miral-db-test?retryWrites=true&w=majority";
   return mongoose
     .connect(mongoUri, {
       useNewUrlParser: true,

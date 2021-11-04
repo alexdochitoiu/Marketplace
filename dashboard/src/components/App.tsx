@@ -12,10 +12,10 @@ import "./style.css";
 const theme = createTheme({
   palette: {
     primary: {
-      main: "#2E8B57",
+      main: "#91610f",
     },
     secondary: {
-      main: "#2F4F4F",
+      main: "#222",
     },
   },
 });

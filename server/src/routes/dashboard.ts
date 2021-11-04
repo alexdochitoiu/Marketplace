@@ -12,7 +12,7 @@ router.post("/login", (req: Request, res: Response, next: NextFunction) => {
     password === process.env.DASHBOARD_PASSWORD
   ) {
     const token = jwt.sign({ username }, process.env.JWT_SECRET_KEY!, {
-      expiresIn: "3h",
+      expiresIn: "8h",
     });
     res.status(200).json({ token });
   } else {

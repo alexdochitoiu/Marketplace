@@ -183,12 +183,14 @@ export function sendOrderSentMail(order: OrderDocument, { awb, invoice }) {
     subject: `${brand} | Comanda dvs. #${order.number} a fost trimisă`,
     text: "",
     html,
-    attachments: [
-      {
-        filename: invoice,
-        path: path.resolve("./public/invoices/" + invoice),
-        contentType: "application/pdf",
-      },
-    ],
+    attachments: invoice
+      ? [
+          {
+            filename: invoice,
+            path: path.resolve("./public/invoices/" + invoice),
+            contentType: "application/pdf",
+          },
+        ]
+      : [],
   });
 }

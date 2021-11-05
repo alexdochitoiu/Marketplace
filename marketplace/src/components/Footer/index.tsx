@@ -15,10 +15,10 @@ export default function () {
     <div className="footer">
       <div className="container flex-row footer-wrapper">
         <div style={{ alignItems: "flex-start" }}>
-          <h3>Despre Brand</h3>
+          <h3>Despre Miral-Fashion</h3>
           <p>
-            Bun venit in lumea blanilor naturale. Descopera ultimele articole
-            din blana naturala.
+            Bun venit în lumea blănurilor naturale. Descoperă ultimele articole
+            din blană naturală de înaltă calitate.
           </p>
           <div className="social-nav-bar">
             <a href={FACEBOOK}>
@@ -50,11 +50,11 @@ export default function () {
             <a href="/cos-de-cumparaturi">
               <li>Cosul meu</li>
             </a>
-            <a>
+            <a href="/checkout">
               <li>Checkout</li>
             </a>
           </ul>
-          <div className="copy-right">Copyright © Brand 2021</div>
+          <div className="copy-right">Copyright © miral-fashion.ro 2021</div>
         </div>
         <div className="more-info">
           <div className="more-info-wrapper">

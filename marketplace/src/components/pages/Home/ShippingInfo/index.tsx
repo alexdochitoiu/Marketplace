@@ -9,7 +9,7 @@ export default function () {
         <p>
           Produsele sunt livrate prin curier.
           <br /> Termenul de livrare pentru produsele din stoc este de 1-2 zile
-          lucratoare, iar pentru cele pe comanda, 5-10 zile lucratoare.
+          lucratoare, iar pentru cele pre-comandă, 5-10 zile lucratoare.
         </p>
         <Button
           animation="slide"

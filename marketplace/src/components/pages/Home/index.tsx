@@ -1,5 +1,6 @@
 import "./Home.styles.css";
 import ImageSlider from "./ImageSlider";
+import SelectYourProduct from "./SelectYourProduct";
 import ShippingInfo from "./ShippingInfo";
 import TopProducts from "./TopProducts";
 
@@ -9,6 +10,7 @@ export default function () {
       <ImageSlider />
       <TopProducts />
       <ShippingInfo />
+      <SelectYourProduct />
     </div>
   );
 }

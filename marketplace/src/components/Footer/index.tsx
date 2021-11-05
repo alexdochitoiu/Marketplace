@@ -54,7 +54,7 @@ export default function () {
               <li>Checkout</li>
             </a>
           </ul>
-          <div className="copy-right">Copyright © miral-fashion.ro 2021</div>
+          <div className="copy-right">Copyright © MIRAL FASHION LNT SRL 2021</div>
         </div>
         <div className="more-info">
           <div className="more-info-wrapper">

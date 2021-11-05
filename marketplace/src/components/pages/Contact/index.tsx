@@ -19,7 +19,8 @@ export default function () {
               <ImLocation />
               <div>
                 Locatie: <br />
-                Iasi, Romania
+                Str. A. I. Cuza 11, Bl. 9, Sc. A, Et. 1, Ap. 5 <br />
+                Săveni, Botoșani, Romania
               </div>
             </div>
             <div>

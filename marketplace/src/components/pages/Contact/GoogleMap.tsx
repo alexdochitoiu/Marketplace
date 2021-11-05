@@ -14,9 +14,9 @@ const MapContainer = (props) => {
         width: "100%",
         height: "100%",
       }}
-      initialCenter={{ lat: 47.159446, lng: 27.585269 }}
+      initialCenter={{ lat: 47.95596174846357, lng: 26.858673245317178 }}
     >
-      <Marker position={{ lat: 47.159446, lng: 27.585269 }} />
+      <Marker position={{ lat: 47.95596174846357, lng: 26.858673245317178 }} />
     </Map>
   );
 };

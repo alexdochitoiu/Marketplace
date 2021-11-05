@@ -5,9 +5,13 @@ import Search from "./Search";
 import CartButton from "./CartButton";
 import React from "react";
 import WishlistButton from "./WishlistButton";
+import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
+import MobileNav from "./MobileNav";
 
 export default function () {
   const [sticky, setSticky] = React.useState(false);
+  const [searchVisible, setSearchVisible] = React.useState(false);
+  const windowSize = useWindowDimensions();
 
   React.useEffect(() => {
     window.addEventListener("scroll", handleScroll);
@@ -21,18 +25,25 @@ export default function () {
     setSticky(window.scrollY >= 150);
   };
 
+  let webNav = true;
+  if (windowSize.width <= 1000 && searchVisible) {
+    webNav = false;
+  }
+  if (windowSize.width < 900) {
+    webNav = false;
+  }
   return (
     <header
       id="header"
-      className={
-        sticky ? "animate__animated animate__slideInDown sticky" : ""
-      }
+      className={sticky ? "animate__animated animate__slideInDown sticky" : ""}
     >
       <div className="container header-wrapper">
-        <Logo />
-        <Nav />
+        <div style={{ marginLeft: 15 }}>
+          <Logo />
+        </div>
+        {webNav ? <Nav /> : <MobileNav />}
         <div className="flex-row">
-          <Search />
+          <Search onVisibleChange={(value) => setSearchVisible(value)} />
           <WishlistButton />
           <CartButton />
         </div>

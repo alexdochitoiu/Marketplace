@@ -32,7 +32,7 @@ export default function () {
   }, []);
 
   return (
-    <nav style={{ flex: 1, margin: "0 25px" }}>
+    <nav>
       <ul className="main-menu">
         <a href="/">
           <li>Acasă</li>

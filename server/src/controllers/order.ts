@@ -32,13 +32,14 @@ const createOrder = (req: Request, res: Response) => {
         })
         .then((order) => {
           if (order) {
-            sendOrderPlacedMail(order);
-            sendNotificationMail({
-              orderId: order._id,
-              orderNumber: order.number,
-              clientFirstName: order.clientInfo.firstName,
-              clientLastName: order.clientInfo.lastName,
-            });
+            process.env.NODE_ENV === "production" && sendOrderPlacedMail(order);
+            process.env.NODE_ENV === "production" &&
+              sendNotificationMail({
+                orderId: order._id,
+                orderNumber: order.number,
+                clientFirstName: order.clientInfo.firstName,
+                clientLastName: order.clientInfo.lastName,
+              });
             res.status(201).json(order);
           } else {
             res.status(404).json({ error: "Order not found" });
@@ -103,7 +104,8 @@ const updateOrder = (req: Request, res: Response) => {
             if (!updatedOrder) {
               res.status(404).json({ error: "Order not found" });
             } else if (updatedOrder.status === "preparing") {
-              sendOrderProcessedMail(updatedOrder);
+              process.env.NODE_ENV === "production" &&
+                sendOrderProcessedMail(updatedOrder);
             } else if (updatedOrder.status === "sent") {
               // Update products quantities
               updatedOrder.cart.map((cItem) => {
@@ -119,11 +121,17 @@ const updateOrder = (req: Request, res: Response) => {
                   cItem.product._id,
                   { sizes },
                   { new: true, omitUndefined: true }
+                ).then((updatedProduct) =>
+                  console.log(
+                    "Stocul produsului a fost actualizat",
+                    updatedProduct
+                  )
                 );
               });
 
               // Send mail
-              sendOrderSentMail(updatedOrder, { awb, invoice });
+              process.env.NODE_ENV === "production" &&
+                sendOrderSentMail(updatedOrder, { awb, invoice });
             }
             res.status(200).json(updatedOrder);
           });

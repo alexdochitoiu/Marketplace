@@ -32,12 +32,14 @@ const useStyles = makeStyles<any, any>({
 
 interface IProps {
   value: string;
+  max?: number;
   onChange: (e: any) => void;
   size?: "small" | "normal";
 }
 
-export default function ({ value, onChange, size = "normal" }: IProps) {
+export default function ({ value, max, onChange, size = "normal" }: IProps) {
   const classes = useStyles({ size });
+  const maxValue = max || 25;
 
   const handleChangeFromButtons = (type: "increment" | "decrement") => {
     if (!value) {
@@ -48,7 +50,7 @@ export default function ({ value, onChange, size = "normal" }: IProps) {
     if (type === "decrement" && numVal === 1) {
       return;
     }
-    if (type === "increment" && numVal === 25) {
+    if (type === "increment" && numVal === maxValue) {
       return;
     }
     const step = type === "increment" ? 1 : -1;
@@ -57,8 +59,8 @@ export default function ({ value, onChange, size = "normal" }: IProps) {
 
   const handleChange = (e) => {
     const numValue = parseInt(e.target.value, 10);
-    if (numValue > 25) {
-      onChange({ target: { value: "25" } });
+    if (numValue > maxValue) {
+      onChange({ target: { value: maxValue } });
       return;
     }
     onChange(e);
@@ -80,7 +82,7 @@ export default function ({ value, onChange, size = "normal" }: IProps) {
         type="number"
         onChange={handleChange}
       />
-      {parseInt(value, 10) < 25 && (
+      {parseInt(value, 10) < maxValue && (
         <BiPlus
           onClick={() => handleChangeFromButtons("increment")}
           className={classes.btn}

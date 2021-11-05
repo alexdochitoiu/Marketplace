@@ -7,6 +7,7 @@ import {
   sendOrderSentMail,
 } from "../services/sendOrderMail";
 import { sendNotificationMail } from "../services/sendNotificationMail";
+import Product from "../models/product";
 
 const createOrder = (req: Request, res: Response) => {
   const { cart, cartPrice, clientInfo, orderNotes } = req.body;
@@ -104,6 +105,24 @@ const updateOrder = (req: Request, res: Response) => {
             } else if (updatedOrder.status === "preparing") {
               sendOrderProcessedMail(updatedOrder);
             } else if (updatedOrder.status === "sent") {
+              // Update products quantities
+              updatedOrder.cart.map((cItem) => {
+                const { sizes } = cItem.product;
+                const index = sizes.findIndex(
+                  (s) => s.size === cItem.selectedSize
+                );
+                sizes[index].quantity = Math.max(
+                  0,
+                  sizes[index].quantity - parseInt(cItem.selectedQuantity, 10)
+                );
+                Product.findByIdAndUpdate(
+                  cItem.product._id,
+                  { sizes },
+                  { new: true, omitUndefined: true }
+                );
+              });
+
+              // Send mail
               sendOrderSentMail(updatedOrder, { awb, invoice });
             }
             res.status(200).json(updatedOrder);

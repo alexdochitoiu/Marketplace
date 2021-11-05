@@ -195,10 +195,13 @@ export default function () {
               className="product-listItem-actions"
               style={{ justifyContent: "space-between", marginTop: 20 }}
             >
-              <SelectQuantity
-                value={selectedQuantity}
-                onChange={(e) => setSelectedQuantity(e.target.value)}
-              />
+              {selectedSize && (
+                <SelectQuantity
+                  value={selectedQuantity}
+                  max={selectedSize?.quantity}
+                  onChange={(e) => setSelectedQuantity(e.target.value)}
+                />
+              )}
               <Button
                 animation="slide"
                 text="Adauga in cos"

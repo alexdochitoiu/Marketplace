@@ -80,34 +80,34 @@ export default function ({ product }: IProps) {
           </div>
         </div>
       </div>
-      <div className="product-content">
-        <div className="product-title-price">
-          <div className="flex-row product-price">
-            <h4
-              style={{ whiteSpace: "nowrap" }}
-              className={promoProduct ? "product-promo-price" : ""}
-            >
-              {computePriceString(product.sizes, "price")} RON
-            </h4>
-            {promoProduct && (
-              <h4 style={{ marginLeft: 8, whiteSpace: "nowrap" }}>
-                {computePriceString(product.sizes, "promoPrice")} RON
+      <a href={`/produs/${product._id}`}>
+        <div className="product-content">
+          <div className="product-title-price">
+            <div className="flex-row product-price">
+              <h4
+                style={{ whiteSpace: "nowrap" }}
+                className={promoProduct ? "product-promo-price" : ""}
+              >
+                {computePriceString(product.sizes, "price")} RON
               </h4>
-            )}
+              {promoProduct && (
+                <h4 style={{ marginLeft: 8, whiteSpace: "nowrap" }}>
+                  {computePriceString(product.sizes, "promoPrice")} RON
+                </h4>
+              )}
+            </div>
+            <h4 className="product-title">{product.title}</h4>
           </div>
-          <h4 className="product-title">{product.title}</h4>
-        </div>
-        <div className="product-cart-category">
-          <div className="product-category">
-            {product.category?.title || "Alte produse"}
-          </div>
-          <a href={`/produs/${product._id}`}>
+          <div className="product-cart-category">
+            <div className="product-category">
+              {product.category?.title || "Alte produse"}
+            </div>
             <div className="product-cart">
               <BiShoppingBag /> SELECTEAZA OPTIUNILE
             </div>
-          </a>
+          </div>
         </div>
-      </div>
+      </a>
     </div>
   );
 }

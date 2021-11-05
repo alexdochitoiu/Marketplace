@@ -28,7 +28,7 @@
   justify-content: space-between;
 }
 
-.contact-content > div {
+.contact-content div {
   display: flex;
 }
 

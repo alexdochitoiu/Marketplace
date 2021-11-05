@@ -1,13 +1,9 @@
 import Logo from "../generic/Logo";
 import "./Footer.styles.css";
-import {
-  FaFacebookF,
-  FaInstagram,
-  FaYoutube,
-  FaPhoneAlt,
-} from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaPhoneAlt } from "react-icons/fa";
+import { ImWhatsapp } from "react-icons/im";
 import { MdEmail } from "react-icons/md";
-import { FACEBOOK, INSTAGRAM, YOUTUBE } from "src/constants/socialLinks";
+import { FACEBOOK, INSTAGRAM } from "src/constants/socialLinks";
 import { PHONE, MAIL } from "src/constants/contact";
 
 export default function () {
@@ -31,9 +27,9 @@ export default function () {
                 <FaInstagram />
               </div>
             </a>
-            <a href={YOUTUBE}>
+            <a href={`https://api.whatsapp.com/send?phone=${PHONE}`}>
               <div className="circle-icon-btn">
-                <FaYoutube />
+                <ImWhatsapp />
               </div>
             </a>
           </div>

@@ -23,13 +23,15 @@ export default function () {
                 Săveni, Botoșani, Romania
               </div>
             </div>
-            <div>
-              <FaPhoneAlt />
+            <a href={`https://api.whatsapp.com/send?phone=${PHONE}`}>
               <div>
-                Telefon: <br />
-                {PHONE}
+                <FaPhoneAlt />
+                <div>
+                  Telefon: <br />
+                  {PHONE}
+                </div>
               </div>
-            </div>
+            </a>
             <div>
               <MdEmail />
               <div>

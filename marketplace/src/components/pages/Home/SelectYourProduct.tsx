@@ -15,7 +15,7 @@ export default function () {
 
   return (
     <div className="container">
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: 35 }}>
+      <div style={{ display: "flex", flexWrap: "wrap", marginTop: 35, justifyContent: "center" }}>
         {products.map((p) => (
           <ProductCard key={p._id} product={p} />
         ))}

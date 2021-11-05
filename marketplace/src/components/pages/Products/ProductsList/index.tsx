@@ -10,6 +10,7 @@ const useStyles = makeStyles({
   root: {
     display: "flex",
     flexWrap: "wrap",
+    justifyContent: "center",
   },
   list: {
     flexDirection: "column",

@@ -1,7 +1,7 @@
 .product-listItem {
   display: flex;
   position: relative;
-  width: 100%;
+  width: calc(100% - 24px);
   margin: 10px;
   border: 1px solid #eee;
 }

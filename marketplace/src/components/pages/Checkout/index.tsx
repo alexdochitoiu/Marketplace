@@ -15,6 +15,7 @@ import * as orderService from "src/services/order";
 import useTotalCartPrice from "src/utils/customHooks/useTotalCartPrice";
 import history from "src/constants/history";
 import { doChangeCart } from "src/redux/actions";
+import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 
 interface IFormError {
   field: string;
@@ -113,7 +114,11 @@ export default function () {
       <TitleBanner title="Plasare comandă" />
       <div
         className="container"
-        style={{ marginTop: 20, display: "flex", flex: "1 1" }}
+        style={{
+          marginTop: 20,
+          display: "flex",
+          flex: "1 1",
+        }}
       >
         <div style={{ flex: "65%", margin: "0 6px" }}>
           <h4 className="contact-title" style={{ marginBottom: 20 }}>

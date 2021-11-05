@@ -11,4 +11,11 @@
   letter-spacing: 6px;
   font-weight: bolder;
   text-transform: uppercase;
+  text-align: center;
+}
+
+@media screen and (max-width: 650px) {
+  .title-banner > h2 {
+    font-size: 18px;
+  }
 }

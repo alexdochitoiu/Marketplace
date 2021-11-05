@@ -25,6 +25,7 @@ import CartSnackContent from "src/components/generic/SnackContent/CartSnackConte
 import { doChangeCart } from "src/redux/actions";
 import { uuid } from "uuidv4";
 import { getSectionLabel } from "src/utils";
+import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 
 const useStyles = makeStyles({
   root: {
@@ -48,6 +49,7 @@ const useStyles = makeStyles({
 
 export default function () {
   const classes = useStyles();
+  const windowSize = useWindowDimensions();
   const wishlist = useSelector((state: RootState) => state.wishlist);
   const addOrRemoveFromWishlist = useAddOrRemoveFromWishlist();
   const cart = useSelector((state: RootState) => state.cart);
@@ -120,9 +122,16 @@ export default function () {
       />
       <TitleBanner title={product.title} />
       <div className="container">
-        <div className={classes.root}>
+        <div
+          className={classes.root}
+          style={
+            windowSize.width < 1000
+              ? { flexDirection: "column", alignItems: "center" }
+              : {}
+          }
+        >
           <ProductImages images={product.images} />
-          <div>
+          <div style={windowSize.width < 1000 ? { marginTop: 50 } : {}}>
             <h3
               className={classes.title}
               onClick={() => history.push(`/produs/${product._id}`)}

@@ -3,6 +3,7 @@ import IProduct from "src/types/IProduct";
 import * as productService from "src/services/product";
 import ProductCard from "../Products/ProductsList/ProductCard";
 import { sortProducts } from "src/utils";
+import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 
 type TopProductType = "best-seller" | "sale" | "last-models" | "limited";
 
@@ -31,6 +32,8 @@ export default function () {
   const [animation, setAnimation] = React.useState(false);
   const [type, setType] = React.useState<TopProductType>("best-seller");
   const [products, setProducts] = React.useState<IProduct[]>([]);
+
+  const windowSize = useWindowDimensions();
 
   React.useEffect(() => {
     setAnimation(false);

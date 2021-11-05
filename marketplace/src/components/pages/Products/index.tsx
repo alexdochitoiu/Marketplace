@@ -86,7 +86,7 @@ export default function () {
   return (
     <div>
       <TitleBanner title={category?.title || getSectionLabel(sectionType)} />
-      <div className={classes.root}>
+      <div className={`${classes.root} products-container`}>
         <ProductsSideBar />
         <div className={classes.productsWrapper}>
           <ProductsTopBar productsCount={displayProducts.length} />

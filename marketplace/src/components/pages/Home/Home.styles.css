@@ -21,6 +21,7 @@
   font-weight: 500;
   transition: all ease-in-out 0.4s;
   padding: 3px 5px;
+  text-align: center;
 }
 
 .top-products-nav > li:hover h4 {
@@ -49,6 +50,7 @@
 .top-products {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .each-slide > div {

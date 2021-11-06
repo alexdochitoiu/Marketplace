@@ -131,7 +131,11 @@ export default function () {
           }
         >
           <ProductImages images={product.images} />
-          <div style={windowSize.width < 1000 ? { marginTop: 50 } : {}}>
+          <div
+            style={
+              windowSize.width < 1000 ? { marginTop: 50, width: "100%" } : {}
+            }
+          >
             <h3
               className={classes.title}
               onClick={() => history.push(`/produs/${product._id}`)}

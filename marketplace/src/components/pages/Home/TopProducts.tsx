@@ -4,6 +4,7 @@ import * as productService from "src/services/product";
 import ProductCard from "../Products/ProductsList/ProductCard";
 import { sortProducts } from "src/utils";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
+import Select from "src/components/generic/Select";
 
 type TopProductType = "best-seller" | "sale" | "last-models" | "limited";
 
@@ -45,32 +46,46 @@ export default function () {
 
   return (
     <div className="container">
-      <ul className="top-products-nav">
-        <li
-          className={type === "best-seller" ? "active" : ""}
-          onClick={() => setType("best-seller")}
-        >
-          <h4>Cele mai vandute</h4>
-        </li>
-        <li
-          className={type === "sale" ? "active" : ""}
-          onClick={() => setType("sale")}
-        >
-          <h4>La reducere</h4>
-        </li>
-        <li
-          className={type === "last-models" ? "active" : ""}
-          onClick={() => setType("last-models")}
-        >
-          <h4>Ultimele modele</h4>
-        </li>
-        <li
-          className={type === "limited" ? "active" : ""}
-          onClick={() => setType("limited")}
-        >
-          <h4>Stoc limitat</h4>
-        </li>
-      </ul>
+      {windowSize.width > 428 ? (
+        <ul className="top-products-nav">
+          <li
+            className={type === "best-seller" ? "active" : ""}
+            onClick={() => setType("best-seller")}
+          >
+            <h4>Cele mai vandute</h4>
+          </li>
+          <li
+            className={type === "sale" ? "active" : ""}
+            onClick={() => setType("sale")}
+          >
+            <h4>La reducere</h4>
+          </li>
+          <li
+            className={type === "last-models" ? "active" : ""}
+            onClick={() => setType("last-models")}
+          >
+            <h4>Ultimele modele</h4>
+          </li>
+          <li
+            className={type === "limited" ? "active" : ""}
+            onClick={() => setType("limited")}
+          >
+            <h4>Stoc limitat</h4>
+          </li>
+        </ul>
+      ) : (
+        <Select
+          options={[
+            { value: "best-seller", label: "Cele mai vandute" },
+            { value: "sale", label: "La reducere" },
+            { value: "last-models", label: "Ultimele modele" },
+            { value: "limited", label: "Stoc limitat" },
+          ]}
+          value={type}
+          onChange={(e) => setType(e.target.value as any)}
+          style={{ display: "flex", textAlign: "center" }}
+        />
+      )}
       <div
         className={`top-products ${
           animation ? "animate__animated animate__fadeIn" : ""

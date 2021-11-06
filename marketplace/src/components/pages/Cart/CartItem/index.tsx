@@ -74,6 +74,7 @@ export default function ({ item, onRemove, onChangeQuantity }: IProps) {
               height="160"
               style={{ objectFit: "contain" }}
               src={product.images[0]}
+              className="cart-item-image"
             />
           </a>
           <div

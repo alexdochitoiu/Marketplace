@@ -49,7 +49,7 @@ export default function ({ product }: IProps) {
           <Tooltip title="Sterge din lista de favorite">
             <div
               className="product-isPromo"
-              style={{ left: "initial", right: 1, cursor: "pointer" }}
+              style={{ left: "initial", right: 1, cursor: "pointer", zIndex: 1 }}
               onClick={handleHeartClick}
             >
               <FaHeart style={{ width: 18, height: 18, fill: "red" }} />

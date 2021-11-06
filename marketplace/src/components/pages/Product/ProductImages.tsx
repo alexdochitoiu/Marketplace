@@ -1,5 +1,6 @@
-import { makeStyles } from "@material-ui/core";
+import { Dialog, IconButton, makeStyles } from "@material-ui/core";
 import React from "react";
+import CloseIcon from "@material-ui/icons/Close";
 import ReactImageMagnify from "react-image-magnify";
 
 const useStyles = makeStyles({
@@ -32,6 +33,9 @@ const useStyles = makeStyles({
     opacity: "1 !important",
     background: "#eee",
   },
+  overflow: {
+    overflow: "hidden",
+  },
 });
 
 interface IProps {
@@ -41,21 +45,53 @@ interface IProps {
 export default function ({ images }: IProps) {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
+  const [fullscreen, setFullscreen] = React.useState("");
   return (
     <div>
-      <ReactImageMagnify
-        smallImage={{ src: images[index], width: 600, height: 650 }}
+      <Dialog
+        open={!!fullscreen}
+        fullWidth={true}
+        onClose={() => setFullscreen("")}
+        // classes={{ paper: classes.overflow }}
+      >
+        <IconButton
+          color="primary"
+          size="small"
+          onClick={() => setFullscreen("")}
+          style={{ position: "absolute", top: 5, right: 5 }}
+        >
+          <CloseIcon fontSize="small" />
+        </IconButton>
+        <img src={fullscreen} className={classes.image} />
+      </Dialog>
+      {/* <ReactImageMagnify
+        smallImage={{
+          src: images[index],
+          width: 600,
+          height: 650,
+        }}
         largeImage={{ src: images[index], width: 1200, height: 1300 }}
         imageClassName={classes.image}
         enlargedImageClassName={classes.image}
         enlargedImageContainerStyle={{ background: "#fff", zIndex: 1000 }}
+      /> */}
+      <img
+        className={`${classes.image} animate__animated animate__fadeIn product-selected-image`}
+        src={images[index]}
+        width={600}
+        height={650}
+        style={{ cursor: "zoom-in", width: "100%" }}
+        onClick={() => setFullscreen(images[index])}
       />
-      <div className={classes.nav}>
+      <div className={`${classes.nav} product-images-nav`}>
         {images.map((img, idx) => (
           <div
             key={idx}
             className={idx === index ? classes.active : ""}
-            onClick={() => setIndex(idx)}
+            onClick={() => {
+              setIndex(idx);
+            }}
+            style={{ width: `${100 / images.length}%` }}
           >
             <img src={img} width={141} height={135} />
           </div>

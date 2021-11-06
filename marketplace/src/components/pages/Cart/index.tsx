@@ -114,7 +114,7 @@ export default function () {
         >
           <TotalPrice cart={cart} />
           <div
-            className="flex-row"
+            className="flex-row cart-bottom-buttons"
             style={{
               width: 420,
               justifyContent: "space-between",

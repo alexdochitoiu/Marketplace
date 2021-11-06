@@ -43,7 +43,7 @@ export default function ({ productId }) {
       />
       <h5
         style={{ margin: "0 20px" }}
-        className={`flex-row ${classes.root}`}
+        className={`flex-row ${classes.root} add-to-fav-button`}
         onClick={handleHeartClick}
       >
         {isWishlist ? (

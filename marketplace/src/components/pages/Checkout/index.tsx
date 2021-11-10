@@ -15,7 +15,6 @@ import * as orderService from "src/services/order";
 import useTotalCartPrice from "src/utils/customHooks/useTotalCartPrice";
 import history from "src/constants/history";
 import { doChangeCart } from "src/redux/actions";
-import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 
 interface IFormError {
   field: string;
@@ -67,7 +66,8 @@ export default function () {
       });
     }
     Object.keys(form).map((k) => {
-      if (form[k].length === 0 && k !== "orderNotes") {
+      const notRequired = ["orderNotes", "zipCode"];
+      if (form[k].length === 0 && notRequired.indexOf(k) === -1) {
         err.push({
           field: k,
           message: `Acest câmp este obligatoriu!`,
@@ -227,9 +227,9 @@ export default function () {
                   value={form.zipCode}
                   name="zipCode"
                   onChange={handleFormChange}
-                  placeholder="Cod poștal *"
+                  placeholder="Cod poștal"
                 />
-                <span className="custom-label">Cod poștal *</span>
+                <span className="custom-label">Cod poștal</span>
                 <DisplayError field="zipCode" />
               </div>
             </div>

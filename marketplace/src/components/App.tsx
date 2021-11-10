@@ -1,4 +1,4 @@
-import { createTheme, ThemeProvider } from "@material-ui/core";
+import { createTheme, Fab, ThemeProvider } from "@material-ui/core";
 import { Route, Router, Switch } from "react-router-dom";
 import "./App.styles.css";
 import "animate.css";
@@ -16,6 +16,8 @@ import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import OrderDetails from "./pages/OrderDetails";
+import WhatsAppIcon from "@material-ui/icons/WhatsApp";
+import { PHONE } from "src/constants/contact";
 
 const theme = createTheme({
   palette: {
@@ -56,6 +58,20 @@ export default function App() {
         <BackToTopButton />
         <Footer />
       </Router>
+      <a href={`https://api.whatsapp.com/send?phone=${PHONE}`}>
+        <Fab
+          size="small"
+          style={{
+            backgroundColor: "#25D366",
+            color: "#FFF",
+            position: "fixed",
+            bottom: 10,
+            left: 10,
+          }}
+        >
+          <WhatsAppIcon />
+        </Fab>
+      </a>
     </ThemeProvider>
   );
 }

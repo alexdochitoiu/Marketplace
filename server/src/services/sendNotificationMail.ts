@@ -37,7 +37,10 @@ export function sendNotificationMail({
     .replace(/{{firstName}}/g, clientFirstName);
 
   return sendMail({
-    to: process.env.NOTIFICATION_EMAIL,
+    to:
+      process.env.NODE_ENV === "production"
+        ? process.env.NOTIFICATION_EMAIL
+        : "dokee15@gmail.com",
     subject: `${brand} | ${clientLastName} ${clientFirstName} a facut o comandă (#${orderNumber})`,
     text: "",
     html,

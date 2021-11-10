@@ -44,11 +44,15 @@ export default function () {
         {webNav ? <Nav /> : <MobileNav />}
         <div
           className="flex-row"
-          style={windowSize.width <= 428 ? { flexDirection: "column", margin: 10 } : { width: 100, justifyContent: "space-around"}}
+          style={
+            windowSize.width <= 428
+              ? { flexDirection: "column", margin: 10 }
+              : { width: 60, justifyContent: "space-around" }
+          }
         >
-          {windowSize.width > 428 && (
+          {/* {windowSize.width > 428 && (
             <Search onVisibleChange={(value) => setSearchVisible(value)} />
-          )}
+          )} */}
           <WishlistButton />
           <CartButton />
         </div>

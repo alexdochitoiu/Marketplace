@@ -57,3 +57,14 @@ input:focus + .custom-label {
   margin-left: 10px;
   top: 0;
 }
+
+.terms_and_cond_content h4 {
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.terms_and_cond_content p {
+  font-family: Poppins, sans-serif;
+  font-weight: normal !important;
+  font-size: 14px;
+}

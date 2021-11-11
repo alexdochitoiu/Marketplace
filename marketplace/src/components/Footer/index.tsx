@@ -1,8 +1,7 @@
 import Logo from "../generic/Logo";
 import "./Footer.styles.css";
-import { FaFacebookF, FaInstagram, FaPhoneAlt } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { ImWhatsapp } from "react-icons/im";
-import { MdEmail } from "react-icons/md";
 import { FACEBOOK, INSTAGRAM } from "src/constants/socialLinks";
 import { PHONE, MAIL } from "src/constants/contact";
 
@@ -61,10 +60,16 @@ export default function () {
               {PHONE}
             </a>
             <a href={`mailto:${MAIL}`}>
-              <MdEmail />
+              <FaEnvelope />
               {MAIL}
             </a>
-            <a className="info-link">INFORMATII</a>
+            <a className="info-link" href="/informatii/termenii-si-conditiile">
+              TERMENII ŞI CONDIŢIILE
+            </a>
+            <a href="/informatii/politica-de-confidentialitate">
+              POLITICA DE CONFIDENȚIALITATE
+            </a>
+            <a href="/informatii/politica-de-retur">POLITICA DE RETUR</a>
             <a href="/contact">CONTACT</a>
             <a href="https://anpc.ro/">ANPC</a>
           </div>

@@ -103,10 +103,11 @@
 
 .footer .more-info {
   font-family: Oswald, sans-serif;
+  font-size: 15px;
 }
 
 .more-info-wrapper {
-  width: 140px;
+  width: 185px;
   display: flex;
   flex-direction: column;
   justify-content: center;

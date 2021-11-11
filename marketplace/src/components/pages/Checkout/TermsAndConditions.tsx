@@ -142,7 +142,7 @@ export default function ({ value, onChange }) {
             răspundere sau obligație de nici o natură pentru aceste alte pagini
             de Internet sau pentru orice informație conținută în ele.
           </p>
-          <h4>Siguranța</h4>{" "}
+          <h4>Siguranța</h4>
           <p>
             Miral Fashion LNT SRL a luat toate măsurile tehnico-organizatorice
             de siguranță pentru a proteja datele administrate de noi împotriva

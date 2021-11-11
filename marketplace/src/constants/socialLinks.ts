@@ -1,5 +1,4 @@
-const FACEBOOK = "https://facebook.com";
-const INSTAGRAM = "https://instagram.com";
-const YOUTUBE = "https://youtube.com";
+const FACEBOOK = "https://www.facebook.com/Miral-Fashion-100538942456611/";
+const INSTAGRAM = "https://www.instagram.com/miralfashion.ro/";
 
-export { FACEBOOK, INSTAGRAM, YOUTUBE };
+export { FACEBOOK, INSTAGRAM };

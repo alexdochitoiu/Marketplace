@@ -263,3 +263,7 @@ textarea {
   color: var(--primary);
   background: #eee;
 }
+
+.info_container {
+  margin: 20px auto;
+}

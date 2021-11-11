@@ -16,19 +16,10 @@ const allowedOrigins = [
   "http://localhost:8000",
   "http://localhost:3000",
 
-  "http://89.46.7.46",
-  "http://89.46.7.46:81",
-  "http://miral-fashion.ro",
-  "http://www.miral-fashion.ro",
-  "http://miral-fashion.ro:81",
-  "http://www.miral-fashion.ro:81",
-
-  "https://89.46.7.46",
-  "https://89.46.7.46:81",
   "https://miral-fashion.ro",
   "https://www.miral-fashion.ro",
-  "https://miral-fashion.ro:81",
-  "https://www.miral-fashion.ro:81",
+  "https://admin.miral-fashion.ro",
+  "http://admin.miral-fashion.ro",
 ];
 
 const port = parseInt(process.env.PORT!);

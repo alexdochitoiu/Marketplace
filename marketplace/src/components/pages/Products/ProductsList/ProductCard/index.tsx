@@ -25,62 +25,70 @@ export default function ({ product }: IProps) {
   const promoProduct = isPromo(product);
   const outOfStockProduct = isOutOfStock(product);
 
-  const handleHeartClick = () => {
+  const handleHeartClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     const operation = addOrRemoveFromWishlist(product._id);
     setSnack(<FavoriteSnackContent operation={operation} />);
   };
 
   const isWishlist = wishlist.indexOf(product._id) !== -1;
-
+  const handleClose = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setSnack(null);
+  };
+  
   return (
-    <div className="product-card">
-      <SnackBar
-        message={snack}
-        open={Boolean(snack)}
-        onClose={() => setSnack(null)}
-      />
-      <div className="product-img">
-        {(promoProduct || outOfStockProduct) && (
-          <div className="product-isPromo">
-            {outOfStockProduct ? "STOC EPUIZAT" : "REDUCERE"}
-          </div>
-        )}
-        {isWishlist && (
-          <Tooltip title="Sterge din lista de favorite">
-            <div
-              className="product-isPromo"
-              style={{ left: "initial", right: 1, cursor: "pointer", zIndex: 1 }}
-              onClick={handleHeartClick}
-            >
-              <FaHeart style={{ width: 18, height: 18, fill: "red" }} />
+    <a href={`/produs/${product._id}`}>
+      <div className="product-card">
+        <SnackBar message={snack} open={Boolean(snack)} onClose={handleClose} />
+        <div className="product-img">
+          {(promoProduct || outOfStockProduct) && (
+            <div className="product-isPromo">
+              {outOfStockProduct ? "STOC EPUIZAT" : "REDUCERE"}
             </div>
-          </Tooltip>
-        )}
-        <img
-          width={280}
-          height={373}
-          src={
-            product.images.length > 0 ? product.images[0] : imageNotAvailable
-          }
-        />
-        <div className="product-action">
-          <Tooltip
-            title={
-              isWishlist
-                ? "Sterge din lista de favorite"
-                : "Adauga la lista de favorite"
+          )}
+          {isWishlist && (
+            <Tooltip title="Sterge din lista de favorite">
+              <div
+                className="product-isPromo"
+                style={{
+                  left: "initial",
+                  right: 1,
+                  cursor: "pointer",
+                  zIndex: 1,
+                }}
+                onClick={handleHeartClick}
+              >
+                <FaHeart style={{ width: 18, height: 18, fill: "red" }} />
+              </div>
+            </Tooltip>
+          )}
+          <img
+            width={280}
+            height={373}
+            src={
+              product.images.length > 0 ? product.images[0] : imageNotAvailable
             }
-          >
-            <div onClick={handleHeartClick}>
-              {isWishlist ? <FaHeart /> : <BiHeart />}
-            </div>
-          </Tooltip>
-          <div onClick={() => history.push(`/produs/${product._id}`)}>
+          />
+          <div className="product-action">
+            <Tooltip
+              title={
+                isWishlist
+                  ? "Sterge din lista de favorite"
+                  : "Adauga la lista de favorite"
+              }
+            >
+              <div onClick={handleHeartClick}>
+                {isWishlist ? <FaHeart /> : <BiHeart />}
+              </div>
+            </Tooltip>
+            {/* <div onClick={() => history.push(`/produs/${product._id}`)}>
             <AiOutlineEye />
+          </div> */}
           </div>
         </div>
-      </div>
-      <a href={`/produs/${product._id}`}>
         <div className="product-content">
           <div className="product-title-price">
             <div className="flex-row product-price">
@@ -107,7 +115,7 @@ export default function ({ product }: IProps) {
             </div>
           </div>
         </div>
-      </a>
-    </div>
+      </div>
+    </a>
   );
 }

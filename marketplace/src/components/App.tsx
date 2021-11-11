@@ -18,6 +18,10 @@ import Checkout from "./pages/Checkout";
 import OrderDetails from "./pages/OrderDetails";
 import WhatsAppIcon from "@material-ui/icons/WhatsApp";
 import { PHONE } from "src/constants/contact";
+import TermsAndConditions from "./pages/Information/TermsAndConditions";
+import PoliticaDeConfidentialitate from "./pages/Information/PoliticaDeConfidentialitate";
+import PoliticaDeRetur from "./pages/Information/PoliticaDeRetur";
+import CookieConsent from "./generic/CookieConsent";
 
 const theme = createTheme({
   palette: {
@@ -51,6 +55,21 @@ export default function App() {
           <Route exact={true} path="/checkout" component={Checkout} />
           <Route
             exact={true}
+            path="/informatii/termenii-si-conditiile"
+            component={TermsAndConditions}
+          />
+          <Route
+            exact={true}
+            path="/informatii/politica-de-confidentialitate"
+            component={PoliticaDeConfidentialitate}
+          />
+          <Route
+            exact={true}
+            path="/informatii/politica-de-retur"
+            component={PoliticaDeRetur}
+          />
+          <Route
+            exact={true}
             path="/comanda/:orderId"
             component={OrderDetails}
           />
@@ -72,6 +91,7 @@ export default function App() {
           <WhatsAppIcon />
         </Fab>
       </a>
+      <CookieConsent />
     </ThemeProvider>
   );
 }

@@ -12,10 +12,20 @@
   font-weight: bolder;
   text-transform: uppercase;
   text-align: center;
+  margin: 0 15px;
 }
 
 @media screen and (max-width: 650px) {
   .title-banner > h2 {
     font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .title-banner {
+    height: 130px;
+  }
+  .title-banner > h2 {
+    font-size: 14px;
   }
 }

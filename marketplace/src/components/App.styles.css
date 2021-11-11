@@ -109,6 +109,7 @@ a {
 
   .product-images-nav {
     width: 400px !important;
+    margin-top: -40px !important;
   }
 
   .total-price-root {

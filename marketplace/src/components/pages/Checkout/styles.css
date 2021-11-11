@@ -58,6 +58,12 @@ input:focus + .custom-label {
   top: 0;
 }
 
+.terms_and_cond_content {
+  border-left: 1px solid #eee;
+  border-right: 1px solid #eee;
+  padding: 15px 20px;
+}
+
 .terms_and_cond_content h4 {
   color: var(--primary);
   text-transform: uppercase;

@@ -26,10 +26,12 @@
 .contact-content {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .contact-content div {
   display: flex;
+  margin: 5px;
 }
 
 .contact-content > div > div {

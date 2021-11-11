@@ -2,6 +2,7 @@ import { Dialog, IconButton, makeStyles } from "@material-ui/core";
 import React from "react";
 import CloseIcon from "@material-ui/icons/Close";
 import ReactImageMagnify from "react-image-magnify";
+import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 
 const useStyles = makeStyles({
   image: {
@@ -46,6 +47,7 @@ export default function ({ images }: IProps) {
   const classes = useStyles();
   const [index, setIndex] = React.useState(0);
   const [fullscreen, setFullscreen] = React.useState("");
+  const windowSize = useWindowDimensions();
   return (
     <div>
       <Dialog
@@ -80,7 +82,7 @@ export default function ({ images }: IProps) {
         src={images[index]}
         width={600}
         height={650}
-        style={{ cursor: "zoom-in", width: "100%" }}
+        style={{ cursor: "zoom-in", display: "flex", margin: "0 auto" }}
         onClick={() => setFullscreen(images[index])}
       />
       <div className={`${classes.nav} product-images-nav`}>
@@ -91,9 +93,13 @@ export default function ({ images }: IProps) {
             onClick={() => {
               setIndex(idx);
             }}
-            style={{ width: `${100 / images.length}%` }}
+            style={{
+              width: `${100 / images.length}%`,
+              display: "flex",
+              justifyContent: "center",
+            }}
           >
-            <img src={img} width={141} height={135} />
+            <img src={img} width="100%" height={100} />
           </div>
         ))}
       </div>

@@ -126,7 +126,11 @@ export default function () {
           className={classes.root}
           style={
             windowSize.width < 1000
-              ? { flexDirection: "column", alignItems: "center" }
+              ? {
+                  flexDirection: "column",
+                  alignItems: "center",
+                  marginTop: windowSize.width < 350 ? -50 : 0,
+                }
               : {}
           }
         >

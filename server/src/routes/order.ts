@@ -5,7 +5,7 @@ import upload from "../middleware/invoice-upload";
 
 const router = express.Router();
 
-router.get("/", controller.getOrders);
+router.get("/", checkAuth, controller.getOrders);
 router.get("/:id", controller.getOrder);
 router.post("/create", controller.createOrder);
 router.put(

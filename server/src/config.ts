@@ -1,3 +1,4 @@
-export const HOST = `http://${
-  process.env.NODE_ENV === "production" ? "89.46.7.46" : "localhost"
-}:${process.env.PORT}`;
+export const HOST =
+  process.env.NODE_ENV === "production"
+    ? `https://miral-fashion.ro:${process.env.PORT}`
+    : `http://localhost:${process.env.PORT}`;

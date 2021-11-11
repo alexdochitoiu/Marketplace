@@ -1,7 +1,7 @@
 import Logo from "../generic/Logo";
 import Nav from "./Nav";
 import "./Header.styles.css";
-import Search from "./Search";
+// import Search from "./Search";
 import CartButton from "./CartButton";
 import React from "react";
 import WishlistButton from "./WishlistButton";
@@ -10,7 +10,7 @@ import MobileNav from "./MobileNav";
 
 export default function () {
   const [sticky, setSticky] = React.useState(false);
-  const [searchVisible, setSearchVisible] = React.useState(false);
+  // const [searchVisible, setSearchVisible] = React.useState(false);
   const windowSize = useWindowDimensions();
 
   React.useEffect(() => {
@@ -26,9 +26,9 @@ export default function () {
   };
 
   let webNav = true;
-  if (windowSize.width <= 1000 && searchVisible) {
-    webNav = false;
-  }
+  // if (windowSize.width <= 1000 && searchVisible) {
+  //   webNav = false;
+  // }
   if (windowSize.width < 900) {
     webNav = false;
   }

@@ -2,6 +2,7 @@ import { Dialog, DialogContent, makeStyles } from "@material-ui/core";
 import React from "react";
 import CookieConsent from "react-cookie-consent";
 import { GrClose } from "react-icons/gr";
+import ReactPixel from "src/ReactPixel";
 
 const useStyles = makeStyles({
   root: {
@@ -68,7 +69,8 @@ export default function () {
     <>
       <CookieConsent
         location="bottom"
-        buttonText="Am înțeles"
+        buttonText="Acceptă"
+        onAccept={ReactPixel.grantConsent}
         cookieName="cookie-consent"
         style={{ background: "#2B373B" }}
         buttonStyle={{ background: "var(--primary)", color: "#fff" }}

@@ -15,6 +15,8 @@ import * as orderService from "src/services/order";
 import useTotalCartPrice from "src/utils/customHooks/useTotalCartPrice";
 import history from "src/constants/history";
 import { doChangeCart } from "src/redux/actions";
+import { ImInfo } from "react-icons/im";
+import PayOption from "./PayOption";
 
 interface IFormError {
   field: string;
@@ -269,6 +271,7 @@ export default function () {
             }}
           >
             <OrderSummary />
+            <PayOption />
             <TermsAndConditions
               value={termsAccepted}
               onChange={handleTermsAcceptedChange}
@@ -288,6 +291,16 @@ export default function () {
               text="Plasează comanda"
               onClick={handleDone}
             />
+          </div>
+          <div className="confidentialitate-info">
+            <ImInfo style={{ fontSize: 11, marginRight: 3 }} />
+            Datele personale vor fi folosite pentru a procesa comanda, pentru
+            a-ți susține experiența pe acest magazin online și pentru alte
+            scopuri descrise în{" "}
+            <a href="/informatii/politica-de-confidentialitate">
+              politică de confidențialitate
+            </a>
+            .
           </div>
         </div>
       </div>

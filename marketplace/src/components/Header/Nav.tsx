@@ -37,25 +37,40 @@ export default function () {
         <a href="/">
           <li>Acasă</li>
         </a>
-        <a onClick={() => setMenu(!menu)}>
-          <li
-            style={
-              menu
-                ? {
-                    color: "var(--primary)",
-                    borderBottom: "3px solid var(--primary)",
-                  }
-                : {}
-            }
-            className="flex-row"
-          >
+        <a>
+          <li className="flex-row">
             Produse{" "}
             <FaAngleDown
               style={{
                 transition: "0.3s transform ease-in",
-                transform: !menu ? "rotate(-90deg)" : "initial",
+                transform: "initial",
               }}
             />
+            <ul
+              className="sub-menu"
+              style={{ borderTop: `1px solid ${menu ? "#999" : "#fff"}` }}
+            >
+              {categories.map((c) => (
+                <a key={c.section} href={"/produse/section/" + c.section}>
+                  <li className="flex-row">
+                    {getSectionLabel(c.section)}{" "}
+                    {c.categories.length > 0 && <FaAngleDown />}
+                    {c.categories.length > 0 && (
+                      <ul className="categories-sub-menu">
+                        {c.categories.map((c, idx) => (
+                          <a key={c._id} href={"/produse/" + c._id}>
+                            <li>{c.title}</li>
+                          </a>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                </a>
+              ))}
+              <a href="/produse/section/all">
+                <li>Toate</li>
+              </a>
+            </ul>
           </li>
         </a>
         <a href="/blog">
@@ -68,33 +83,6 @@ export default function () {
           <li>Contact</li>
         </a>
       </ul>
-      <Collapse in={menu}>
-        <ul
-          className="main-menu products-menu"
-          style={{ borderTop: `1px solid ${menu ? "#999" : "#fff"}` }}
-        >
-          {categories.map((c) => (
-            <a key={c.section} href={"/produse/section/" + c.section}>
-              <li className="flex-row">
-                {getSectionLabel(c.section)}{" "}
-                {c.categories.length > 0 && <FaAngleDown />}
-                {c.categories.length > 0 && (
-                  <ul className="sub-menu">
-                    {c.categories.map((c, idx) => (
-                      <a key={c._id} href={"/produse/" + c._id}>
-                        <li>{c.title}</li>
-                      </a>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            </a>
-          ))}
-          <a href="/produse/section/all">
-            <li>Toate</li>
-          </a>
-        </ul>
-      </Collapse>
     </nav>
   );
 }

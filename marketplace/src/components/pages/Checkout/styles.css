@@ -68,3 +68,31 @@ input:focus + .custom-label {
   font-weight: normal !important;
   font-size: 14px;
 }
+
+.confidentialitate-info {
+  padding: 5px;
+  font-size: 13px;
+  color: #666;
+  font-family: Poppins, sans-serif;
+  line-height: 20px;
+}
+
+.confidentialitate-info a:hover {
+  color: var(--primary);
+}
+
+.paying_options_radio_group {
+  background-color: white;
+  margin-left: 14px;
+}
+
+.paying_options_radio_group label {
+  background-color: white;
+  justify-content: start;
+  padding: 0;
+}
+
+.paying_options_radio_group label span {
+  font-size: 14px;
+  font-family: Oswald, sans-serif;
+}

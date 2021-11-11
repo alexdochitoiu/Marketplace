@@ -22,6 +22,8 @@ import TermsAndConditions from "./pages/Information/TermsAndConditions";
 import PoliticaDeConfidentialitate from "./pages/Information/PoliticaDeConfidentialitate";
 import PoliticaDeRetur from "./pages/Information/PoliticaDeRetur";
 import CookieConsent from "./generic/CookieConsent";
+import ReactPixel from "src/ReactPixel";
+
 
 const theme = createTheme({
   palette: {
@@ -35,6 +37,7 @@ const theme = createTheme({
 });
 
 export default function App() {
+  ReactPixel.pageView();
   return (
     <ThemeProvider theme={theme}>
       <Router history={history}>

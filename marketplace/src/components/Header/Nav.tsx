@@ -12,7 +12,6 @@ interface IState {
 
 export default function () {
   const [categories, setCategories] = React.useState<IState[]>([]);
-  const [menu, setMenu] = React.useState(false);
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
@@ -46,10 +45,7 @@ export default function () {
                 transform: "initial",
               }}
             />
-            <ul
-              className="sub-menu"
-              style={{ borderTop: `1px solid ${menu ? "#999" : "#fff"}` }}
-            >
+            <ul className="sub-menu">
               {categories.map((c) => (
                 <a key={c.section} href={"/produse/section/" + c.section}>
                   <li className="flex-row">

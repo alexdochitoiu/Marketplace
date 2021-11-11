@@ -6,6 +6,9 @@ import * as categoryService from "src/services/category";
 import { Collapse } from "@material-ui/core";
 import { getSectionLabel } from "src/utils";
 import { FaAngleDown } from "react-icons/fa";
+import LogoIcon from "../generic/Logo/LogoIcon";
+import WishlistButton from "./WishlistButton";
+import CartButton from "./CartButton";
 
 interface IState {
   section: ICategory["section"];
@@ -16,6 +19,7 @@ export default function () {
   const [categories, setCategories] = React.useState<IState[]>([]);
   const [expanded, setExpanded] = React.useState(false);
   const [menu, setMenu] = React.useState(false);
+  const [subMenu, setSubMenu] = React.useState("");
 
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
@@ -35,25 +39,41 @@ export default function () {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        margin: "15px",
-      }}
-    >
-      {expanded ? (
-        <IoMdClose
-          className="mobile-nav-button"
-          onClick={() => setExpanded((e) => !e)}
-        />
-      ) : (
-        <FiMenu
-          className="mobile-nav-button"
-          onClick={() => setExpanded((e) => !e)}
-        />
-      )}
+    <div style={{ flex: 1 }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          flex: 1,
+        }}
+      >
+        <LogoIcon />
+        <div className="flex-row">
+          <div
+            className="flex-row"
+            style={{
+              width: 60,
+              justifyContent: "space-around",
+              marginRight: 10,
+            }}
+          >
+            <WishlistButton darkBg={true} />
+            <CartButton darkBg={true} />
+          </div>
+          {expanded ? (
+            <IoMdClose
+              className="mobile-nav-button"
+              onClick={() => setExpanded((e) => !e)}
+            />
+          ) : (
+            <FiMenu
+              className="mobile-nav-button"
+              onClick={() => setExpanded((e) => !e)}
+            />
+          )}
+        </div>
+      </div>
       <nav className="mobile-nav">
         <Collapse in={expanded}>
           <ul>
@@ -61,15 +81,7 @@ export default function () {
               <li>Acasă</li>
             </a>
             <a onClick={() => setMenu(!menu)}>
-              <li
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  flexDirection: "column",
-                  background: menu ? "#eee" : "initial",
-                  padding: menu ? 20 : 5,
-                }}
-              >
+              <li>
                 <span>
                   Produse{" "}
                   <FaAngleDown
@@ -79,32 +91,41 @@ export default function () {
                     }}
                   />
                 </span>
-                <Collapse in={menu} unmountOnExit={true}>
-                  <ul>
-                    {categories.map((c) => (
-                      <a key={c.section} href={"/produse/section/" + c.section}>
-                        <li>
-                          {getSectionLabel(c.section)}
-                          {/* {c.categories.length > 0 && <FaAngleDown />}
-                          {c.categories.length > 0 && (
-                            <ul>
-                              {c.categories.map((c, idx) => (
-                                <a key={c._id} href={"/produse/" + c._id}>
-                                  <li>{c.title}</li>
-                                </a>
-                              ))}
-                            </ul>
-                          )} */}
-                        </li>
-                      </a>
-                    ))}
-                    <a href="/produse/section/all">
-                      <li>Toate</li>
-                    </a>
-                  </ul>
-                </Collapse>
               </li>
             </a>
+            <Collapse in={menu} unmountOnExit={true} style={{ width: "100%" }}>
+              <ul>
+                {categories.map((c) => (
+                  <a
+                    key={c.section}
+                    onClick={() => setSubMenu((old) => (old ? "" : c.section))}
+                  >
+                    <li>
+                      {getSectionLabel(c.section)}
+                      {c.categories.length > 0 && <FaAngleDown />}
+                    </li>
+                    <Collapse
+                      in={subMenu === c.section}
+                      unmountOnExit={true}
+                      style={{ width: "100%" }}
+                    >
+                      {c.categories.length > 0 && (
+                        <ul>
+                          {c.categories.map((c) => (
+                            <a key={c._id} href={"/produse/" + c._id}>
+                              <li>{c.title}</li>
+                            </a>
+                          ))}
+                        </ul>
+                      )}
+                    </Collapse>
+                  </a>
+                ))}
+                <a href="/produse/section/all">
+                  <li>Toate</li>
+                </a>
+              </ul>
+            </Collapse>
             <a href="/blog">
               <li>Blog</li>
             </a>

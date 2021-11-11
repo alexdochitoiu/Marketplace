@@ -7,6 +7,7 @@ import React from "react";
 import WishlistButton from "./WishlistButton";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 import MobileNav from "./MobileNav";
+import LogoIcon from "../generic/Logo/LogoIcon";
 
 export default function () {
   const [sticky, setSticky] = React.useState(false);
@@ -25,14 +26,7 @@ export default function () {
     setSticky(window.scrollY >= 150);
   };
 
-  let webNav = true;
-  // if (windowSize.width <= 1000 && searchVisible) {
-  //   webNav = false;
-  // }
-  if (windowSize.width < 900) {
-    webNav = false;
-  }
-  return (
+  return windowSize.width >= 900 ? (
     <header
       id="header"
       className={sticky ? "animate__animated animate__slideInDown sticky" : ""}
@@ -41,7 +35,7 @@ export default function () {
         <div style={{ marginLeft: 15 }}>
           <Logo />
         </div>
-        {webNav ? <Nav /> : <MobileNav />}
+        <Nav />
         <div
           className="flex-row"
           style={
@@ -50,12 +44,15 @@ export default function () {
               : { width: 60, justifyContent: "space-around" }
           }
         >
-          {/* {windowSize.width > 428 && (
-            <Search onVisibleChange={(value) => setSearchVisible(value)} />
-          )} */}
           <WishlistButton />
           <CartButton />
         </div>
+      </div>
+    </header>
+  ) : (
+    <header id="header" className="mobile_header">
+      <div className="container header-wrapper">
+        <MobileNav />
       </div>
     </header>
   );

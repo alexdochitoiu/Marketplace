@@ -11,7 +11,12 @@ import { getToken } from "./auth";
 const getById = async (id: string) =>
   axios.get<IOrder>(GET_ORDER.replace(":id", id));
 
-const getAll = async () => axios.get<IOrder[]>(GET_ORDERS);
+const getAll = async () =>
+  axios.get<IOrder[]>(GET_ORDERS, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
 
 const remove = async (id: string) =>
   axios.delete<IOrder>(DELETE_ORDER.replace(":id", id), {

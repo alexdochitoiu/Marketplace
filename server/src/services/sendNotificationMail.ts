@@ -19,7 +19,7 @@ export function sendNotificationMail({
 
   const url =
     process.env.NODE_ENV === "production"
-      ? "http://miral-fashion.ro"
+      ? "https://miral-fashion.ro"
       : "http://localhost:8000";
   const dashboardUrl =
     process.env.NODE_ENV === "production"

@@ -44,13 +44,13 @@ export default function () {
               : { width: 60, justifyContent: "space-around" }
           }
         >
-          <WishlistButton />
-          <CartButton />
+          <WishlistButton darkBg={true} />
+          <CartButton darkBg={true} />
         </div>
       </div>
     </header>
   ) : (
-    <header id="header" className="mobile_header">
+    <header id="header">
       <div className="container header-wrapper">
         <MobileNav />
       </div>

@@ -5,7 +5,7 @@ export default function () {
   return (
     <Link to="/">
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img src={icon} width={45} height={45} />
+        <img src={icon} height={60} />
       </div>
     </Link>
   );

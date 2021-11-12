@@ -1,7 +1,7 @@
 import "./Contact.styles.css";
 import { ImLocation } from "react-icons/im";
 import { FaPhoneAlt } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { MdEmail, MdBusiness } from "react-icons/md";
 import { PHONE, MAIL } from "src/constants/contact";
 import { Divider } from "@material-ui/core";
 import TitleBanner from "src/components/generic/TitleBanner";
@@ -15,16 +15,8 @@ export default function () {
         <div className="contact-info">
           <h4 className="contact-title">CONTACT</h4>
           <div className="contact-content">
-            <div>
-              <ImLocation />
-              <div>
-                Locatie: <br />
-                Str. A. I. Cuza 11, Bl. 9, Sc. A, Et. 1, Ap. 5 <br />
-                Săveni, Botoșani, Romania
-              </div>
-            </div>
             <a href={`https://api.whatsapp.com/send?phone=${PHONE}`}>
-              <div>
+              <div style={{ display: "flex", alignItems: "center" }}>
                 <FaPhoneAlt />
                 <div>
                   Telefon: <br />
@@ -32,11 +24,34 @@ export default function () {
                 </div>
               </div>
             </a>
-            <div>
+            <div style={{ display: "flex", alignItems: "center" }}>
               <MdEmail />
               <div>
                 E-mail: <br />
                 {MAIL}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="contact-info">
+          <h4 className="contact-title">DATE IDENTIFICARE FIRMĂ</h4>
+          <div className="contact-content">
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <ImLocation />
+              <div>
+                Locatie: <br />
+                Str. A. I. Cuza 11, Bl. 9, Sc. A, Et. 1, Ap. 5 <br />
+                Săveni, Botoșani, Romania
+              </div>
+            </div>
+            <div style={{ display: "flex", alignItems: "center" }}>
+              <MdBusiness />
+              <div>
+                Firmă: MIRAL FASHION LNT S.R.L.
+                <br />
+                CUI: 45058320
+                <br />
+                Nr. reg. com.: J7/668/14.10.2021
               </div>
             </div>
           </div>

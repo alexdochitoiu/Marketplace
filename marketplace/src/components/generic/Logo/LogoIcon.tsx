@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import icon from "src/assets/icon.png";
+import icon from "src/assets/icon_100x.png";
 
 export default function () {
   return (

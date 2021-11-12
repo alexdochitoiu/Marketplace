@@ -2,10 +2,10 @@
   background: rgb(44, 44, 44);
   background: radial-gradient(
     circle,
-    rgba(44, 44, 44, 1) 0%,
-    rgba(25, 25, 25, 1) 100%
+    rgba(60, 60, 60, 1) 0%,
+    rgba(35, 35, 35, 1) 100%
   );
-  border-bottom: 2px solid #111;
+  border-bottom: 2px solid #222;
   width: 100%;
   animation-duration: 200ms;
 }
@@ -75,10 +75,10 @@ ul {
   background: rgb(44, 44, 44);
   background: radial-gradient(
     circle,
-    rgba(44, 44, 44, 1) 0%,
-    rgba(25, 25, 25, 1) 100%
+    rgba(60, 60, 60, 1) 0%,
+    rgba(35, 35, 35, 1) 100%
   );
-  border-top: 1px solid #111;
+  border-top: 1px solid #222;
   box-shadow: 0 3px 7px rgb(0 0 0 / 10%);
   display: block;
   opacity: 0;
@@ -104,10 +104,10 @@ ul {
   background: rgb(44, 44, 44);
   background: radial-gradient(
     circle,
-    rgba(44, 44, 44, 1) 0%,
-    rgba(25, 25, 25, 1) 100%
+    rgba(60, 60, 60, 1) 0%,
+    rgba(35, 35, 35, 1) 100%
   );
-  border-top: 1px solid #111;
+  border-top: 1px solid #222;
   box-shadow: 0 3px 7px rgb(0 0 0 / 10%);
   display: block;
   opacity: 0;

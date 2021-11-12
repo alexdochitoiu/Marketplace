@@ -35,3 +35,24 @@
   border: 1px solid #eee;
   padding: 3px 15px;
 }
+
+.order-placed {
+  font-size: 30px;
+  justify-content: center;
+}
+
+@media screen and (max-width: 500px) {
+  .order-placed {
+    font-size: 22px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .order-placed {
+    font-size: 16px;
+  }
+  .order-box * {
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+}

@@ -32,14 +32,15 @@ const createOrder = (req: Request, res: Response) => {
         })
         .then((order) => {
           if (order) {
-            process.env.NODE_ENV === "production" && sendOrderPlacedMail(order);
-            process.env.NODE_ENV === "production" &&
-              sendNotificationMail({
-                orderId: order._id,
-                orderNumber: order.number,
-                clientFirstName: order.clientInfo.firstName,
-                clientLastName: order.clientInfo.lastName,
-              });
+            // process.env.NODE_ENV === "production" &&
+            sendOrderPlacedMail(order);
+            // process.env.NODE_ENV === "production" &&
+            sendNotificationMail({
+              orderId: order._id,
+              orderNumber: order.number,
+              clientFirstName: order.clientInfo.firstName,
+              clientLastName: order.clientInfo.lastName,
+            });
             res.status(201).json(order);
           } else {
             res.status(404).json({ error: "Order not found" });

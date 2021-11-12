@@ -45,6 +45,7 @@ const useStyles = makeStyles({
   detailsBtn: {
     cursor: "pointer",
     padding: "0 5px",
+    borderBottom: "1px solid #eee",
     transition: "0.15s all ease-in-out",
     "&:hover": {
       background: "#fff",
@@ -76,9 +77,17 @@ export default function () {
         buttonStyle={{ background: "var(--primary)", color: "#fff" }}
         expires={150}
       >
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          Miral-Fashion.ro folosește cookies doar pentru a îmbunătăți navigarea
-          în magazinul online. Acestea nu conțin date personale.
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            flexWrap: "wrap",
+          }}
+        >
+          <span>
+            Miral-Fashion.ro folosește cookies doar pentru a îmbunătăți
+            navigarea în magazinul online. Acestea nu conțin date personale.
+          </span>
           <span className={classes.detailsBtn} onClick={handleClick}>
             Detalii
           </span>

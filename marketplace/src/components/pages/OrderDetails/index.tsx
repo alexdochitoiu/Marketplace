@@ -72,10 +72,7 @@ export default function () {
       <div className="container" style={{ marginTop: 30 }}>
         {window.location.search && (
           <div className="order-box" style={{ margin: "30px 0" }}>
-            <h4
-              className="flex-row"
-              style={{ fontSize: 30, justifyContent: "center" }}
-            >
+            <h4 className="flex-row order-placed">
               <FaCheckCircle style={{ marginRight: 15, color: "green" }} />
               Comanda a fost plasată cu succes!
             </h4>

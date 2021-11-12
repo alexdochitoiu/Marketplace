@@ -24,7 +24,7 @@ export interface ProductDocument extends mongoose.Document {
 
 const ProductSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true, unique: true },
+    title: { type: String, required: true },
     productCode: { type: String, required: true },
     description: { type: String, required: true },
     category: {

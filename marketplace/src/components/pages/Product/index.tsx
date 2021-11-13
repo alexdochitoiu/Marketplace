@@ -121,7 +121,7 @@ export default function () {
         onClose={() => setSnack(null)}
       />
       <TitleBanner title={product.title} />
-      <div className="container">
+      <div className="container product-details">
         <div
           className={classes.root}
           style={
@@ -129,7 +129,7 @@ export default function () {
               ? {
                   flexDirection: "column",
                   alignItems: "center",
-                  marginTop: windowSize.width < 350 ? -50 : 0,
+                  marginTop: windowSize.width < 350 ? -4 : 0,
                 }
               : {}
           }

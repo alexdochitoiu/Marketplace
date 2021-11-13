@@ -3,7 +3,7 @@ import log from "../logger";
 
 export default function () {
   const mongoUri =
-    process.env.NODE_ENV === "production"
+    process.env.NODE_ENV === "production" || true
       ? "mongodb+srv://miral-dbuser:GJEkZBOfXL22WUYb@cluster0.tnmqw.mongodb.net/miral-db-prod?retryWrites=true&w=majority"
       : "mongodb+srv://miral-dbuser:GJEkZBOfXL22WUYb@cluster0.tnmqw.mongodb.net/miral-db-test?retryWrites=true&w=majority";
   return mongoose

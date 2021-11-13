@@ -95,6 +95,7 @@ export default function ({ images }: IProps) {
             }}
             style={{
               width: `${100 / images.length}%`,
+              margin: 3,
               display: "flex",
               justifyContent: "center",
             }}

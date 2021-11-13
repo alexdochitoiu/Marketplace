@@ -186,12 +186,20 @@ export default function () {
               <h3 style={{ marginBottom: 10, color: "#444" }}>
                 Alege culoarea:
               </h3>
-              <div style={{ display: "flex" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  justifyContent:
+                    windowSize.width < 1000 ? "center" : "flex-start",
+                }}
+              >
                 {pcProducts.map(
                   (pcp) =>
                     pcp.color && (
                       <a
                         key={pcp._id}
+                        style={{ margin: "4px 0" }}
                         href={
                           product._id !== pcp._id
                             ? `/produs/${pcp._id}`
@@ -208,10 +216,7 @@ export default function () {
               </div>
             </div>
             <QuantityInfoText selectedSize={selectedSize} />
-            <div
-              className="product-listItem-actions"
-              style={{ justifyContent: "space-between", marginTop: 20 }}
-            >
+            <div className="product-listItem-actions" style={{ marginTop: 20 }}>
               {selectedSize && (
                 <SelectQuantity
                   value={selectedQuantity}

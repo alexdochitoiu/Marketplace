@@ -57,11 +57,50 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-size: cover;
-  height: 450px;
   background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #111;
+  height: 450px;
   position: relative;
 }
+
+@media screen and (max-width: 2560px) {
+  .each-slide > div {
+    height: 700px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .each-slide > div {
+    height: 650px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .each-slide > div {
+    height: 510px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .each-slide > div {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .each-slide > div {
+    height: 220px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .each-slide > div {
+    height: 180px;
+  }
+}
+
 
 .each-slide span {
   padding: 5px 25px;

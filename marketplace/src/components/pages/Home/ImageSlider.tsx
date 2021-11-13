@@ -4,10 +4,11 @@ import "react-slideshow-image/dist/styles.css";
 import { HOST } from "src/constants/host";
 
 const images = [
-  { url: HOST + "/public/slider/1.jpeg", caption:  "Căciulă din blană naturală (neagră)"},
-  { url: HOST + "/public/slider/2.jpeg", caption:  "Căciulă din blană naturală de vulpe" },
-  { url: HOST + "/public/slider/3.jpeg", caption:  "Căciulă din blană naturală" },
-  { url: HOST + "/public/slider/4.jpeg", caption:  "Căciulă din piele și blană naturală (maro)" },
+  { url: HOST + "/public/slider/s1.jpg" },
+  { url: HOST + "/public/slider/s2.jpg" },
+  { url: HOST + "/public/slider/s3.jpg" },
+  { url: HOST + "/public/slider/s4.jpg" },
+  { url: HOST + "/public/slider/s5.jpg" },
 ];
 
 export default function () {
@@ -38,14 +39,14 @@ export default function () {
         {images.map((img) => (
           <div key={img.url} className="each-slide">
             <div style={{ backgroundImage: `url(${img.url})` }}>
-              {animation && (
+              {/* {animation && img.caption && (
                 <span
                   className={`animate__animated ${animation}`}
                   style={position}
                 >
                   {img.caption}
                 </span>
-              )}
+              )} */}
             </div>
           </div>
         ))}

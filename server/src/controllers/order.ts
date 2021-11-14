@@ -105,8 +105,8 @@ const updateOrder = (req: Request, res: Response) => {
             if (!updatedOrder) {
               res.status(404).json({ error: "Order not found" });
             } else if (updatedOrder.status === "preparing") {
-              process.env.NODE_ENV === "production" &&
-                sendOrderProcessedMail(updatedOrder);
+              // process.env.NODE_ENV === "production" &&
+              sendOrderProcessedMail(updatedOrder);
             } else if (updatedOrder.status === "sent") {
               // Update products quantities
               updatedOrder.cart.map((cItem) => {
@@ -131,8 +131,8 @@ const updateOrder = (req: Request, res: Response) => {
               });
 
               // Send mail
-              process.env.NODE_ENV === "production" &&
-                sendOrderSentMail(updatedOrder, { awb, invoice });
+              // process.env.NODE_ENV === "production" &&
+              sendOrderSentMail(updatedOrder, { awb, invoice });
             }
             res.status(200).json(updatedOrder);
           });

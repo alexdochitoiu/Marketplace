@@ -1,7 +1,9 @@
 import fs from "fs";
 import path from "path";
+import { HOST } from "../config";
 import sendMail from "./sendMail";
 
+const logo = HOST + "/public/assets/logo_x80.png";
 export function sendNotificationMail({
   orderNumber,
   orderId,
@@ -29,7 +31,7 @@ export function sendNotificationMail({
 
   const html = template
     .replace(/{{number}}/g, orderNumber)
-    .replace(/{{brand}}/g, brand)
+    .replace(/{{logo}}/g, logo)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${orderId}`)
     .replace(/{{dashboardUrl}}/g, dashboardUrl)

@@ -1,7 +1,10 @@
 import fs from "fs";
 import path from "path";
+import { HOST } from "../config";
 import { OrderDocument } from "src/models/order";
 import sendMail from "./sendMail";
+
+const logo = HOST + "/public/assets/logo_x80.png";
 
 export function sendOrderPlacedMail(order: OrderDocument) {
   const template = fs.readFileSync(
@@ -52,12 +55,15 @@ export function sendOrderPlacedMail(order: OrderDocument) {
 
   const html = template
     .replace(/{{number}}/g, order.number)
-    .replace(/{{brand}}/g, brand)
+    .replace(/{{logo}}/g, logo)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{cartTableContent}}/g, cartTableContent)
     .replace(/{{shippingFee}}/g, `${order.cartPrice.shippingFee}`)
-    .replace(/{{totalPrice}}/g, `${order.cartPrice.totalPrice}`)
+    .replace(
+      /{{totalPrice}}/g,
+      `${order.cartPrice.totalPrice + order.cartPrice.shippingFee}`
+    )
     .replace(/{{lastName}}/g, order.clientInfo.lastName)
     .replace(/{{firstName}}/g, order.clientInfo.firstName)
     .replace(/{{address}}/g, order.clientInfo.address)
@@ -94,7 +100,7 @@ export function sendOrderProcessedMail(order: OrderDocument) {
 
   const html = template
     .replace(/{{number}}/g, order.number)
-    .replace(/{{brand}}/g, brand)
+    .replace(/{{logo}}/g, logo)
     .replace(/{{url}}/g, url)
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{lastName}}/g, order.clientInfo.lastName)
@@ -157,7 +163,7 @@ export function sendOrderSentMail(order: OrderDocument, { awb, invoice }) {
 
   const html = template
     .replace(/{{number}}/g, order.number)
-    .replace(/{{brand}}/g, brand)
+    .replace(/{{logo}}/g, logo)
     .replace(/{{url}}/g, url)
     .replace(
       /{{invoiceMessage}}/g,
@@ -166,7 +172,10 @@ export function sendOrderSentMail(order: OrderDocument, { awb, invoice }) {
     .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${order._id}`)
     .replace(/{{cartTableContent}}/g, cartTableContent)
     .replace(/{{shippingFee}}/g, `${order.cartPrice.shippingFee}`)
-    .replace(/{{totalPrice}}/g, `${order.cartPrice.totalPrice}`)
+    .replace(
+      /{{totalPrice}}/g,
+      `${order.cartPrice.totalPrice + order.cartPrice.shippingFee}`
+    )
     .replace(/{{lastName}}/g, order.clientInfo.lastName)
     .replace(/{{firstName}}/g, order.clientInfo.firstName)
     .replace(/{{address}}/g, order.clientInfo.address)

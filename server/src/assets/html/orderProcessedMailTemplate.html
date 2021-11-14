@@ -27,7 +27,7 @@
     }
 
     a {
-      color: #444 !important;
+      color: #444;
       text-decoration: none;
     }
 
@@ -103,16 +103,16 @@
 
 <body style="margin: 0; padding: 0; background: #fff">
   <div style="max-width: 800px; margin: 0 auto; border: 1px solid #ccc; background: #F5F7F9">
-    <table width="100%" cellpadding="0" cellspacing="0">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #323232">
       <tr class="header">
         <td>
           <a href="{{url}}">
-            <div class="logo">{{brand}}</div>
+            <img src="{{logo}}" height="45" />
           </a>
         </td>
         <td align="right">
-          <h4 style="white-space: nowrap">Comanda ta:</h4>
-          <a href="{{orderDetailsUrl}}" style="font-family: Poppins, sans-serif;">#{{number}}</a>
+          <h4 style="white-space: nowrap; color: #eee;">Comanda ta:</h4>
+          <a href="{{orderDetailsUrl}}" style="font-family: Poppins, sans-serif; color: #ddd;">#{{number}}</a>
         </td>
       </tr>
     </table>

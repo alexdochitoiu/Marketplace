@@ -26,6 +26,7 @@ interface IFormError {
 export default function () {
   const cart = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
+  const [payMethod, setPayMethod] = React.useState("ramburs");
   const [form, setForm] = React.useState({
     lastName: "",
     firstName: "",
@@ -86,6 +87,7 @@ export default function () {
         cartPrice,
         clientInfo,
         orderNotes,
+        payMethod,
       };
       orderService
         .create(body)
@@ -271,7 +273,10 @@ export default function () {
             }}
           >
             <OrderSummary />
-            <PayOption />
+            <PayOption
+              value={payMethod}
+              onChange={(e) => setPayMethod(e.target.value)}
+            />
             <TermsAndConditions
               value={termsAccepted}
               onChange={handleTermsAcceptedChange}

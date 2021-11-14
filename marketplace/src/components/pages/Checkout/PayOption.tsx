@@ -47,13 +47,10 @@ const useStyles = makeStyles({
   },
 });
 
-export default function () {
+export default function ({ value, onChange }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
-  const [value, setValue] = React.useState("ramburs");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  
   let info: any = "";
   if (value === "ramburs") {
     info = "Plata se face ramburs la primirea coletului.";
@@ -110,7 +107,7 @@ export default function () {
         <RadioGroup
           name="paying"
           value={value}
-          onChange={handleChange}
+          onChange={onChange}
           className="paying_options_radio_group"
         >
           <FormControlLabel

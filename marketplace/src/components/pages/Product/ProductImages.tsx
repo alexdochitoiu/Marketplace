@@ -1,4 +1,5 @@
 import ImageGallery from "react-image-gallery";
+
 interface IProps {
   images: string[];
 }
@@ -9,9 +10,7 @@ export default function ({ images }: IProps) {
     thumbnail: i,
     originalWidth: 600,
     originalHeight: 650,
-    originalClass: "original-photo"
+    originalClass: "original-photo",
   }));
-  return (
-    <ImageGallery items={items} />
-  );
+  return <ImageGallery items={items} />;
 }

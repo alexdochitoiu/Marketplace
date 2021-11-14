@@ -25,6 +25,7 @@ export default interface IOrder {
     zipCode: string;
   };
   orderNotes?: string;
+  payMethod: "ramburs" | "transfer";
   createdAt: string;
   updatedAt: string;
 }

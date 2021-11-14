@@ -1,0 +1,26 @@
+.about_us {
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  font-family: Poppins, sans-serif;
+  color: #333;
+}
+
+.about_us img {
+  object-fit: contain;
+}
+
+.about_us p::first-letter {
+  font-family: Brush Script MT, Brush Script Std, cursive;
+  font-size: 200%;
+}
+
+@media screen and (max-width: 428px) {
+  .about_us {
+    flex-direction: column;
+  }
+
+  .about_us img {
+    height: 400px !important;
+  }
+}

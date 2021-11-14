@@ -25,6 +25,7 @@ export interface OrderDocument extends mongoose.Document {
     zipCode: string;
   };
   orderNotes?: string;
+  payMethod: "ramburs" | "transfer";
 }
 
 const OrderSchema = new mongoose.Schema(
@@ -62,6 +63,16 @@ const OrderSchema = new mongoose.Schema(
       zipCode: String,
     },
     orderNotes: String,
+    payMethod: {
+      type: String,
+      enum: ["ramburs", "transfer"],
+      default: "ramburs",
+    },
+    orderType: {
+      type: String,
+      enum: ["comanda", "precomanda"],
+      default: "comanda",
+    },
   },
   { timestamps: true }
 );

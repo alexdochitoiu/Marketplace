@@ -10,7 +10,7 @@ import { sendNotificationMail } from "../services/sendNotificationMail";
 import Product from "../models/product";
 
 const createOrder = (req: Request, res: Response) => {
-  const { cart, cartPrice, clientInfo, orderNotes } = req.body;
+  const { cart, cartPrice, clientInfo, orderNotes, payMethod } = req.body;
 
   if (cart.length === 0) {
     return res.status(400).json({ error: "Cart empty" });
@@ -23,6 +23,7 @@ const createOrder = (req: Request, res: Response) => {
     cartPrice,
     clientInfo,
     orderNotes,
+    payMethod,
   })
     .then((response) => {
       Order.findById(response._id)

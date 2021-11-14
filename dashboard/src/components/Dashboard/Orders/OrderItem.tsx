@@ -133,6 +133,17 @@ export default function ({ order, onDelete, onEdit }: IProps) {
                 label={`${order.cartPrice?.totalPrice || 0} RON`}
               />
             </div>
+            <Divider
+              orientation="vertical"
+              flexItem={true}
+              style={{ margin: "0 10px" }}
+            />
+            <div className="flex-row">
+              <Typography variant="body2" style={{ marginRight: 8 }}>
+                Metoda de plata:
+              </Typography>
+              <Chip variant="outlined" size="small" label={order.payMethod.toUpperCase()} />
+            </div>
           </div>
           <Chip
             size="small"

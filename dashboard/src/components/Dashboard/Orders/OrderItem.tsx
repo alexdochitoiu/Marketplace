@@ -170,7 +170,7 @@ export default function ({ order, onDelete, onEdit }: IProps) {
                   <div
                     style={{ display: "flex", alignItems: "center", flex: 1 }}
                   >
-                    {ci.product && ci.product.images.length > 0 (
+                    {ci.product && ci.product.images.length > 0 && (
                       <img
                         width="50"
                         height="50"

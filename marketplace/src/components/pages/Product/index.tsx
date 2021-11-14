@@ -31,6 +31,7 @@ const useStyles = makeStyles({
   root: {
     margin: "80px 0",
     display: "flex",
+    justifyContent: "space-around",
   },
   title: {
     color: "#3e3e3e",
@@ -136,6 +137,7 @@ export default function () {
         >
           <ProductImages images={product.images} />
           <div
+            className="product-content"
             style={
               windowSize.width < 1000 ? { marginTop: 50, width: "100%" } : {}
             }

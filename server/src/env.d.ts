@@ -8,5 +8,7 @@ declare namespace NodeJS {
     DASHBOARD_USER: string;
     DASHBOARD_PASSWORD: string;
     BRAND_NAME: string;
+    PROD_DATABASE: string;
+    DEV_DATABASE: string;
   }
 }

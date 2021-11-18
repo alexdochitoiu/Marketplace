@@ -1,3 +1,4 @@
+import Head from "src/components/generic/Head";
 import TitleBanner from "src/components/generic/TitleBanner";
 import aboutUs from "../../../assets/about_us.jpeg";
 import "./style.css";
@@ -5,9 +6,20 @@ import "./style.css";
 export default function () {
   return (
     <div style={{ background: "#eee", marginBottom: -30 }}>
+      <Head
+        title="Despre noi"
+        description="Descopera o lume a elegantei si rafinamentului, a ultimelor tendinte
+        in moda si a materialelor pretioase."
+        image="https://miral-fashion.ro:4000/public/images/1636700451137miral-fashion-esarfa-din-blana-naturala-de-vizon-nurca-neagra.jpg"
+        url="https://miral-fashion.ro/despre-noi"
+      />
       <TitleBanner title="Despre noi" />
       <div className="container about_us">
-        <img src={aboutUs} height={600} />
+        <img
+          src={aboutUs}
+          height={600}
+          alt="Miral-Fashion.ro - Haine si caciuli din blana naturala pentru femei si barbati"
+        />
         <div style={{ margin: 20 }}>
           <p>
             Descoperă o lume a eleganței și rafinamentului, a ultimelor tendințe

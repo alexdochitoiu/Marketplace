@@ -17,6 +17,7 @@ import history from "src/constants/history";
 import { doChangeCart } from "src/redux/actions";
 import { ImInfo } from "react-icons/im";
 import PayOption from "./PayOption";
+import { isValidEmail } from "src/utils/isValidEmail";
 
 interface IFormError {
   field: string;
@@ -106,6 +107,15 @@ export default function () {
       [e.target.name]: e.target.value,
     });
     setErrors(errors.filter((err) => err.field !== e.target.name));
+    if (e.target.name === "email" && !isValidEmail(e.target.value)) {
+      setErrors([
+        ...errors,
+        {
+          field: "email",
+          message: "Adresa de e-mail introdusă nu este validă!",
+        },
+      ]);
+    }
   };
 
   const handleTermsAcceptedChange = (e) => {

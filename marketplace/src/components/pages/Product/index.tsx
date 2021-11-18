@@ -26,6 +26,7 @@ import { doChangeCart } from "src/redux/actions";
 import { uuid } from "uuidv4";
 import { getSectionLabel } from "src/utils";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
+import Head from "src/components/generic/Head";
 
 const useStyles = makeStyles({
   root: {
@@ -96,6 +97,7 @@ export default function () {
       productId: product._id,
       selectedQuantity: selectedQuantity,
       selectedSize: selectedSize.size,
+      orderType: selectedSize.quantity === 0 ? "precomanda" : "comanda",
     };
 
     dispatch(doChangeCart([...cart, item]));
@@ -116,6 +118,16 @@ export default function () {
 
   return (
     <div>
+      <Head
+        title={product.title}
+        description={product.description}
+        image={
+          product.images.length > 0
+            ? product.images[0]
+            : "https://miral-fashion.ro:4000/public/images/1636700451137miral-fashion-esarfa-din-blana-naturala-de-vizon-nurca-neagra.jpg"
+        }
+        url={window.location.href}
+      />
       <SnackBar
         message={snack}
         open={Boolean(snack)}
@@ -135,7 +147,7 @@ export default function () {
               : {}
           }
         >
-          <ProductImages images={product.images} />
+          <ProductImages images={product.images} title={product.title} />
           <div
             className="product-content"
             style={

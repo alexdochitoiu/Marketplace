@@ -56,29 +56,29 @@ export default function ({ product }: IProps) {
             </div>
           </Tooltip>
         )}
-        <img
-          width={280}
-          height={373}
-          src={
-            product.images.length > 0 ? product.images[0] : imageNotAvailable
-          }
-        />
-        <div className="product-action">
+        <a href={`/produs/${product._id}`}>
+          <img
+            width={280}
+            height={373}
+            src={
+              product.images.length > 0 ? product.images[0] : imageNotAvailable
+            }
+            alt={product.title}
+          />
+          {/* <div className="product-action">
           <div
             className="product-view"
             onClick={() => history.push(`/produs/${product._id}`)}
           >
             <AiOutlineEye />
           </div>
-        </div>
+        </div> */}
+        </a>
       </div>
       <div className="product-listItem-content">
-        <h4
-          className="product-listItem-title"
-          onClick={() => history.push(`/produs/${product._id}`)}
-        >
-          {product.title}
-        </h4>
+        <a href={`/produs/${product._id}`}>
+          <h4 className="product-listItem-title">{product.title}</h4>
+        </a>
         <div className="product-listItem-price">
           <h4
             style={{ whiteSpace: "nowrap" }}

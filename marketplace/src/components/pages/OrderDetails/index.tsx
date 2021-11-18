@@ -115,7 +115,8 @@ export default function () {
                   width="80"
                   height="80"
                   style={{ objectFit: "contain", marginRight: 15 }}
-                  src={ci.product.images[0]}
+                  src={ci.product.images.length > 0 ? ci.product.images[0] : ""}
+                  alt={ci.product.title}
                 />
                 <div>
                   <h4>
@@ -125,6 +126,10 @@ export default function () {
                     Mărime:{" "}
                   </span>
                   {ci.selectedSize}
+                  <br />
+                  {ci.orderType === "precomanda" && (
+                    <span style={{ fontSize: 13, color: "#444" }}>(Precomandă)</span>
+                  )}
                 </div>
               </div>
               <ItemPrice cartItem={ci} />

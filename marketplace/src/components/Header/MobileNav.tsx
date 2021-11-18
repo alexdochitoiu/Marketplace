@@ -98,7 +98,9 @@ export default function () {
                 {categories.map((c) => (
                   <a
                     key={c.section}
-                    onClick={() => setSubMenu((old) => (old ? "" : c.section))}
+                    onClick={() =>
+                      setSubMenu((old) => (old === c.section ? "" : c.section))
+                    }
                   >
                     <li>
                       {getSectionLabel(c.section)}

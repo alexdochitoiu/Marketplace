@@ -38,7 +38,7 @@ export default function ({ product }: IProps) {
     e.stopPropagation();
     setSnack(null);
   };
-  
+
   return (
     <a href={`/produs/${product._id}`}>
       <div className="product-card">
@@ -71,6 +71,7 @@ export default function ({ product }: IProps) {
             src={
               product.images.length > 0 ? product.images[0] : imageNotAvailable
             }
+            alt={product.title}
           />
           <div className="product-action">
             <Tooltip

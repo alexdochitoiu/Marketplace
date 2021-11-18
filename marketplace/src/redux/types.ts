@@ -23,6 +23,7 @@ export interface ICartItem {
   productId: string;
   selectedSize: string;
   selectedQuantity: string;
+  orderType: "comanda" | "precomanda";
 }
 
 export interface IState {

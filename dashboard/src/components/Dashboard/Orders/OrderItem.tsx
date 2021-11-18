@@ -142,7 +142,11 @@ export default function ({ order, onDelete, onEdit }: IProps) {
               <Typography variant="body2" style={{ marginRight: 8 }}>
                 Metoda de plata:
               </Typography>
-              <Chip variant="outlined" size="small" label={order.payMethod.toUpperCase()} />
+              <Chip
+                variant="outlined"
+                size="small"
+                label={order.payMethod.toUpperCase()}
+              />
             </div>
           </div>
           <Chip
@@ -196,6 +200,9 @@ export default function ({ order, onDelete, onEdit }: IProps) {
                       <br />
                       <i>Mărime: </i>
                       {ci.selectedSize}
+                      <br />
+                      <i>Tip comandă: </i>
+                      {ci.orderType[0].toUpperCase() + ci.orderType.substring(1)}
                     </div>
                   </div>
                   <ItemPrice cartItem={ci} />

@@ -7,7 +7,8 @@ import {
   sendOrderSentMail,
 } from "../services/sendOrderMail";
 import { sendNotificationMail } from "../services/sendNotificationMail";
-import Product from "../models/product";
+import { sendOutOfStockMail } from "../services/sendOutOfStockMail";
+import Product, { ProductDocument } from "../models/product";
 
 const createOrder = (req: Request, res: Response) => {
   const { cart, cartPrice, clientInfo, orderNotes, payMethod } = req.body;
@@ -106,9 +107,6 @@ const updateOrder = (req: Request, res: Response) => {
             if (!updatedOrder) {
               res.status(404).json({ error: "Order not found" });
             } else if (updatedOrder.status === "preparing") {
-              // process.env.NODE_ENV === "production" &&
-              sendOrderProcessedMail(updatedOrder);
-            } else if (updatedOrder.status === "sent") {
               // Update products quantities
               updatedOrder.cart.map((cItem) => {
                 const { sizes } = cItem.product;
@@ -123,16 +121,34 @@ const updateOrder = (req: Request, res: Response) => {
                   cItem.product._id,
                   { sizes },
                   { new: true, omitUndefined: true }
-                ).then((updatedProduct) =>
-                  console.log(
-                    "Stocul produsului a fost actualizat",
-                    updatedProduct
-                  )
-                );
+                ).then((updatedProduct: ProductDocument | null) => {
+                  if (updatedProduct) {
+                    console.log(
+                      "Stocul produsului a fost actualizat",
+                      updatedProduct
+                    );
+                    const outOfStockSize = updatedProduct.sizes.find(
+                      (s) => s.quantity === 0
+                    );
+                    if (outOfStockSize) {
+                      const oldSize = sizes.find(
+                        (s) => s.size === outOfStockSize.size
+                      );
+                      if (oldSize.quantity === 1) {
+                        sendOutOfStockMail({
+                          productId: updatedProduct._id,
+                          productTitle: updatedProduct.title,
+                          outOfStockSize: outOfStockSize.size,
+                        });
+                      }
+                    }
+                  }
+                });
               });
 
-              // Send mail
-              // process.env.NODE_ENV === "production" &&
+              // Send email
+              sendOrderProcessedMail(updatedOrder);
+            } else if (updatedOrder.status === "sent") {
               sendOrderSentMail(updatedOrder, { awb, invoice });
             }
             res.status(200).json(updatedOrder);

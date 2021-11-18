@@ -4,17 +4,16 @@ import { HOST } from "../config";
 import sendMail from "./sendMail";
 
 const logo = HOST + "/public/assets/logo_x80.png";
-export function sendNotificationMail({
-  orderNumber,
-  orderId,
-  clientLastName,
-  clientFirstName,
+export function sendOutOfStockMail({
+  productId,
+  productTitle,
+  outOfStockSize,
 }) {
   const template = fs.readFileSync(
     path.resolve(
       process.env.NODE_ENV === "production"
-        ? "./dist/assets/html/newOrderPlaced.html"
-        : "./src/assets/html/newOrderPlaced.html"
+        ? "./dist/assets/html/outOfStockProduct.html"
+        : "./src/assets/html/outOfStockProduct.html"
     ),
     "utf-8"
   );
@@ -28,22 +27,21 @@ export function sendNotificationMail({
       ? "http://admin.miral-fashion.ro"
       : "http://localhost:3000";
   const brand = process.env.BRAND_NAME!;
-
+  const productUrl = `${url}/produs/${productId}`;
   const html = template
-    .replace(/{{number}}/g, orderNumber)
     .replace(/{{logo}}/g, logo)
     .replace(/{{url}}/g, url)
-    .replace(/{{orderDetailsUrl}}/g, `${url}/comanda/${orderId}`)
-    .replace(/{{dashboardUrl}}/g, dashboardUrl)
-    .replace(/{{lastName}}/g, clientLastName)
-    .replace(/{{firstName}}/g, clientFirstName);
+    .replace(/{{productTitle}}/g, productTitle)
+    .replace(/{{outOfStockSize}}/g, outOfStockSize)
+    .replace(/{{productUrl}}/g, productUrl)
+    .replace(/{{dashboardUrl}}/g, dashboardUrl);
 
   return sendMail({
     to:
       process.env.NODE_ENV === "production"
         ? process.env.NOTIFICATION_EMAIL
         : "dokee15@gmail.com",
-    subject: `${brand} | ${clientLastName} ${clientFirstName} a facut o comandă (#${orderNumber})`,
+    subject: `${brand} | Stoc 0 pentru produsul ${productTitle}`,
     text: "",
     html,
   });

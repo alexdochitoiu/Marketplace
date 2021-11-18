@@ -7,8 +7,17 @@ export default function () {
   return (
     <Link to="/">
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img src={icon} height={60} />
-        <img src={logo} height={45} style={{ marginLeft: 8 }} />
+        <img
+          src={icon}
+          height={60}
+          alt="Miral-Fashion.ro - Articole vestimentare din blana naturala (logo, icon, golden)"
+        />
+        <img
+          src={logo}
+          height={45}
+          style={{ marginLeft: 8 }}
+          alt="Miral-Fashion.ro - Articole vestimentare din blana naturala (logo, icon, golden)"
+        />
       </div>
     </Link>
   );

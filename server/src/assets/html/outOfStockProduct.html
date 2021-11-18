@@ -1,0 +1,144 @@
+<html>
+
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet">
+  <style type="text/css">
+    html,
+    body {
+      margin: 0;
+      font-family: Oswald, sans-serif;
+    }
+
+    :root {
+      --primary: #a8741a;
+      --secondary: #222;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-family: Oswald, sans-serif;
+      margin: 0;
+      font-style: normal;
+      font-weight: 400;
+    }
+
+    a {
+      color: #444;
+      text-decoration: none;
+    }
+
+    td {
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+    .logo {
+      font-family: 'Brush Script MT', cursive;
+      font-size: 32px;
+    }
+
+    .header td {
+      padding-top: 15px;
+      padding-bottom: 15px;
+    }
+
+    .product-table {
+      background-color: #fff;
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .product-table td {
+      border: 1px solid #999;
+    }
+
+    .total-table {
+      float: right;
+      border-collapse: collapse;
+      border-spacing: 0;
+      background-color: #fff;
+      margin-top: 20px;
+    }
+
+    .total-table tr:first-child {
+      font-size: 14px;
+    }
+
+    .total-table tr>td:first-child {
+      width: 200px;
+    }
+
+    .total-table tr>td:last-child {
+      text-align: center;
+    }
+
+    .total-table td {
+      padding-top: 8px;
+      padding-bottom: 8px;
+      border: 1px solid #999;
+    }
+
+    .button {
+      margin: 10px auto;
+      background-color: #444;
+      padding: 10px 25px;
+      width: 200px;
+      color: #fff;
+      text-align: center;
+      border-radius: 3px;
+      border: 1px solid #333
+    }
+
+    .client-info td {
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+  </style>
+</head>
+
+<body style="margin: 0; padding: 0; background: #fff">
+  <div style="max-width: 800px; margin: 0 auto; border: 1px solid #ccc; background: #F5F7F9">
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #323232">
+      <tr class="header">
+        <td>
+          <a href="{{url}}">
+            <img src="{{logo}}" height="45" />
+          </a>
+        </td>
+      </tr>
+    </table>
+    <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #fff; padding-bottom: 15px;">
+      <tr style="line-height: 30px;" align="center">
+        <td style="width: 100%; padding-top: 15px;">
+          <br />
+          <h4 syle="font-weight: 600">Produsul <b>{{productTitle}}</b> a ajuns la stoc 0 pentru mărimea
+            {{outOfStockSize}}</h4>
+          <br />
+          <a style="font-family: Poppins, sans-serif; color: #a8741a" href="{{productUrl}}">Vezi produsul aici
+          </a>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <br />
+        </td>
+      </tr>
+    </table>
+    <table width="100%">
+      <tr>
+        <td style="padding-top: 25px; padding-bottom: 30px;" align="center">
+          <a class="button" style="background: #a8741a" href="{{dashboardUrl}}">
+            <span style="color: #fff">Panou de control</span>
+          </a>
+        </td>
+      </tr>
+    </table>
+  </div>
+</body>
+
+</html>

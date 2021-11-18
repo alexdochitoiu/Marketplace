@@ -1,6 +1,6 @@
 {
   "short_name": "MIRAL FASHION",
-  "name": "MIRAL FASHION | Haine și căciuli din blană naturală",
+  "name": "MIRAL FASHION | Haine si caciuli din blana naturala",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,12 +10,12 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x205"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x548"
     }
   ],
   "start_url": ".",

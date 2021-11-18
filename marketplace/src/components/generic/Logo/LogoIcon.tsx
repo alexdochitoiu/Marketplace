@@ -5,7 +5,11 @@ export default function () {
   return (
     <Link to="/">
       <div style={{ display: "flex", alignItems: "center" }}>
-        <img src={icon} height={60} />
+        <img
+          src={icon}
+          height={60}
+          alt="Miral-Fashion.ro - Articole vestimentare din blana naturala (logo, icon, golden)"
+        />
       </div>
     </Link>
   );

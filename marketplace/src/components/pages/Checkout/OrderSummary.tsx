@@ -47,6 +47,11 @@ const CartItem = ({ item }: ICartItemProps) => {
         <p style={{ fontSize: 14, color: "#444", marginTop: 0 }}>
           Mărime: {item.selectedSize}
         </p>
+        {item.orderType === "precomanda" && (
+          <p style={{ fontSize: 13, color: "#444", marginTop: 0 }}>
+            (Precomandă)
+          </p>
+        )}
       </div>
       <p
         style={{

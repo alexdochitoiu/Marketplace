@@ -8,6 +8,7 @@ export default interface IOrder {
     product: IProduct;
     selectedSize: string;
     selectedQuantity: string;
+    orderType: "comanda" | "precomanda";
   }>;
   cartPrice: {
     shippingFee: number;

@@ -8,6 +8,7 @@ export interface OrderDocument extends mongoose.Document {
     product: ProductDocument["_id"];
     selectedSize: string;
     selectedQuantity: string;
+    orderType: "comanda" | "precomanda";
   }>;
   cartPrice: {
     shippingFee: number;
@@ -45,6 +46,11 @@ const OrderSchema = new mongoose.Schema(
         },
         selectedSize: String,
         selectedQuantity: String,
+        orderType: {
+          type: String,
+          enum: ["comanda", "precomanda"],
+          default: "comanda",
+        },
       },
     ],
     cartPrice: {
@@ -67,11 +73,6 @@ const OrderSchema = new mongoose.Schema(
       type: String,
       enum: ["ramburs", "transfer"],
       default: "ramburs",
-    },
-    orderType: {
-      type: String,
-      enum: ["comanda", "precomanda"],
-      default: "comanda",
     },
   },
   { timestamps: true }

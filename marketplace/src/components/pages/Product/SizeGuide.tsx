@@ -106,7 +106,12 @@ export default function () {
                 HAINE ȘI VESTE DE BLANĂ
               </h4>
               <div style={{ display: "flex", flexDirection: "column" }}>
-                <img src={clothesSizeGuideImg} width={"100%"} height="auto" />
+                <img
+                  src={clothesSizeGuideImg}
+                  width="100%"
+                  height="auto"
+                  alt="Ghid de marimi pentru haine"
+                />
                 <div>
                   <p
                     style={{ fontFamily: "Poppins, sans-serif", fontSize: 12 }}
@@ -183,9 +188,10 @@ export default function () {
               <div style={{ display: "flex", flexDirection: "column" }}>
                 <img
                   src={hatSizeGuideImg}
-                  width={"100%"}
+                  width="100%"
                   height="auto"
                   style={{ border: "1px solid #ccc", padding: 10 }}
+                  alt="Ghid de marimi pentru caciuli si palarii"
                 />
                 <div>
                   <p
@@ -304,7 +310,11 @@ export default function () {
                 <div
                   style={{ display: "flex", justifyContent: "space-around" }}
                 >
-                  <img src={clothesSizeGuideImg} width={500} />
+                  <img
+                    src={clothesSizeGuideImg}
+                    width={500}
+                    alt="Ghid de marimi pentru haine"
+                  />
                   <div style={{ marginLeft: 25 }}>
                     <p style={{ fontFamily: "Poppins, sans-serif" }}>
                       Ai nevoie, in primul rand, de un centimetru de croitorie.
@@ -376,6 +386,7 @@ export default function () {
                     width={712}
                     height={400}
                     style={{ border: "1px solid #ccc", padding: 10 }}
+                    alt="Ghid de marimi pentru caciuli si palarii"
                   />
                   <div style={{ marginLeft: 25 }}>
                     <p style={{ fontFamily: "Poppins, sans-serif" }}>

@@ -107,6 +107,7 @@ export default function ({ item, onRemove, onChangeQuantity }: IProps) {
                   </a>
                 </div>
               )}
+              {item.orderType === "precomanda" && <span style={{ fontSize: 11, color: "#666" }}>Precomandă</span>}
             </div>
             <div className="flex-row">
               <SelectQuantity

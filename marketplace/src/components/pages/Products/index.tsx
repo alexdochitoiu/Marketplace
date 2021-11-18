@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "src/redux/types";
 import { filterProducts, getSectionLabel, sortProducts } from "src/utils";
 import { doChangeMaxPrice } from "src/redux/actions";
+import Head from "src/components/generic/Head";
 
 const useStyles = makeStyles({
   root: {
@@ -83,8 +84,21 @@ export default function () {
 
   displayProducts = sortProducts(displayProducts, sortBy);
 
+  const subTitle =
+    sectionType === "men"
+      ? "pentru barbati"
+      : sectionType === "women"
+      ? "pentru femei"
+      : "";
+
   return (
     <div>
+      <Head
+        title={"Haine si caciuli din blana naturala " + subTitle}
+        description="Miral-Fashion.ro iti ofera haine de blana naturala, caciuli din blana naturala, cape si etole, cojoace precum si accesorii din blana"
+        image="https://miral-fashion.ro:4000/public/images/1636700451137miral-fashion-esarfa-din-blana-naturala-de-vizon-nurca-neagra.jpg"
+        url={window.location.href}
+      />
       <TitleBanner title={category?.title || getSectionLabel(sectionType)} />
       <div className={`${classes.root} products-container`}>
         <ProductsSideBar />

@@ -49,7 +49,7 @@ export default function ({ product, selected }: IProps) {
       <img
         width={60}
         style={{ objectFit: "contain" }}
-        src={product.images[0]}
+        src={product.images.length > 0 ? product.images[0] : ""}
       />
     </div>
   );

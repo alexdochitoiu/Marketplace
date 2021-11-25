@@ -121,6 +121,18 @@ export default function ({ product, onDelete, onEdit, onDuplicate }: IProps) {
       />
       <Divider />
       <CardContent className={classes.content}>
+        <span
+          style={{
+            padding: "2px 6px",
+            border: "1px solid #333",
+            margin: 3,
+            fontSize: 12,
+            background: product.active ? "green" : "#777",
+            color: "#fff",
+          }}
+        >
+          {product.active ? "ACTIV" : "INACTIV"}
+        </span>
         <Typography style={{ marginBottom: 8 }} variant="body2">
           Cod produs: <b>{product.productCode}</b>
         </Typography>

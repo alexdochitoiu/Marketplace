@@ -44,7 +44,7 @@ export default function () {
   React.useEffect(() => {
     if (categoryId) {
       productService.getByCategory(categoryId).then(({ data }) => {
-        setProducts(data);
+        setProducts(data.filter((p) => p.active));
       });
       categoryService.getById(categoryId).then(({ data }) => {
         setCategory(data);
@@ -52,11 +52,11 @@ export default function () {
     } else if (sectionType) {
       if (sectionType === "all") {
         productService.getAll().then(({ data }) => {
-          setProducts(data);
+          setProducts(data.filter((p) => p.active));
         });
       } else {
         productService.getBySection(sectionType).then(({ data }) => {
-          setProducts(data);
+          setProducts(data.filter((p) => p.active));
         });
       }
     }

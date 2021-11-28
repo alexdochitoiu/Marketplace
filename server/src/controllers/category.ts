@@ -77,6 +77,7 @@ const getAllCategories = async (
         categories.map(async (c) => {
           const productsCount = await Product.find({
             category: { _id: c._id },
+            active: true,
           })
             .countDocuments()
             .exec();

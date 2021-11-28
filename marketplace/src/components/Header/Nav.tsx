@@ -2,7 +2,6 @@ import React from "react";
 import { FaAngleDown } from "react-icons/fa";
 import ICategory from "src/types/ICategory";
 import * as categoryService from "src/services/category";
-import { Collapse } from "@material-ui/core";
 import { getSectionLabel } from "src/utils";
 
 interface IState {
@@ -36,7 +35,7 @@ export default function () {
         <a href="/">
           <li>Acasă</li>
         </a>
-        <a>
+        <a href="/produse/section/all">
           <li className="flex-row">
             Produse{" "}
             <FaAngleDown

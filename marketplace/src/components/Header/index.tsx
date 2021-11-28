@@ -1,17 +1,14 @@
 import Logo from "../generic/Logo";
 import Nav from "./Nav";
 import "./Header.styles.css";
-// import Search from "./Search";
 import CartButton from "./CartButton";
 import React from "react";
 import WishlistButton from "./WishlistButton";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 import MobileNav from "./MobileNav";
-import LogoIcon from "../generic/Logo/LogoIcon";
 
 export default function () {
   const [sticky, setSticky] = React.useState(false);
-  // const [searchVisible, setSearchVisible] = React.useState(false);
   const windowSize = useWindowDimensions();
 
   React.useEffect(() => {

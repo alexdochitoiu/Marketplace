@@ -1,5 +1,6 @@
 import { Helmet } from "react-helmet";
 import Head from "src/components/generic/Head";
+import Categories from "./Categories";
 import "./Home.styles.css";
 import ImageSlider from "./ImageSlider";
 import SelectYourProduct from "./SelectYourProduct";
@@ -16,6 +17,7 @@ export default function () {
         url="https://miral-fashion.ro/"
       />
       <ImageSlider />
+      <Categories />
       <TopProducts />
       <ShippingInfo />
       <SelectYourProduct />

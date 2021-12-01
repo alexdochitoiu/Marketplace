@@ -10,7 +10,7 @@ import Contact from "./pages/Contact";
 import Products from "./pages/Products";
 import AboutUs from "./pages/AboutUs";
 import Blog from "./pages/Blog";
-import BackToTopButton from "./BackToTopButton";
+import GoToCartButton from "./GoToCartButton";
 import Product from "./pages/Product";
 import Wishlist from "./pages/Wishlist";
 import Cart from "./pages/Cart";
@@ -21,7 +21,7 @@ import { PHONE } from "src/constants/contact";
 import TermsAndConditions from "./pages/Information/TermsAndConditions";
 import PoliticaDeConfidentialitate from "./pages/Information/PoliticaDeConfidentialitate";
 import PoliticaDeRetur from "./pages/Information/PoliticaDeRetur";
-import CookieConsent from "./generic/CookieConsent";
+import CookieConsent from "./CookieConsent";
 import ReactPixel from "src/ReactPixel";
 
 
@@ -77,7 +77,7 @@ export default function App() {
             component={OrderDetails}
           />
         </Switch>
-        <BackToTopButton />
+        <GoToCartButton />
         <Footer />
       </Router>
       <a href={`https://api.whatsapp.com/send?phone=${PHONE}`}>

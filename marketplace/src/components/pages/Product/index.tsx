@@ -27,6 +27,7 @@ import { uuid } from "uuidv4";
 import { getSectionLabel } from "src/utils";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 import Head from "src/components/generic/Head";
+import AddedToCartDialog from "./AddedToCartDialog";
 
 const useStyles = makeStyles({
   root: {

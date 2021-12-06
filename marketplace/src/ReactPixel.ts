@@ -5,6 +5,6 @@ const options = {
   debug: false,
 };
 
-ReactPixel.init("577050433556120", undefined, options);
+ReactPixel.init("327705292192445", undefined, options);
 
 export default ReactPixel;

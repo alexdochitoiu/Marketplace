@@ -333,47 +333,43 @@ export default function () {
                     <table className={classes.sizesTable}>
                       <tr>
                         <th>Mărime</th>
-                        <td>36 / XS</td>
-                        <td>38 / S</td>
-                        <td>40 / M</td>
-                        <td>42 / L</td>
-                        <td>44 / XL</td>
-                        <td>46 / 2XL</td>
-                        <td>48 / 3XL</td>
-                        <td>50 / 4XL</td>
+                        <td>32/34 (XS)</td>
+                        <td>36/38 (S)</td>
+                        <td>40/42 (M)</td>
+                        <td>44/46 (L)</td>
+                        <td>48/50 (XL)</td>
+                        <td>52/54 (2XL)</td>
+                        <td>56/58 (3XL)</td>
                       </tr>
                       <tr>
                         <th>A - Bust (cm)</th>
-                        <td>82-86</td>
-                        <td>86-90</td>
-                        <td>90-95</td>
-                        <td>95-100</td>
-                        <td>100-104</td>
-                        <td>104-108</td>
-                        <td>108-114</td>
-                        <td>114-120</td>
+                        <td>74-81</td>
+                        <td>82-89</td>
+                        <td>90-97</td>
+                        <td>98-107</td>
+                        <td>108-119</td>
+                        <td>120-131</td>
+                        <td>132-143</td>
                       </tr>
                       <tr>
                         <th>B - Talie (cm)</th>
-                        <td>64-68</td>
-                        <td>70-74</td>
-                        <td>76-80</td>
-                        <td>82-86</td>
-                        <td>89-93</td>
-                        <td>95-100</td>
-                        <td>100-106</td>
-                        <td>106-110</td>
+                        <td>60-65</td>
+                        <td>66-73</td>
+                        <td>74-81</td>
+                        <td>82-91</td>
+                        <td>92-102</td>
+                        <td>103-114</td>
+                        <td>115-126</td>
                       </tr>
                       <tr>
                         <th>C - Șold (cm)</th>
-                        <td>90-94</td>
-                        <td>94-98</td>
-                        <td>98-102</td>
-                        <td>102-106</td>
-                        <td>106-110</td>
-                        <td>110-116</td>
-                        <td>116-122</td>
-                        <td>122-130</td>
+                        <td>84-91</td>
+                        <td>92-98</td>
+                        <td>99-106</td>
+                        <td>107-115</td>
+                        <td>116-125</td>
+                        <td>126-135</td>
+                        <td>136-147</td>
                       </tr>
                     </table>
                   </div>

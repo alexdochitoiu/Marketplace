@@ -23,7 +23,7 @@ import PoliticaDeConfidentialitate from "./pages/Information/PoliticaDeConfident
 import PoliticaDeRetur from "./pages/Information/PoliticaDeRetur";
 import CookieConsent from "./CookieConsent";
 import ReactPixel from "src/ReactPixel";
-
+import React from "react";
 
 const theme = createTheme({
   palette: {
@@ -37,7 +37,10 @@ const theme = createTheme({
 });
 
 export default function App() {
-  ReactPixel.pageView();
+  React.useEffect(() => {
+    ReactPixel.pageView();
+  }, []);
+
   return (
     <ThemeProvider theme={theme}>
       <Router history={history}>

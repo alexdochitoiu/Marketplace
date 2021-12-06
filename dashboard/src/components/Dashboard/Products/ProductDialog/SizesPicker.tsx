@@ -43,10 +43,16 @@ const getSizes = (sizeType: IProduct["sizeType"]): string[] => {
     }
     return result;
   }
-  const clothesSizes = [36, 50];
-  for (let i = clothesSizes[0]; i <= clothesSizes[1]; i += 2) {
-    result.push(`${i}`);
-  }
+  const clothesSizes = [
+    "32/34 (XS)",
+    "36/38 (S)",
+    "40/42 (M)",
+    "44/46 (L)",
+    "48/50 (XL)",
+    "52/54 (2XL)",
+    "56/58 (3XL)",
+  ];
+  result = clothesSizes;
   return result;
 };
 

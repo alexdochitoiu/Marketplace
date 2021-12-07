@@ -24,6 +24,8 @@ import PoliticaDeRetur from "./pages/Information/PoliticaDeRetur";
 import CookieConsent from "./CookieConsent";
 import ReactPixel from "src/ReactPixel";
 import React from "react";
+import ArticoleDeSezonDeCareAiNevoie from "./pages/Blog/ArticoleDeSezonDeCareAiNevoie";
+import RegulamentConcurs from "./pages/Blog/RegulamentConcurs";
 
 const theme = createTheme({
   palette: {
@@ -54,6 +56,16 @@ export default function App() {
           />
           <Route exact={true} path="/produs/:productId" component={Product} />
           <Route exact={true} path="/blog" component={Blog} />
+          <Route
+            exact={true}
+            path="/blog/articole-de-sezon-de-care-ai-nevoie"
+            component={ArticoleDeSezonDeCareAiNevoie}
+          />
+          <Route
+            exact={true}
+            path="/blog/regulament-concurs"
+            component={RegulamentConcurs}
+          />
           <Route exact={true} path="/despre-noi" component={AboutUs} />
           <Route exact={true} path="/contact" component={Contact} />
           <Route exact={true} path="/favorite" component={Wishlist} />

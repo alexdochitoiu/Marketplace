@@ -53,3 +53,27 @@
     width: 100%;
   }
 }
+
+.regulament {
+  line-height: 25px;
+}
+
+.regulament p {
+  line-height: 18px;
+}
+
+.regulament b {
+  margin-top: 20px;
+  display: inline-block;
+}
+
+.regulament ol {
+  counter-reset: item;
+}
+.regulament li {
+  display: block;
+}
+.regulament li:before {
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+}

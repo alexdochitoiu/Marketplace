@@ -118,16 +118,15 @@ export default function () {
                   >
                     Ai nevoie, in primul rand, de un centimetru de croitorie. Cu
                     ajutorul acestuia, vei realiza masuratorile corpului tau.
-                    Atentie! Acestea se realizeaza numai in lenjerie intima,
-                    stand in pozitia de drepti – atat in cazul femeilor, cat si
-                    in cazul barbatilor sau copiilor.
+                    Masuratorile sunt valabile atat in cazul femeilor, cat si in
+                    cazul barbatilor sau copiilor.
                     <br />
                     <br />
                     Dupa realizarea masuratorilor, va trebui doar sa compari
                     rezultatele obtinute cu datele prezente in tabelul de mai
-                    jos, pentru a putea alege lenjeria potrivita. In cazul in
-                    care dimensiunile nu sunt numere intregi, va trebui sa
-                    rotunjesti in sus.
+                    jos, pentru a putea alege articolul cu marimea potrivita. In
+                    cazul in care dimensiunile nu sunt numere intregi, va trebui
+                    sa rotunjesti in sus.
                   </p>
                   <table
                     className={classes.sizesTable}

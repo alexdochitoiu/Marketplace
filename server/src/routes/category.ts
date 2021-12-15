@@ -8,6 +8,7 @@ const router = express.Router();
 router.get("/", controller.getAllCategories);
 router.get("/:id", controller.getCategory);
 router.get("/section/:sectionType", controller.getCategoriesBySection);
+router.get("/all/active", controller.getAllActiveCategories);
 router.post(
   "/create",
   checkAuth,

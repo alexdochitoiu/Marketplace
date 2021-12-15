@@ -5,6 +5,7 @@ export type SectionType = "men" | "women" | "kids" | "other";
 export interface CategoryDocument extends mongoose.Document {
   title: string;
   section: SectionType;
+  active: boolean;
   description?: string;
   image?: string;
 }
@@ -18,6 +19,7 @@ const CategorySchema = new mongoose.Schema({
   },
   description: String,
   image: String,
+  active: { type: Boolean, default: true },
 });
 
 const Category = mongoose.model<CategoryDocument>("Category", CategorySchema);

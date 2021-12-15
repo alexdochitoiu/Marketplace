@@ -38,11 +38,12 @@ export default function () {
     });
   }, []);
 
-  const handleDone = ({ title, description, image, section }: any) => {
+  const handleDone = ({ title, description, image, section, active }: any) => {
     const data = new FormData();
     data.append("title", title);
     data.append("section", section);
     data.append("description", description);
+    data.append("active", active);
     if (image) {
       data.append("image", image);
     }
@@ -85,13 +86,17 @@ export default function () {
       {categories.length === 0 && (
         <NoItems
           primaryText="Nu exista categorii"
-          secondaryText={<>Apasa
-            <AddCircleIcon
-              fontSize="small"
-              color="primary"
-              style={{ margin: "0 3px " }}
-            />
-            pentru a crea</>}
+          secondaryText={
+            <>
+              Apasa
+              <AddCircleIcon
+                fontSize="small"
+                color="primary"
+                style={{ margin: "0 3px " }}
+              />
+              pentru a crea
+            </>
+          }
         />
       )}
       {categories.map((c) => (

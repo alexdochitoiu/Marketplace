@@ -4,7 +4,7 @@ import { HOST } from "./host";
 export const GET_CATEGORY = HOST + "/api/category/:id";
 export const GET_CATEGORIES_BY_SECTION =
   HOST + "/api/category/section/:sectionType";
-export const GET_CATEGORIES = HOST + "/api/category";
+export const GET_CATEGORIES = HOST + "/api/category/all/active";
 
 // products
 export const GET_PRODUCT = HOST + "/api/product/:id";

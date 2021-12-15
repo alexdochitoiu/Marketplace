@@ -75,6 +75,18 @@ export default function ({ category, onDelete, onEdit }: IProps) {
       />
       <Divider />
       <CardContent className={classes.content}>
+        <span
+          style={{
+            padding: "2px 6px",
+            border: "1px solid #333",
+            margin: 3,
+            fontSize: 12,
+            background: category.active ? "green" : "#777",
+            color: "#fff",
+          }}
+        >
+          {category.active ? "ACTIV" : "INACTIV"}
+        </span>
         <Chip
           size="small"
           label={getSection(category.section)}

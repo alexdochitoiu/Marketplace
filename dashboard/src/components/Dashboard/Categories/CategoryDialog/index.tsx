@@ -10,6 +10,7 @@ import {
   makeStyles,
   Radio,
   RadioGroup,
+  Switch,
   TextField,
   Theme,
 } from "@material-ui/core";
@@ -67,6 +68,9 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
   const [description, setDescription] = React.useState(
     category ? category.description : ""
   );
+  const [active, setActive] = React.useState<boolean>(
+    category ? category.active : true
+  );
   const [image, setImage] = React.useState<any>(null);
   const [imagePreviewUrl, setImagePreviewUrl] = React.useState<any>(
     category ? category.image : null
@@ -75,7 +79,7 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
 
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    onDone({ title, description, image, section });
+    onDone({ title, description, image, section, active });
   };
 
   const handleImageChange = (e: any) => {
@@ -101,12 +105,20 @@ export default function ({ mode, onClose, onDone, category }: IProps) {
     setSelectImage(false);
   };
 
+  const handleChangeActive = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setActive(event.target.checked);
+  };
+
   return (
     <Dialog open={Boolean(mode)} onClose={onClose} fullWidth={true}>
       <DialogTitle className={classes.title}>
         {mode === "create" ? "Creeaza categorie" : "Modifica categorie"}
       </DialogTitle>
       <DialogContent>
+        <FormControlLabel
+          control={<Switch checked={active} onChange={handleChangeActive} />}
+          label="Categorie activa"
+        />
         <form onSubmit={handleSubmit}>
           <TextField
             margin="normal"

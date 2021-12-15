@@ -16,7 +16,7 @@ const createCategory = async (
   req: Request,
   res: Response<ResponseType<CategoryDocument>>
 ) => {
-  const { title, description, image: imageAsUrl, section } = req.body;
+  const { title, description, image: imageAsUrl, section, active } = req.body;
   const imageName = req.file?.filename;
   const alreadyExists = Boolean(await Category.findOne({ title }));
   if (alreadyExists) {
@@ -28,6 +28,7 @@ const createCategory = async (
       section,
       description,
       image,
+      active,
     })
       .then((category) => {
         res.status(201).json(category);
@@ -96,12 +97,42 @@ const getAllCategories = async (
     });
 };
 
+const getAllActiveCategories = async (
+  req: Request,
+  res: Response<ResponseType<ICategoryResult[]>>
+) => {
+  Category.find({ active: { $not: { $eq: false } } })
+    .exec()
+    .then((categories) => {
+      const pResult = Promise.all(
+        categories.map(async (c) => {
+          const productsCount = await Product.find({
+            category: { _id: c._id },
+            active: true,
+          })
+            .countDocuments()
+            .exec();
+          return {
+            // @ts-ignore
+            ...c._doc,
+            productsCount,
+          } as ICategoryResult;
+        })
+      );
+      pResult.then((result) => res.status(200).json(result));
+    })
+    .catch((error) => {
+      log.error(error);
+      res.status(500).json({ error });
+    });
+};
+
 const getCategoriesBySection = (
   req: Request,
   res: Response<ResponseType<CategoryDocument[]>>
 ) => {
   const section = req.params.sectionType as SectionType;
-  Category.find({ section })
+  Category.find({ section, active: true })
     .exec()
     .then((categories) => {
       res.status(200).json(categories);
@@ -117,7 +148,7 @@ const updateCategory = (
   res: Response<ResponseType<CategoryDocument>>
 ) => {
   const { id } = req.params;
-  const { title, description, image: imageAsUrl, section } = req.body;
+  const { title, description, image: imageAsUrl, section, active } = req.body;
   const imageName = req.file?.filename;
   const image = imageName ? url + imageName : imageAsUrl;
   Category.findByIdAndUpdate(
@@ -127,6 +158,7 @@ const updateCategory = (
       section,
       description,
       image,
+      active,
     },
     { new: true, omitUndefined: true }
   )
@@ -166,6 +198,7 @@ export default {
   createCategory,
   getCategory,
   getAllCategories,
+  getAllActiveCategories,
   getCategoriesBySection,
   updateCategory,
   deleteCategory,

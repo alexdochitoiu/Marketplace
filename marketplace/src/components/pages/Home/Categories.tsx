@@ -9,7 +9,14 @@ export default function () {
   React.useEffect(() => {
     categoryService.getAll().then(({ data }) => {
       setCategories(
-        data.sort((c1, c2) => (c1.section === c2.section ? 1 : -1))
+        data
+          .filter(
+            (c) =>
+              ["ȘEPCI PIELE", "CĂȘTI DIN BLANĂ"].indexOf(
+                c.title.toUpperCase()
+              ) === -1
+          )
+          .sort((c1, c2) => (c1.section === c2.section ? 1 : -1))
       );
     });
   }, []);

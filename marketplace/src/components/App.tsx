@@ -26,6 +26,7 @@ import ReactPixel from "src/ReactPixel";
 import React from "react";
 import ArticoleDeSezonDeCareAiNevoie from "./pages/Blog/ArticoleDeSezonDeCareAiNevoie";
 import RegulamentConcurs from "./pages/Blog/RegulamentConcurs";
+import IntretinereaHainelorSiAccesoriilorDinBlana from "./pages/Blog/IntretinereaHainelorSiAccesoriilorDinBlana";
 
 const theme = createTheme({
   palette: {
@@ -65,6 +66,11 @@ export default function App() {
             exact={true}
             path="/blog/regulament-concurs"
             component={RegulamentConcurs}
+          />
+          <Route
+            exact={true}
+            path="/blog/intretinerea-hainelor-din-blana"
+            component={IntretinereaHainelorSiAccesoriilorDinBlana}
           />
           <Route exact={true} path="/despre-noi" component={AboutUs} />
           <Route exact={true} path="/contact" component={Contact} />

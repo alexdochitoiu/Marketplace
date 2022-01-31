@@ -34,12 +34,21 @@ export default function () {
               "
             href="/blog/articole-de-sezon-de-care-ai-nevoie"
           />
-          <BlogCard
+          {/* <BlogCard
             imageSrc={concursImg}
             title="Regulament concurs"
-            description="Orice persoană care dorește să se înscrie și ulterior să revendice premium, dacă este cazul, trebuie să respecte următoarele condiții, pe lângă cele de participare de la art. 5:
+            description="Orice persoană care dorește să se înscrie și ulterior să revendice premium, 
+            dacă este cazul, trebuie să respecte următoarele condiții, pe lângă cele de participare de la art. 5:
             "
             href="/blog/regulament-concurs"
+          /> */}
+          <BlogCard
+            imageSrc="https://miral-fashion.ro:4000/public/images/1638435123160miral-fashion-caciula-blana-argintie.jpg"
+            title="Întreținerea hainelor și accesoriilor din blană"
+            description="Blana este un material natural, organic, care nu va ține o veșnicie fără o îngrijire propice. 
+            Pentru a le prelungi viața și a le păstra aspectul, 
+            acestea trebuie depozitate corespunzător atunci când nu sunt purtate."
+            href="/blog/intretinerea-hainelor-din-blana"
           />
         </div>
       </div>

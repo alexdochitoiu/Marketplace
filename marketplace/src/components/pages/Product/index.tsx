@@ -27,7 +27,7 @@ import { uuid } from "uuidv4";
 import { getSectionLabel } from "src/utils";
 import useWindowDimensions from "src/utils/customHooks/useWindowDimensions";
 import Head from "src/components/generic/Head";
-import AddedToCartDialog from "./AddedToCartDialog";
+import { GrNotes } from "react-icons/gr";
 
 const useStyles = makeStyles({
   root: {
@@ -81,6 +81,41 @@ export default function () {
     return (
       <div>
         <TitleBanner title="Articol inexistent" />
+      </div>
+    );
+  }
+
+  if (!product.active) {
+    return (
+      <div
+        style={{
+          height: "calc(100vh - 300px)",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          marginBottom: -30,
+          background: "#eee",
+        }}
+      >
+        <h4
+          style={{
+            fontSize: 30,
+            color: "#444",
+            marginBottom: 15,
+            display: "flex",
+            alignItems: "center",
+          }}
+        >
+          <GrNotes style={{ fontSize: 50, marginRight: 10 }} />
+        </h4>
+        <p style={{ fontSize: 20 }}>Acest articol este momentan inactiv.</p>
+        <Button
+          onClick={() => history.goBack()}
+          text="Inapoi"
+          animation="slide"
+          style={{ border: "1px solid #ccc", marginTop: 25 }}
+        />
       </div>
     );
   }

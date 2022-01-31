@@ -2,7 +2,7 @@ import React from "react";
 import * as productService from "src/services/product";
 
 export default function ({ cart }) {
-  const shippingFee = 18;
+  const shippingFee = 17;
   const [data, setData] = React.useState({
     totalPrice: 0,
     totalDiscount: 0,

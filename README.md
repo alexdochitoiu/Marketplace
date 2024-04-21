@@ -1,5 +1,5 @@
 # Marketplace
-Welcome to the Marketplace project! This project is a full-stack application built with the `MERN` (MongoDB, Express.js, React.js, Node.js) stack. It consists of three main applications:
+Welcome to the Marketplace project! This project is a full-stack application built with the `MERN` (`MongoDB`, `Express.js`, `React.js`, `Node.js`) stack. It consists of three main applications:
 
 1. **Dashboard**: A React application designed for administrators to manage the database and oversee the operations of the marketplace.
 2. **Marketplace**: The front-end of the e-shop, built using React.js, where users can browse products, make purchases, and interact with the platform.
